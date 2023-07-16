@@ -6,6 +6,7 @@ import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
 import NotFound from "./components/NotFound";
 import PostPage from "./components/post/PostPage";
+import LoginPage from "./components/LoginPage";
 
 function App() {
   const defaultTheme = createTheme();
@@ -19,6 +20,7 @@ function App() {
             <Route index element={<HomePage />} />
             <Route path=':id' element={<PostPage />} />
           </Route>
+          <Route path="/login" element={<LoginPage />} />
           <Route path="/category" element={<CategoryPage />} />
           <Route path="/tag" element={<HomePage />} />
           <Route path="/about" element={<HomePage />} />
