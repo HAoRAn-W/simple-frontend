@@ -16,6 +16,13 @@ function Footer(props) {
             >
               The best people in life are free
             </Typography>
+            <Typography
+              variant="subtitle2"
+              align="center"
+              color="text.secondary"
+            >
+              Built with React.js and MUI
+            </Typography>
             <Copyright />
           </Container>
         </Box>

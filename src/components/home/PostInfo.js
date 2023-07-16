@@ -18,7 +18,6 @@ function PostInfo() {
             <Typography variant="h5">Post Title</Typography>
             <DataLine />
             <Typography>
-              {" "}
               Post Introduction, this is a post intropuction: today I go out ith
               my girlfriend and we eat hot pot and watch movie. I love my
               girlfriend

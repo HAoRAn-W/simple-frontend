@@ -1,24 +1,24 @@
 import React from "react";
 import PostList from "./PostList";
 import PaginationBar from "../PaginationBar";
-import NavBar from "../NavBar";
 import HomeCover from "./HomeCover";
 import NameCard from "./NameCard";
-import Footer from "../Footer";
+import Sidebar from "./Sidebar";
 
 function HomePage() {
   return (
     <>
-      <NavBar />
       <HomeCover />
       <div style={{ display: "flex", justifyContent: "center" }}>
-        <PostList />
-        <NameCard />
+        <div style={{ display: "flex", width: "70%" }}>
+          <PostList />
+        </div>
+        <div style={{ display: "flex", width: "30%" }}>
+          <Sidebar />
+        </div>
       </div>
-      {/* <PostPage /> */}
 
       <PaginationBar />
-      <Footer />
     </>
   );
 }
