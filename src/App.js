@@ -5,6 +5,7 @@ import CategoryPage from "./components/category/CategoryPage";
 import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
 import NotFound from "./components/NotFound";
+import PostPage from "./components/post/PostPage";
 
 function App() {
   const defaultTheme = createTheme();
@@ -14,7 +15,10 @@ function App() {
         <CssBaseline />
         <NavBar />
         <Routes>
-          <Route path="/" element={<HomePage />} />
+          <Route path="/">
+            <Route index element={<HomePage />} />
+            <Route path=':id' element={<PostPage />} />
+          </Route>
           <Route path="/category" element={<CategoryPage />} />
           <Route path="/tag" element={<HomePage />} />
           <Route path="/about" element={<HomePage />} />

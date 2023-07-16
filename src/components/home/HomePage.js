@@ -2,7 +2,6 @@ import React from "react";
 import PostList from "./PostList";
 import PaginationBar from "../PaginationBar";
 import HomeCover from "./HomeCover";
-import NameCard from "./NameCard";
 import Sidebar from "./Sidebar";
 
 function HomePage() {
@@ -17,8 +16,9 @@ function HomePage() {
           <Sidebar />
         </div>
       </div>
-
       <PaginationBar />
+
+
     </>
   );
 }

@@ -1,6 +1,7 @@
-import { Container, List, ListItemButton, Typography } from "@mui/material";
+import { Container, List, ListItemButton } from "@mui/material";
 import React from "react";
 import PostInfo from "./PostInfo";
+import { Link } from "react-router-dom";
 
 function PostList() {
   return (
@@ -12,8 +13,8 @@ function PostList() {
       }}
     >
       {/* <Typography variant="h4" marginTop={'20px'}>Posts</Typography> */}
-      <List sx={{ width: "80%" }} disablePadding>
-        <ListItemButton style={{ marginTop: "15px" }}>
+      <List sx={{ width: "90%" }} disablePadding>
+        <ListItemButton style={{ marginTop: "15px" }} component={Link} to='/1'>
           <PostInfo />
         </ListItemButton>
         <ListItemButton style={{ marginTop: "15px" }}>
