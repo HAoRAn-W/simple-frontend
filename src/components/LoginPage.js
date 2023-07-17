@@ -1,10 +1,9 @@
 import {
+  Alert,
   Avatar,
   Box,
   Button,
-  Checkbox,
   CssBaseline,
-  FormControlLabel,
   Grid,
   Link,
   Paper,
@@ -12,15 +11,29 @@ import {
   Typography,
 } from "@mui/material";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { login } from "../app/slices/auth";
+import { useNavigate } from "react-router-dom";
 
 export default function LoginPage() {
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [loginError, setLoginError] = useState();
+
+  const dispatch = useDispatch();
+
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    console.log('clicked')
+    await dispatch(login({username, password}));
+    if (localStorage.getItem('user')) {
+      navigate('/');
+    } else {
+      setLoginError(true);
+    }
   };
 
   return (
@@ -60,6 +73,7 @@ export default function LoginPage() {
             <Typography component="h1" variant="h5">
               Sign in
             </Typography>
+            {loginError && <Alert severity="error">Please check username or password</Alert>}
             <Box
               component="form"
               noValidate
@@ -70,11 +84,15 @@ export default function LoginPage() {
                 margin="normal"
                 required
                 fullWidth
-                id="email"
-                label="Email Address"
-                name="email"
-                autoComplete="email"
+                id="username"
+                label="Username"
+                name="username"
                 autoFocus
+                autoComplete="username"
+                value={username}
+                onChange={(e) => {
+                  setUsername(e.target.value);
+                }}
               />
               <TextField
                 margin="normal"
@@ -85,11 +103,15 @@ export default function LoginPage() {
                 type="password"
                 id="password"
                 autoComplete="current-password"
+                value={password}
+                onChange={(e) => {
+                  setPassword(e.target.value);
+                }}
               />
-              <FormControlLabel
+              {/* <FormControlLabel
                 control={<Checkbox value="remember" color="primary" />}
                 label="Remember me"
-              />
+              /> */}
               <Button
                 type="submit"
                 fullWidth

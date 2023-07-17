@@ -12,7 +12,9 @@ import {
   Typography,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
+import { logout } from "../app/slices/auth";
 
 function NavBar() {
   const [value, setValue] = useState("");
@@ -21,6 +23,8 @@ function NavBar() {
   const path = location.pathname.split("/")[1];
 
   const navigate = useNavigate();
+
+  const dispatch = useDispatch();
 
   const handleChange = (event, newValue) => {
     setValue((prev) => newValue);
@@ -34,10 +38,11 @@ function NavBar() {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
-  const handleClickUserMenu = () => {
+
+  const handleLogout = () => {
     setAnchorElUser(null);
-    navigate(`login`);
-  };
+    dispatch(logout());
+  }
 
   useEffect(() => {
     setValue(path);
@@ -47,6 +52,7 @@ function NavBar() {
     navigate(`/`);
     setValue((prev) => "");
   };
+
   return (
     <Toolbar
       style={{ backgroundColor: "transparent" }}
@@ -68,13 +74,19 @@ function NavBar() {
         </Tabs>
       </Box>
       <Box>
-        <Tooltip title="User menu">
-          <IconButton onClick={handleOpenUserMenu}>
-            <Avatar sx={{ bgcolor: "black" }}>W</Avatar>
-          </IconButton>
-        </Tooltip>
+        {!localStorage.getItem("user") ? (
+          <ButtonBase onClick={() => navigate("/login")}>
+            <Typography>login</Typography>
+          </ButtonBase>
+        ) : (
+          <Tooltip title="User menu">
+            <IconButton onClick={handleOpenUserMenu}>
+              <Avatar sx={{ bgcolor: "black" }}>W</Avatar>
+            </IconButton>
+          </Tooltip>
+        )}
         <Menu
-        sx={{ mt: '45px' }}
+          sx={{ mt: "45px" }}
           anchorEl={anchorElUser}
           anchorOrigin={{
             vertical: "top",
@@ -85,19 +97,18 @@ function NavBar() {
           onClose={handleCloseUserMenu}
         >
           <MenuItem onClick={handleCloseUserMenu}>
-          <Typography textAlign="center">
-              favorite
-            </Typography>
+            <Typography textAlign="center">favorite</Typography>
           </MenuItem>
-          <MenuItem onClick={handleClickUserMenu}>
-          <Typography textAlign="center">
-              log in
-            </Typography>
+          <MenuItem
+            onClick={() => {
+              setAnchorElUser(null);
+              navigate(`register`);
+            }}
+          >
+            <Typography textAlign="center">register</Typography>
           </MenuItem>
-          <MenuItem onClick={handleCloseUserMenu}>
-          <Typography textAlign="center">
-              log out
-            </Typography>
+          <MenuItem onClick={handleLogout}>
+            <Typography textAlign="center">log out</Typography>
           </MenuItem>
         </Menu>
       </Box>
