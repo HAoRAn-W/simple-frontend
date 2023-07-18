@@ -12,7 +12,7 @@ import {
 } from "@mui/material";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { login } from "../app/slices/auth";
 import { useNavigate } from "react-router-dom";
 
@@ -25,15 +25,17 @@ export default function LoginPage() {
 
   const navigate = useNavigate();
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault()
     console.log('clicked')
-    await dispatch(login({username, password}));
-    if (localStorage.getItem('user')) {
-      navigate('/');
-    } else {
+    dispatch(login({username, password})).unwrap().then(
+      () => {
+        navigate('/');
+      }
+    ).catch(() => {
       setLoginError(true);
-    }
+    })
+
   };
 
   return (

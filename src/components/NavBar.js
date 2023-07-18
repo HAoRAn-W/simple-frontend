@@ -2,6 +2,7 @@ import {
   Avatar,
   Box,
   ButtonBase,
+  Grid,
   IconButton,
   Menu,
   MenuItem,
@@ -42,7 +43,7 @@ function NavBar() {
   const handleLogout = () => {
     setAnchorElUser(null);
     dispatch(logout());
-  }
+  };
 
   useEffect(() => {
     setValue(path);
@@ -75,9 +76,19 @@ function NavBar() {
       </Box>
       <Box>
         {!localStorage.getItem("user") ? (
-          <ButtonBase onClick={() => navigate("/login")}>
-            <Typography>login</Typography>
-          </ButtonBase>
+          <Grid container display={'flex'} justifyContent={'center'} spacing={3}>
+            <Grid item>
+            <ButtonBase onClick={() => navigate("/login")}>
+              <Typography>Login</Typography>
+            </ButtonBase>
+            </Grid>
+            <Grid item>
+            <ButtonBase onClick={() => navigate("/signup")}>
+              <Typography>Sign up</Typography>
+            </ButtonBase>
+            </Grid>
+            
+          </Grid>
         ) : (
           <Tooltip title="User menu">
             <IconButton onClick={handleOpenUserMenu}>

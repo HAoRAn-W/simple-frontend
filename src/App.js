@@ -7,7 +7,7 @@ import Footer from "./components/Footer";
 import NotFound from "./components/NotFound";
 import PostPage from "./components/post/PostPage";
 import LoginPage from "./components/LoginPage";
-import RegisterPage from "./components/RegisterPage";
+import SignupPage from "./components/SignupPage";
 
 function App() {
   const defaultTheme = createTheme();
@@ -22,7 +22,7 @@ function App() {
             <Route path=':id' element={<PostPage />} />
           </Route>
           <Route path="/login" element={<LoginPage />} />
-          <Route path="/register" element={<RegisterPage />} />
+          <Route path="/signup" element={<SignupPage />} />
 
           <Route path="/category" element={<CategoryPage />} />
           <Route path="/tag" element={<HomePage />} />

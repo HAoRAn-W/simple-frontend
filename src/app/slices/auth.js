@@ -1,7 +1,11 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import AuthService from "../services/auth.service";
 import { setMessage } from "./message";
-import { SIGNUP_SUCCESSFUL, UNDEFINED_ERROR } from "../services/MessageCode";
+import {
+  INIT_CODE,
+  SIGNUP_SUCCESSFUL,
+  UNDEFINED_ERROR,
+} from "../services/MessageCode";
 
 const user = JSON.parse(localStorage.getItem("user"));
 
@@ -10,18 +14,18 @@ export const signup = createAsyncThunk(
   async ({ username, email, password }, thunkAPI) => {
     try {
       const data = await AuthService.signup(username, email, password);
-      thunkAPI.dispatch(setMessage(data));
+      // thunkAPI.dispatch(setMessage(data));
       if (data.code === SIGNUP_SUCCESSFUL) {
         return data;
       } else {
-        return thunkAPI.rejectWithValue();
+        return thunkAPI.rejectWithValue(data);
       }
     } catch (error) {
       const message = error.message || error.toString();
-      thunkAPI.dispatch(
-        setMessage({ code: UNDEFINED_ERROR, message: message })
-      );
-      return thunkAPI.rejectWithValue();
+      // thunkAPI.dispatch(
+      //   setMessage({ code: UNDEFINED_ERROR, message: message })
+      // );
+      return thunkAPI.rejectWithValue({ code: UNDEFINED_ERROR, message: message });
     }
   }
 );
@@ -52,10 +56,12 @@ export const logout = createAsyncThunk("auth/logout", async () => {
 
 const initialState = user
   ? {
+      code: INIT_CODE,
       isLoggedIn: true,
       user,
     }
   : {
+      code: INIT_CODE,
       isLoggedIn: false,
       user: null,
     };
@@ -66,9 +72,11 @@ const authSlice = createSlice({
   extraReducers: {
     [signup.fulfilled]: (state, action) => {
       state.isLoggedIn = false;
+      state.code = action.payload.code;
     },
     [signup.rejected]: (state, action) => {
       state.isLoggedIn = false;
+      state.code = action.payload.code;
     },
     [login.fulfilled]: (state, action) => {
       state.isLoggedIn = true;
