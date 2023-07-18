@@ -8,6 +8,8 @@ import NotFound from "./components/NotFound";
 import PostPage from "./components/post/PostPage";
 import LoginPage from "./components/LoginPage";
 import SignupPage from "./components/SignupPage";
+import ProfilePage from "./components/user/ProfilePage";
+import FavoritePage from "./components/user/FavoritePage"
 
 function App() {
   const defaultTheme = createTheme();
@@ -17,16 +19,18 @@ function App() {
         <CssBaseline />
         <NavBar />
         <Routes>
-          <Route path="/">
-            <Route index element={<HomePage />} />
-            <Route path=':id' element={<PostPage />} />
-          </Route>
+          <Route path="/" element={<HomePage />}/>
+          <Route path='/:id' element={<PostPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/signup" element={<SignupPage />} />
 
           <Route path="/category" element={<CategoryPage />} />
           <Route path="/tag" element={<HomePage />} />
           <Route path="/about" element={<HomePage />} />
+
+          <Route path="/profile" element={<ProfilePage />} />
+          <Route path="/favorites" element={<FavoritePage />} />
+
           <Route path="/*" element={<NotFound />} />
         </Routes>
         <Footer />

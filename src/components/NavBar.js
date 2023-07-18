@@ -12,22 +12,20 @@ import {
   Tooltip,
   Typography,
 } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { logout } from "../app/slices/auth";
 
 function NavBar() {
-  const [tabValue, setTabValue] = useState("home");
+  const [tabValue, setTabValue] = useState(false);
 
-  const location = useLocation();
-  const path = location.pathname.split("/")[1];
 
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
 
-  const handleChange = (event, newValue) => {
+  const handleTabChange = (event, newValue) => {
     setTabValue(newValue);
     navigate(`/${newValue}`);
   };
@@ -36,26 +34,14 @@ function NavBar() {
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
   };
-  const handleCloseUserMenu = () => {
+  const handleClickUserMenu = (path) => {
     setAnchorElUser(null);
+    navigate(`/${path}`)
   };
 
   const handleLogout = () => {
     setAnchorElUser(null);
     dispatch(logout());
-  };
-
-  useEffect(() => {
-    if (path === "") {
-      setTabValue("home");
-    } else {
-      setTabValue(path);
-    }
-  }, [path]);
-
-  const handleClick = () => {
-    navigate(`/`);
-    setTabValue('home');
   };
 
   return (
@@ -68,12 +54,17 @@ function NavBar() {
         justifyContent: "space-between",
       }}
     >
-      <ButtonBase disableRipple onClick={handleClick}>
+      <ButtonBase
+        disableRipple
+        onClick={() => {
+          navigate(`/`);
+          setTabValue(false);
+        }}
+      >
         <Typography variant="h4">whr.one</Typography>
       </ButtonBase>
       <Box>
-        <Tabs value={tabValue} onChange={handleChange}>
-        <Tab disableRipple value="home" label="Home" />
+        <Tabs value={tabValue} onChange={handleTabChange}>
           <Tab disableRipple value="category" label="Category" />
           <Tab disableRipple value="tag" label="Tag" />
           <Tab disableRipple value="about" label="About" />
@@ -114,12 +105,12 @@ function NavBar() {
           }}
           keepMounted
           open={Boolean(anchorElUser)}
-          onClose={handleCloseUserMenu}
+          onClose={() => setAnchorElUser(null)}
         >
-          <MenuItem onClick={handleCloseUserMenu}>
+          <MenuItem onClick={() => handleClickUserMenu('profile')}>
             <Typography textAlign="center">Profile</Typography>
           </MenuItem>
-          <MenuItem onClick={handleCloseUserMenu}>
+          <MenuItem onClick={() =>  handleClickUserMenu('favorites')}>
             <Typography textAlign="center">favorites</Typography>
           </MenuItem>
           <MenuItem onClick={handleLogout}>
