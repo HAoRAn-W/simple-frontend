@@ -10,7 +10,9 @@ const getPublicConetnt = () => {
 };
 
 const getUserContent = () => {
-  return userClient.get("user");
+  return userClient.get("user").then((response) => {
+    return response.data;
+  });
 };
 
 const getAdminContent = () => {

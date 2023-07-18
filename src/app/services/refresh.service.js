@@ -5,6 +5,9 @@ const refreshClient = axios.create({
   withCredentials: true,
 });
 
+
+// if access token expired, a 401 error will be raised by other requests.
+// call refreshToken to request a new access token
 const refreshToken = () => {
     return refreshClient.get().then((response) => {
         return response.data;

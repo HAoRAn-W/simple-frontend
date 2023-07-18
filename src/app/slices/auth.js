@@ -1,6 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import AuthService from "../services/auth.service";
-import { setMessage } from "./message";
 import {
   INIT_CODE,
   SIGNUP_SUCCESSFUL,
@@ -14,7 +13,6 @@ export const signup = createAsyncThunk(
   async ({ username, email, password }, thunkAPI) => {
     try {
       const data = await AuthService.signup(username, email, password);
-      // thunkAPI.dispatch(setMessage(data));
       if (data.code === SIGNUP_SUCCESSFUL) {
         return data;
       } else {
@@ -22,9 +20,6 @@ export const signup = createAsyncThunk(
       }
     } catch (error) {
       const message = error.message || error.toString();
-      // thunkAPI.dispatch(
-      //   setMessage({ code: UNDEFINED_ERROR, message: message })
-      // );
       return thunkAPI.rejectWithValue({ code: UNDEFINED_ERROR, message: message });
     }
   }
@@ -38,14 +33,11 @@ export const login = createAsyncThunk(
       if (data.username) {
         return { user: data };
       } else {
-        return thunkAPI.rejectWithValue();
+        return thunkAPI.rejectWithValue(data);
       }
     } catch (error) {
       const message = error.message || error.toString();
-      thunkAPI.dispatch(
-        setMessage({ code: UNDEFINED_ERROR, message: message })
-      );
-      return thunkAPI.rejectWithValue();
+      return thunkAPI.rejectWithValue({ code: UNDEFINED_ERROR, message: message });
     }
   }
 );

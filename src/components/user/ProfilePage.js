@@ -1,13 +1,12 @@
-import React from 'react'
-
+import { Typography } from "@mui/material";
 
 function ProfilePage() {
-    const user = JSON.parse(localStorage.getItem('user'));
+  const user = JSON.parse(localStorage.getItem("user"));
   return (
-    <div>
-      {user.username}
-    </div>
-  )
+    <>
+      <Typography variant="h5">Welcome, {user.username}!</Typography>
+    </>
+  );
 }
 
-export default ProfilePage
+export default ProfilePage;
