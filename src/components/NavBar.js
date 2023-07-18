@@ -18,7 +18,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { logout } from "../app/slices/auth";
 
 function NavBar() {
-  const [value, setValue] = useState("");
+  const [tabValue, setTabValue] = useState("home");
 
   const location = useLocation();
   const path = location.pathname.split("/")[1];
@@ -28,7 +28,7 @@ function NavBar() {
   const dispatch = useDispatch();
 
   const handleChange = (event, newValue) => {
-    setValue((prev) => newValue);
+    setTabValue(newValue);
     navigate(`/${newValue}`);
   };
 
@@ -46,12 +46,16 @@ function NavBar() {
   };
 
   useEffect(() => {
-    setValue(path);
+    if (path === "") {
+      setTabValue("home");
+    } else {
+      setTabValue(path);
+    }
   }, [path]);
 
   const handleClick = () => {
     navigate(`/`);
-    setValue((prev) => "");
+    setTabValue('home');
   };
 
   return (
@@ -68,7 +72,8 @@ function NavBar() {
         <Typography variant="h4">whr.one</Typography>
       </ButtonBase>
       <Box>
-        <Tabs value={value} onChange={handleChange}>
+        <Tabs value={tabValue} onChange={handleChange}>
+        <Tab disableRipple value="home" label="Home" />
           <Tab disableRipple value="category" label="Category" />
           <Tab disableRipple value="tag" label="Tag" />
           <Tab disableRipple value="about" label="About" />
@@ -76,18 +81,22 @@ function NavBar() {
       </Box>
       <Box>
         {!localStorage.getItem("user") ? (
-          <Grid container display={'flex'} justifyContent={'center'} spacing={3}>
+          <Grid
+            container
+            display={"flex"}
+            justifyContent={"center"}
+            spacing={3}
+          >
             <Grid item>
-            <ButtonBase onClick={() => navigate("/login")}>
-              <Typography>Login</Typography>
-            </ButtonBase>
+              <ButtonBase onClick={() => navigate("/login")}>
+                <Typography>Login</Typography>
+              </ButtonBase>
             </Grid>
             <Grid item>
-            <ButtonBase onClick={() => navigate("/signup")}>
-              <Typography>Sign up</Typography>
-            </ButtonBase>
+              <ButtonBase onClick={() => navigate("/signup")}>
+                <Typography>Sign up</Typography>
+              </ButtonBase>
             </Grid>
-            
           </Grid>
         ) : (
           <Tooltip title="User menu">
@@ -108,15 +117,10 @@ function NavBar() {
           onClose={handleCloseUserMenu}
         >
           <MenuItem onClick={handleCloseUserMenu}>
-            <Typography textAlign="center">favorite</Typography>
+            <Typography textAlign="center">Profile</Typography>
           </MenuItem>
-          <MenuItem
-            onClick={() => {
-              setAnchorElUser(null);
-              navigate(`register`);
-            }}
-          >
-            <Typography textAlign="center">register</Typography>
+          <MenuItem onClick={handleCloseUserMenu}>
+            <Typography textAlign="center">favorites</Typography>
           </MenuItem>
           <MenuItem onClick={handleLogout}>
             <Typography textAlign="center">log out</Typography>
