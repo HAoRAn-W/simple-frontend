@@ -14,3 +14,5 @@ axios should send request with credentials and sprong boot need accept that.
 state     action    reducer
 cnt = 0   inc,dec   cnt + 1, cnt - 1
 in React, components call action to trigger reducer
+
+React.StrictMode will render components twice.
