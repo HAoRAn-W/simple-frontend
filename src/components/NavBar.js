@@ -42,6 +42,7 @@ function NavBar() {
   const handleLogout = () => {
     setAnchorElUser(null);
     dispatch(logout());
+    navigate('/');
   };
 
   return (
