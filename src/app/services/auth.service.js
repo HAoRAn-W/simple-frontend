@@ -5,11 +5,6 @@ const authClient = axios.create({
   withCredentials: true,
 });
 
-const refreshClient = axios.create({
-  baseURL: "http://localhost:8080/api/refresh",
-  withCredentials: true,
-});
-
 const signup = (username, email, password) => {
   return authClient
     .post("signup", {
@@ -47,17 +42,10 @@ const getUser = () => {
   return JSON.parse(localStorage.getItem("user"));
 };
 
-const refresh = () => {
-  return refreshClient.post("").then((response) => {
-    return response.data;
-  });
-};
-
 const AuthService = {
   signup,
   login,
   logout,
-  refresh,
   getUser,
 };
 
