@@ -8,6 +8,18 @@ import {
 
 const user = JSON.parse(localStorage.getItem("user"));
 
+const initialState = user
+  ? {
+      code: INIT_CODE,
+      isLoggedIn: true,
+      user,
+    }
+  : {
+      code: INIT_CODE,
+      isLoggedIn: false,
+      user: null,
+    };
+
 export const signup = createAsyncThunk(
   "auth/signup",
   async ({ username, email, password }, thunkAPI) => {
@@ -46,17 +58,7 @@ export const logout = createAsyncThunk("auth/logout", async () => {
   await AuthService.logout();
 });
 
-const initialState = user
-  ? {
-      code: INIT_CODE,
-      isLoggedIn: true,
-      user,
-    }
-  : {
-      code: INIT_CODE,
-      isLoggedIn: false,
-      user: null,
-    };
+
 
 const authSlice = createSlice({
   name: "auth",
