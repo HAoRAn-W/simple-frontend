@@ -9,8 +9,9 @@ import PostPage from "./components/post/PostPage";
 import LoginPage from "./components/LoginPage";
 import SignupPage from "./components/SignupPage";
 import ProfilePage from "./components/user/ProfilePage";
-import FavoritePage from "./components/user/FavoritePage"
+import FavoritePage from "./components/user/FavoritePage";
 import AboutPage from "./components/about/AboutPage";
+import EditorPage from "./components/editor/EditorPage";
 
 function App() {
   const defaultTheme = createTheme();
@@ -19,21 +20,25 @@ function App() {
       <ThemeProvider theme={defaultTheme}>
         <CssBaseline />
         <NavBar />
-        <Routes>
-          <Route path="/" element={<HomePage />}/>
-          <Route path='/:id' element={<PostPage />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/signup" element={<SignupPage />} />
+        <div style={{minHeight: '100vh'}}>
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/:id" element={<PostPage />} />
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/signup" element={<SignupPage />} />
 
-          <Route path="/category" element={<CategoryPage />} />
-          <Route path="/tag" element={<HomePage />} />
-          <Route path="/about" element={<AboutPage />} />
+            <Route path="/category" element={<CategoryPage />} />
+            <Route path="/tag" element={<HomePage />} />
+            <Route path="/about" element={<AboutPage />} />
 
-          <Route path="/profile" element={<ProfilePage />} />
-          <Route path="/favorites" element={<FavoritePage />} />
+            <Route path="/profile" element={<ProfilePage />} />
+            <Route path="/favorites" element={<FavoritePage />} />
+            <Route path="/editor" element={<EditorPage />} />
 
-          <Route path="/*" element={<NotFound />} />
-        </Routes>
+            <Route path="/*" element={<NotFound />} />
+          </Routes>
+        </div>
+
         <Footer />
       </ThemeProvider>
     </div>
