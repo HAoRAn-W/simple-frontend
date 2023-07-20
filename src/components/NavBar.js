@@ -1,6 +1,5 @@
 import {
   Avatar,
-  Box,
   ButtonBase,
   Grid,
   IconButton,
@@ -13,7 +12,7 @@ import {
   Typography,
 } from "@mui/material";
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { logout } from "../app/slices/auth";
 
@@ -23,6 +22,7 @@ function NavBar() {
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
+  const user = useSelector((state) => state.auth.user);
 
   const handleTabChange = (event, newValue) => {
     setTabValue(newValue);
@@ -51,31 +51,55 @@ function NavBar() {
         borderBottom: 1,
         borderColor: "divider",
         display: "flex",
-        justifyContent: "space-between",
       }}
     >
-      <ButtonBase
-        disableRipple
-        onClick={() => {
-          navigate(`/`);
-          setTabValue(false);
+      <div
+        style={{
+          display: "flex",
+          flex: 2,
+          justifyContent: "flex-start",
+          alignItems: "center",
         }}
       >
-        <Typography variant="h4">whr.one</Typography>
-      </ButtonBase>
-      <Box>
+        <ButtonBase
+          disableRipple
+          onClick={() => {
+            navigate(`/`);
+            setTabValue(false);
+          }}
+        >
+          <Typography variant="h4">whr.one</Typography>
+        </ButtonBase>
+      </div>
+
+      <div
+        style={{
+          display: "flex",
+          flex: 8,
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
         <Tabs value={tabValue} onChange={handleTabChange}>
           <Tab disableRipple value="category" label="Category" />
           <Tab disableRipple value="tag" label="Tag" />
           <Tab disableRipple value="about" label="About" />
         </Tabs>
-      </Box>
-      <Box>
-        {!localStorage.getItem("user") ? (
+      </div>
+
+      <div
+        style={{
+          display: "flex",
+          flex: 2,
+          justifyContent: "flex-end",
+          alignItems: "center",
+        }}
+      >
+        {!user ? (
           <Grid
             container
             display={"flex"}
-            justifyContent={"center"}
+            justifyContent={"flex-end"}
             spacing={3}
           >
             <Grid item>
@@ -126,8 +150,18 @@ function NavBar() {
           <MenuItem onClick={handleLogout}>
             <Typography textAlign="center">log out</Typography>
           </MenuItem>
+          {user && user.roles.includes("ROLE_ADMIN") && (
+            <MenuItem
+              onClick={() => {
+                setAnchorElUser(null);
+                navigate("/editor");
+              }}
+            >
+              <Typography textAlign="center">Editor</Typography>
+            </MenuItem>
+          )}
         </Menu>
-      </Box>
+      </div>
     </Toolbar>
   );
 }
