@@ -2,7 +2,7 @@ import { Box, Container, Link, Typography } from '@mui/material';
 import React from 'react'
 
 function Footer(props) {
-    const { description, title } = props;
+    // const { description, title } = props;
     return (
         <Box component="footer" sx={{ bgcolor: 'background.paper', py:4}}>
           <Container maxWidth="lg">
