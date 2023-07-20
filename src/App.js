@@ -10,6 +10,7 @@ import LoginPage from "./components/LoginPage";
 import SignupPage from "./components/SignupPage";
 import ProfilePage from "./components/user/ProfilePage";
 import FavoritePage from "./components/user/FavoritePage"
+import AboutPage from "./components/about/AboutPage";
 
 function App() {
   const defaultTheme = createTheme();
@@ -26,7 +27,7 @@ function App() {
 
           <Route path="/category" element={<CategoryPage />} />
           <Route path="/tag" element={<HomePage />} />
-          <Route path="/about" element={<HomePage />} />
+          <Route path="/about" element={<AboutPage />} />
 
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/favorites" element={<FavoritePage />} />
