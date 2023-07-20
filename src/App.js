@@ -12,6 +12,8 @@ import ProfilePage from "./components/user/ProfilePage";
 import FavoritePage from "./components/user/FavoritePage";
 import AboutPage from "./components/about/AboutPage";
 import EditorPage from "./components/editor/EditorPage";
+import EditPost from "./components/editor/EditPost";
+import PostEditor from "./components/editor/PostEditor";
 
 function App() {
   const defaultTheme = createTheme();
@@ -20,7 +22,7 @@ function App() {
       <ThemeProvider theme={defaultTheme}>
         <CssBaseline />
         <NavBar />
-        <div style={{minHeight: '100vh'}}>
+        <div style={{ minHeight: "100vh" }}>
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/:id" element={<PostPage />} />
@@ -34,6 +36,7 @@ function App() {
             <Route path="/profile" element={<ProfilePage />} />
             <Route path="/favorites" element={<FavoritePage />} />
             <Route path="/editor" element={<EditorPage />} />
+            <Route path="/posteditor" element={<PostEditor />} />
 
             <Route path="/*" element={<NotFound />} />
           </Routes>

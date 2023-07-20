@@ -9,6 +9,7 @@ import { useState } from "react";
 import PostList from "../home/PostList";
 import PaginationBar from "../PaginationBar";
 import CategoryPage from '../category/CategoryPage';
+import EditPost from "./EditPost";
 
 function EditorPage() {
   const [section, setSection] = useState("posts");
@@ -38,12 +39,7 @@ function EditorPage() {
         </ToggleButtonGroup>
         <div>
           {section === "posts" ? (
-            <>
-              <div style={{ height: "100vh" }}>
-                <PostList />
-              </div>
-              <PaginationBar />
-            </>
+            <EditPost />
           ) : section === "categories" ? (
             <div><CategoryPage/></div>
           ) : (
