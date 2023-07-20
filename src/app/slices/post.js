@@ -1,23 +1,24 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import PageService from "../services/page.service";
 import {
   INIT_CODE,
   SUCCESSFUL,
   UNDEFINED_ERROR,
 } from "../services/MessageCode";
+import PostService from "../services/post.service";
 
 const initialState = {
   code: INIT_CODE,
-  posts: [],
-  total: 1,
+  post: {},
 };
 
-export const loadpage = createAsyncThunk(
-  "page/loadpage",
-  async ({ page }, thunkAPI) => {
+export const getpost = createAsyncThunk(
+  "post/getpost",
+  async ({ postId }, thunkAPI) => {
     try {
-      const data = await PageService.loadPage(page);
+      const data = await PostService.getPost(postId);
       if (data.code === SUCCESSFUL) {
+        console.log("slice data:")
+        console.log(data);
         return data;
       } else {
         return thunkAPI.rejectWithValue(data);
@@ -32,22 +33,20 @@ export const loadpage = createAsyncThunk(
   }
 );
 
-const pageSlice = createSlice({
-  name: "page",
+const postSlice = createSlice({
+  name: "post",
   initialState,
   extraReducers: {
-    [loadpage.fulfilled]: (state, action) => {
+    [getpost.fulfilled]: (state, action) => {
       state.code = SUCCESSFUL;
-      state.posts = action.payload.posts;
-      state.total = action.payload.total;
+      state.post = action.payload.post;
     },
-    [loadpage.rejected]: (state, action) => {
+    [getpost.rejected]: (state, action) => {
       state.code = action.payload.code;
-      state.posts = [];
-      state.total = 1;
+      state.post = {};
     },
   },
 });
 
-const { reducer } = pageSlice;
+const { reducer } = postSlice;
 export default reducer;

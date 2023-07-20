@@ -1,26 +1,25 @@
 import axios from "axios";
-import { UNDEFINED_ERROR } from "./MessageCode";
+import { POST_NOT_FOUND, SUCCESSFUL, UNDEFINED_ERROR } from "./MessageCode";
 
 const client = axios.create({
-  baseURL: "http://localhost:8080/api/post/",
-  withCredentials: true,
-});
+    baseURL: "http://localhost:8080/api/post/",
+    withCredentials: true,
+  });
 
-const loadPage = (page) => {
-  return client
-    .get(`${page}`)
-    .then((response) => {
-      console.log("loadpage response:");
-      console.log(response.data);
-      return response.data;
+const getPost = (id) => {
+    return client.get(`${id}`).then((response) => {
+      if (response.data.code === SUCCESSFUL) {
+        return response.data;
+      } else {
+        return {code: POST_NOT_FOUND, message: response.data.message};
+      }
+    }).catch((error) => {
+      return {code: UNDEFINED_ERROR, message: error.toString()};
     })
-    .catch((error) => {
-      return { code: UNDEFINED_ERROR, message: error.toString() };
-    });
-};
+  }
 
-const PageService = {
-  loadPage,
-};
+  const PostService = {
+    getPost,
+  }
 
-export default PageService;
+  export default PostService;

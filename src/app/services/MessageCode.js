@@ -25,3 +25,5 @@ export const REFRESH_TOKEN_EXPIRED = 202;
 export const ACCESS_TOKEN_RENEWED = 203;
 
 export const SUCCESSFUL = 233;
+
+export const POST_NOT_FOUND = 301;
