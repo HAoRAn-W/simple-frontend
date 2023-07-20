@@ -20,7 +20,6 @@ import { logout } from "../app/slices/auth";
 function NavBar() {
   const [tabValue, setTabValue] = useState(false);
 
-
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
@@ -36,13 +35,13 @@ function NavBar() {
   };
   const handleClickUserMenu = (path) => {
     setAnchorElUser(null);
-    navigate(`/${path}`)
+    navigate(`/${path}`);
   };
 
   const handleLogout = () => {
     setAnchorElUser(null);
     dispatch(logout());
-    navigate('/');
+    navigate("/");
   };
 
   return (
@@ -80,12 +79,22 @@ function NavBar() {
             spacing={3}
           >
             <Grid item>
-              <ButtonBase onClick={() => navigate("/login")}>
+              <ButtonBase
+                onClick={() => {
+                  setTabValue(false);
+                  navigate("/login");
+                }}
+              >
                 <Typography>Login</Typography>
               </ButtonBase>
             </Grid>
             <Grid item>
-              <ButtonBase onClick={() => navigate("/signup")}>
+              <ButtonBase
+                onClick={() => {
+                  setTabValue(false);
+                  navigate("/signup");
+                }}
+              >
                 <Typography>Sign up</Typography>
               </ButtonBase>
             </Grid>
@@ -108,10 +117,10 @@ function NavBar() {
           open={Boolean(anchorElUser)}
           onClose={() => setAnchorElUser(null)}
         >
-          <MenuItem onClick={() => handleClickUserMenu('profile')}>
+          <MenuItem onClick={() => handleClickUserMenu("profile")}>
             <Typography textAlign="center">Profile</Typography>
           </MenuItem>
-          <MenuItem onClick={() =>  handleClickUserMenu('favorites')}>
+          <MenuItem onClick={() => handleClickUserMenu("favorites")}>
             <Typography textAlign="center">favorites</Typography>
           </MenuItem>
           <MenuItem onClick={handleLogout}>
