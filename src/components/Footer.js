@@ -4,7 +4,7 @@ import React from 'react'
 function Footer(props) {
     // const { description, title } = props;
     return (
-        <Box component="footer" sx={{ bgcolor: 'background.paper', py:4}}>
+        <Box component="footer" sx={{ bgcolor: 'background.paper', py:4, bottom: 0}}>
           <Container maxWidth="lg">
             <Typography variant="h6" align="center" gutterBottom>
               whr.one
