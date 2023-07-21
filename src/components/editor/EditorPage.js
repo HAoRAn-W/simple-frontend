@@ -6,8 +6,6 @@ import {
 } from "@mui/material";
 import React from "react";
 import { useState } from "react";
-import PostList from "../home/PostList";
-import PaginationBar from "../PaginationBar";
 import CategoryPage from '../category/CategoryPage';
 import EditPost from "./EditPost";
 

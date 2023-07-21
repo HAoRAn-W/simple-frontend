@@ -33,6 +33,26 @@ export const getpost = createAsyncThunk(
   }
 );
 
+export const addpost = createAsyncThunk(
+  "post/addpost",
+  async ({newPost}, thunkAPI) => {
+    try {
+      const data = await PostService.addPost(newPost);
+      if (data.code === SUCCESSFUL) {
+        return data;
+      } else {
+        return thunkAPI.rejectWithValue(data);
+      }
+    } catch (error) {
+      const message = error.message || error.toString();
+      return thunkAPI.rejectWithValue({
+        code: UNDEFINED_ERROR,
+        message: message,
+      });
+    }
+  }
+)
+
 const postSlice = createSlice({
   name: "post",
   initialState,
@@ -42,6 +62,14 @@ const postSlice = createSlice({
       state.post = action.payload.post;
     },
     [getpost.rejected]: (state, action) => {
+      state.code = action.payload.code;
+      state.post = {};
+    },
+    [addpost.fulfilled]: (state, action) => {
+      state.code = action.payload.code;
+      state.post = {};
+    },
+    [addpost.rejected]: (state, action) => {
       state.code = action.payload.code;
       state.post = {};
     },

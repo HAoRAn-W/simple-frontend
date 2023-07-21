@@ -1,11 +1,13 @@
 import { Container, List, ListItemButton } from "@mui/material";
 import React from "react";
 import PostInfo from "./PostInfo";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
-function PostList() {
+function PostList({ fromEditor }) {
   const posts = useSelector((state) => state.page.posts);
+  const navigate = useNavigate();
+
   return (
     <Container
       style={{
@@ -18,16 +20,22 @@ function PostList() {
         {posts.map((post) => {
           return (
             <ListItemButton
-              style={{ marginTop: "15px"}}
-              component={Link}
-              to={`/${post.id}`}
+              style={{ marginTop: "15px" }}
+              onClick={() => {
+                if (fromEditor) {
+                  navigate("/posteditor", {
+                    state: { isNew: false, postId: post.id},
+                  });
+                } else {
+                  navigate(`/${post.id}`);
+                }
+              }}
               key={post.id}
             >
-              <PostInfo post={post}/>
+              <PostInfo post={post} />
             </ListItemButton>
           );
         })}
-
       </List>
     </Container>
   );

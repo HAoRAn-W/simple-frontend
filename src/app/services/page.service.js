@@ -10,8 +10,6 @@ const loadPage = (page) => {
   return client
     .get(`page/${page}`)
     .then((response) => {
-      console.log("loadpage response:");
-      console.log(response.data);
       return response.data;
     })
     .catch((error) => {
