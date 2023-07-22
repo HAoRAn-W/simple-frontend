@@ -1,5 +1,5 @@
 import axios from "axios";
-import { SUCCESSFUL, UNDEFINED_ERROR } from "../constants/MessageCode";
+import { UNDEFINED_ERROR } from "../constants/MessageCode";
 
 const client = axios.create({
   baseURL: "http://localhost:8080/api/category/",
