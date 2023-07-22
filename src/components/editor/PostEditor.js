@@ -11,6 +11,7 @@ import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import PostService from "../../app/services/post.service";
 import CategoryService from "../../app/services/category.service";
+import { SUCCESSFUL } from "../../app/constants/MessageCode";
 
 function PostEditor() {
   const location = useLocation();
@@ -49,7 +50,6 @@ function PostEditor() {
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
-    console.log("clicked");
     e.preventDefault();
     const newPost = {
       title: title,
@@ -59,14 +59,23 @@ function PostEditor() {
     };
 
     if (isNew) {
-      PostService.addPost(newPost);
+      PostService.addPost(newPost).then(data => {
+        if (data.code === SUCCESSFUL) {
+          navigate("/editor");
+        } else {
+          console.log('error:', data);
+        }
+      });
     } else {
-      console.log("updating...");
       newPost.id = postId;
-      PostService.updatePost(newPost);
+      PostService.updatePost(newPost).then(data => {
+        if (data.code === SUCCESSFUL) {
+          navigate("/editor");
+        } else {
+          console.log('error:', data);
+        }
+      });
     }
-
-    navigate("/editor");
   };
 
   return (
