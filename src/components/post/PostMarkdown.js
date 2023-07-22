@@ -16,7 +16,7 @@ function PostMarkdown({ content }) {
     h4: ({ children }) => <Typography variant="h3" fontSize={50}>{children}</Typography>,
     h5: ({ children }) => <Typography variant="h3" fontSize={45}>{children}</Typography>,
     h6: ({ children }) => <Typography variant="h3" fontSize={40}>{children}</Typography>,
-    p: ({ node, children }) => <Typography variant="body" fontSize={30}>{children}</Typography>,
+    p: ({ node, children }) => <Typography variant="body" fontSize={28} style={{ wordWrap: 'break-word' }} gutterBottom>{children}</Typography>,
     img: ({ node, src, alt, title, ...props }) => {
       return (
         <div style={{ display: 'flex', flexDirection: 'column',alignItems: 'center'}}>

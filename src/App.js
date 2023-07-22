@@ -12,7 +12,6 @@ import ProfilePage from "./components/user/ProfilePage";
 import FavoritePage from "./components/user/FavoritePage";
 import AboutPage from "./components/about/AboutPage";
 import EditorPage from "./components/editor/EditorPage";
-import EditPost from "./components/editor/EditPost";
 import PostEditor from "./components/editor/PostEditor";
 
 function App() {
