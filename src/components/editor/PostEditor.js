@@ -103,7 +103,7 @@ function PostEditor() {
           multiline
           rows={20}
         />
-        <FormControl fullWidth>
+        <FormControl fullWidth required>
           <InputLabel id="category-id">Category</InputLabel>
           <Select
             labelId="category-id"
