@@ -3,7 +3,6 @@ import {
   Avatar,
   Box,
   Button,
-  CssBaseline,
   Grid,
   Link,
   Paper,
@@ -27,7 +26,6 @@ export default function LoginPage() {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    console.log('clicked')
     dispatch(login({username, password})).unwrap().then(
       () => {
         navigate('/');
