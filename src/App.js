@@ -15,7 +15,11 @@ import EditorPage from "./components/editor/EditorPage";
 import PostEditor from "./components/editor/PostEditor";
 
 function App() {
-  const defaultTheme = createTheme();
+  const defaultTheme = createTheme({
+    typography: {
+      fontFamily: 'Noto Serif, serif'
+    }
+  });
   return (
     <div className="App">
       <ThemeProvider theme={defaultTheme}>
