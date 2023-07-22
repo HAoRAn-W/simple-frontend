@@ -8,6 +8,8 @@ import {
   UNDEFINED_ERROR,
 } from "../constants/MessageCode";
 
+// TODO
+
 // axios instance with baseURL and credential config to send http-only cookies with request
 const userClient = axios.create({
   baseURL: "http://localhost:8080/api/test/",
@@ -20,7 +22,7 @@ userClient.interceptors.response.use(
   },
   // access token expired OR requesting unauthorized resources
   (error) => {
-    const request = error.config;  // get request
+    const request = error.config; // get request
     if (error.response.status && error.response.status === 401) {
       if (!request._retry) {
         // set _retry flag to prevent multiple retries
@@ -29,12 +31,17 @@ userClient.interceptors.response.use(
         return RefreshService.refreshToken().then((data) => {
           if (data.code === ACCESS_TOKEN_RENEWED) {
             console.log("Successfully refresh access token.");
-            return userClient(request);  // retry original request
+            return userClient(request); // retry original request
           } else if (data.code === REFRESH_TOKEN_EXPIRED) {
             console.log("Refresh token expired, need to login");
-            return {data: {code: NEED_RELOGIN, message: "Refresh token expired, need to login"}}
+            return {
+              data: {
+                code: NEED_RELOGIN,
+                message: "Refresh token expired, need to login",
+              },
+            };
           }
-        })
+        });
       }
     }
     return Promise.reject(error);
@@ -48,7 +55,7 @@ const getPublicConetnt = () => {
       return response.data;
     })
     .catch((error) => {
-      console.log('UNDEFINED_ERROR')
+      console.log("UNDEFINED_ERROR");
       return { code: UNDEFINED_ERROR, message: error.toString() };
     });
 };
@@ -57,11 +64,11 @@ const getUserContent = () => {
   return userClient
     .get("user")
     .then((response) => {
-      console.log('the:', response);
+      console.log("the:", response);
       return response.data;
     })
     .catch(() => {
-      console.log('UNAUTHORIZED')
+      console.log("UNAUTHORIZED");
       return { code: UNAUTHORIZED, message: "unauthorized" };
     });
 };
@@ -74,7 +81,7 @@ const getAdminContent = () => {
       return response.data;
     })
     .catch(() => {
-      console.log('UNAUTHORIZED')
+      console.log("UNAUTHORIZED");
       return { code: UNAUTHORIZED, message: "unauthorized" };
     });
 };

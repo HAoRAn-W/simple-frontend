@@ -28,8 +28,6 @@ const addPost = (newPost) => {
     content: newPost.content,
     categoryId: newPost.categoryId,
   }
-
-  console.log('body',body)
   return client.post("add", body).then((response) => {
     return response.data;
   }).catch(error => {
