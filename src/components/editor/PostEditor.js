@@ -10,6 +10,7 @@ import {
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import PostService from "../../app/services/post.service";
+import CategoryService from "../../app/services/category.service";
 
 function PostEditor() {
   const location = useLocation();
@@ -22,7 +23,11 @@ function PostEditor() {
 
   const [categories, setCategories] = useState([]);
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    CategoryService.getCategoryList().then((data) => {
+      setCategories(data.categories);
+    });
+  }, []);
 
   useEffect(() => {
     if (!isNew) {
@@ -44,6 +49,7 @@ function PostEditor() {
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
+    console.log("clicked");
     e.preventDefault();
     const newPost = {
       title: title,
@@ -55,15 +61,17 @@ function PostEditor() {
     if (isNew) {
       PostService.addPost(newPost);
     } else {
+      console.log("updating...");
       newPost.id = postId;
       PostService.updatePost(newPost);
     }
 
     navigate("/editor");
   };
+
   return (
     <Container>
-      <form noValidate autoComplete="off" onSubmit={handleSubmit}>
+      <form noValidate autoComplete="off">
         <TextField
           label="Title"
           value={title}
@@ -83,7 +91,6 @@ function PostEditor() {
           sx={{ marginTop: 5, marginBottom: 5, display: "block" }}
           multiline
           rows={4}
-          maxRows={4}
         />
         <TextField
           label="Content"
@@ -95,7 +102,6 @@ function PostEditor() {
           sx={{ marginTop: 5, marginBottom: 5, display: "block" }}
           multiline
           rows={20}
-          maxRows={50}
         />
         <FormControl fullWidth>
           <InputLabel id="category-id">Category</InputLabel>
@@ -106,22 +112,20 @@ function PostEditor() {
             lable="Category"
             onChange={handleChange}
           >
-            <MenuItem value={2}>
-              <em>None</em>
-            </MenuItem>
-            <MenuItem value={1}>Java</MenuItem>
+            {categories.map((cate) => {
+              return (
+                <MenuItem value={cate.id} key={cate.id}>
+                  {cate.name}
+                </MenuItem>
+              );
+            })}
           </Select>
         </FormControl>
       </form>
-      {isNew ? (
-        <Button variant="contained" type="submit">
-          Save
-        </Button>
-      ) : (
-        <Button variant="contained" type="submit">
-          Update
-        </Button>
-      )}
+
+      <Button variant="contained" type="submit" onClick={handleSubmit}>
+        {isNew ? "save" : "update"}
+      </Button>
     </Container>
   );
 }
