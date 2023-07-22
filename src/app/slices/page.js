@@ -4,7 +4,7 @@ import {
   INIT_CODE,
   SUCCESSFUL,
   UNDEFINED_ERROR,
-} from "../services/MessageCode";
+} from "../constants/MessageCode";
 
 const initialState = {
   code: INIT_CODE,

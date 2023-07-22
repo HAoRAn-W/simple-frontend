@@ -6,7 +6,7 @@ import {
   REFRESH_TOKEN_EXPIRED,
   UNAUTHORIZED,
   UNDEFINED_ERROR,
-} from "./MessageCode";
+} from "../constants/MessageCode";
 
 const userClient = axios.create({
   baseURL: "http://localhost:8080/api/test/",

@@ -3,7 +3,7 @@ import {
   INIT_CODE,
   SUCCESSFUL,
   UNDEFINED_ERROR,
-} from "../services/MessageCode";
+} from "../constants/MessageCode";
 import PostService from "../services/post.service";
 
 const initialState = {

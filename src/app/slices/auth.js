@@ -4,7 +4,7 @@ import {
   INIT_CODE,
   SIGNUP_SUCCESSFUL,
   UNDEFINED_ERROR,
-} from "../services/MessageCode";
+} from "../constants/MessageCode";
 
 const user = JSON.parse(localStorage.getItem("user"));
 

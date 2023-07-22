@@ -1,5 +1,5 @@
 import axios from "axios";
-import { UNAUTHORIZED } from "./MessageCode";
+import { UNAUTHORIZED } from "../constants/MessageCode";
 
 const refreshClient = axios.create({
   baseURL: "http://localhost:8080/api/refresh",

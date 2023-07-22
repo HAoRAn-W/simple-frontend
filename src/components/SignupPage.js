@@ -17,7 +17,7 @@ import {
   SIGNUP_SUCCESSFUL,
   UNDEFINED_ERROR,
   USER_EXIST,
-} from "../app/services/MessageCode";
+} from "../app/constants/MessageCode";
 import { object, string } from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";

@@ -1,5 +1,5 @@
 import axios from "axios";
-import { UNDEFINED_ERROR } from "./MessageCode";
+import { UNDEFINED_ERROR } from "../constants/MessageCode";
 
 const client = axios.create({
   baseURL: "http://localhost:8080/api/post/",
