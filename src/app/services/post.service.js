@@ -65,14 +65,8 @@ const getPost = (id) => {
 };
 
 const addPost = (newPost) => {
-  const body = {
-    title: newPost.title,
-    description: newPost.description,
-    content: newPost.content,
-    categoryId: newPost.categoryId,
-  };
   return client
-    .post("add", body)
+    .post("add", newPost)
     .then((response) => {
       return response.data;
     })
