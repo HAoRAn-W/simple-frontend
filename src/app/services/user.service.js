@@ -4,15 +4,12 @@ import {
   ACCESS_TOKEN_RENEWED,
   NEED_RELOGIN,
   REFRESH_TOKEN_EXPIRED,
-  UNAUTHORIZED,
   UNDEFINED_ERROR,
 } from "../constants/MessageCode";
 
-// TODO
-
 // axios instance with baseURL and credential config to send http-only cookies with request
 const userClient = axios.create({
-  baseURL: "http://localhost:8080/api/test/",
+  baseURL: "http://localhost:8080/api/user/",
   withCredentials: true,
 });
 
@@ -48,48 +45,56 @@ userClient.interceptors.response.use(
   }
 );
 
-const getPublicConetnt = () => {
+const getFavoriteList = () => {
   return userClient
-    .get("all")
+    .get("favorite/all")
     .then((response) => {
       return response.data;
     })
     .catch((error) => {
-      console.log("UNDEFINED_ERROR");
       return { code: UNDEFINED_ERROR, message: error.toString() };
     });
 };
 
-const getUserContent = () => {
+const addFavorite = (postId) => {
   return userClient
-    .get("user")
+    .get(`favorite/add/${postId}`)
     .then((response) => {
-      console.log("the:", response);
       return response.data;
     })
-    .catch(() => {
-      console.log("UNAUTHORIZED");
-      return { code: UNAUTHORIZED, message: "unauthorized" };
+    .catch((error) => {
+      return { code: UNDEFINED_ERROR, message: error.toString() };
     });
 };
 
-const getAdminContent = () => {
+const removeFavorite = (postId) => {
   return userClient
-    .get("admin")
+    .get(`favorite/remove/${postId}`)
     .then((response) => {
-      console.log(response);
       return response.data;
     })
-    .catch(() => {
-      console.log("UNAUTHORIZED");
-      return { code: UNAUTHORIZED, message: "unauthorized" };
+    .catch((error) => {
+      return { code: UNDEFINED_ERROR, message: error.toString() };
+    });
+};
+
+const queryFavorite = (postId) => {
+  return userClient
+    .get(`favorite/${postId}`)
+    .then((response) => {
+      console.log("query:", response.data);
+      return response.data;
+    })
+    .catch((error) => {
+      return { code: UNDEFINED_ERROR, message: error.toString() };
     });
 };
 
 const UserServcice = {
-  getPublicConetnt,
-  getUserContent,
-  getAdminContent,
+  getFavoriteList,
+  addFavorite,
+  removeFavorite,
+  queryFavorite,
 };
 
 export default UserServcice;
