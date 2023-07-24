@@ -1,9 +1,9 @@
 import { Pagination } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { loadpage } from "../app/slices/page";
+import { loadpage, loadpagebycategory } from "../app/slices/page";
 
-function PaginationBar() {
+function PaginationBar({ pos = 0, id }) {
   const handlePageChange = (event, page) => {
     setCurrentPage(page);
   };
@@ -15,8 +15,13 @@ function PaginationBar() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(loadpage({ page: currentPage - 1 }));
-  }, [currentPage, dispatch]);
+    if (pos === 0) {
+      dispatch(loadpage({ page: currentPage - 1 }));
+    } else if (pos === 1) {
+      // from category
+      dispatch(loadpagebycategory({ categoryId: id, page: currentPage - 1 }));
+    }
+  }, [currentPage, dispatch, pos, id]);
 
   return (
     <div

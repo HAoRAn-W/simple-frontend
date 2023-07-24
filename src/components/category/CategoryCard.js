@@ -6,18 +6,22 @@ import {
   Typography,
 } from "@mui/material";
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
-function CategoryCard() {
+function CategoryCard({category}) {
+  const navigate = useNavigate();
   return (
-    <ButtonBase>
+    <ButtonBase onClick={() => {
+      navigate(`/category/${category.id}`, {state: { id: category.id}})
+    }}>
       <Card>
         <CardMedia
           sx={{ height: 140, width: 300 }}
-          image="https://source.unsplash.com/random?wallpapers"
+          image={category.coverUrl}
           title="green iguana"
         />
         <CardContent>
-          <Typography variant="h5">Java</Typography>
+          <Typography variant="h5">{category.name}</Typography>
         </CardContent>
       </Card>
     </ButtonBase>

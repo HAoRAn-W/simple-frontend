@@ -32,6 +32,26 @@ export const loadpage = createAsyncThunk(
   }
 );
 
+export const loadpagebycategory = createAsyncThunk(
+  "page/loadpagebycategory",
+  async ({categoryId, page}, thunkAPI) => {
+    try {
+      const data = await PageService.loadPageByCategory(categoryId, page);
+      if (data.code === SUCCESSFUL) {
+        return data;
+      } else {
+        return thunkAPI.rejectWithValue(data);
+      }
+    } catch (error) {
+      const message = error.message || error.toString();
+      return thunkAPI.rejectWithValue({
+        code: UNDEFINED_ERROR,
+        message: message,
+      });
+    }
+  }
+)
+
 const pageSlice = createSlice({
   name: "page",
   initialState,
@@ -42,6 +62,16 @@ const pageSlice = createSlice({
       state.total = action.payload.total;
     },
     [loadpage.rejected]: (state, action) => {
+      state.code = action.payload.code;
+      state.posts = [];
+      state.total = 1;
+    },
+    [loadpagebycategory.fulfilled]: (state, action) => {
+      state.code = SUCCESSFUL;
+      state.posts = action.payload.posts;
+      state.total = action.payload.total;
+    },
+    [loadpagebycategory.rejected]: (state, action) => {
       state.code = action.payload.code;
       state.posts = [];
       state.total = 1;

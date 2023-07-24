@@ -17,8 +17,20 @@ const loadPage = (page) => {
     });
 };
 
+const loadPageByCategory = (categoryId, page) => {
+  return client
+    .get(`${categoryId}/page/${page}`)
+    .then((response) => {
+      return response.data;
+    })
+    .catch((error) => {
+      return { code: UNDEFINED_ERROR, message: error.toString() };
+    });
+}
+
 const PageService = {
   loadPage,
+  loadPageByCategory,
 };
 
 export default PageService;

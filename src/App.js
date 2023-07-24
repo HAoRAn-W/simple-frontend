@@ -13,6 +13,7 @@ import FavoritePage from "./components/user/FavoritePage";
 import AboutPage from "./components/about/AboutPage";
 import EditorPage from "./components/editor/EditorPage";
 import PostEditor from "./components/editor/PostEditor";
+import CategoryPostPage from "./components/category/CategoryPostPage";
 
 function App() {
   const defaultTheme = createTheme({
@@ -33,6 +34,7 @@ function App() {
             <Route path="/signup" element={<SignupPage />} />
 
             <Route path="/category" element={<CategoryPage />} />
+            <Route path="/category/:id" element={<CategoryPostPage />} />
             <Route path="/tag" element={<HomePage />} />
             <Route path="/about" element={<AboutPage />} />
 
