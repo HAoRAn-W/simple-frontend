@@ -68,7 +68,7 @@ function NavBar() {
             setTabValue(false);
           }}
         >
-          <Typography variant="h4">whr.one</Typography>
+          <Typography variant="h3">whr.one</Typography>
         </ButtonBase>
       </div>
 
