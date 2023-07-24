@@ -8,21 +8,14 @@ function ProfilePage() {
   const user = AuthService.getUser();
   const [content, setContent] = useState("");
 
-  useEffect(() => {
-    UserServcice.getUserContent().then((data) => {
-      console.log('profile data: ', data)
-      if (data.code !== SUCCESSFUL) {
-        console.log('not success,', data);
-      } else {
-        setContent(data.message);
-      }
-    });
-  }, []);
+  // useEffect(() => {
+
+  // }, []);
 
   return (
     <>
       <Typography variant="h5">Welcome, {user.username}!</Typography>
-      <Typography>{content}</Typography>
+      {/* <Typography>{content}</Typography> */}
     </>
   );
 }
