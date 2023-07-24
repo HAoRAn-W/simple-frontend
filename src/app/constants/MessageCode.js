@@ -27,3 +27,7 @@ export const ACCESS_TOKEN_RENEWED = 203;
 export const SUCCESSFUL = 233;
 
 export const POST_NOT_FOUND = 301;
+
+export const IS_IN_FAVORITE = 400;
+
+export const NOT_IN_FAVORITE = 401;
