@@ -6,7 +6,6 @@ import { loadpage } from "../app/slices/page";
 function PaginationBar() {
   const handlePageChange = (event, page) => {
     setCurrentPage(page);
-    console.log(`Navigating to page ${page}`);
   };
 
   const [currentPage, setCurrentPage] = useState(1);
