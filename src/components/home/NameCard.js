@@ -8,37 +8,38 @@ import {
   IconButton,
   Typography,
 } from "@mui/material";
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import ShareIcon from '@mui/icons-material/Share';
 import React from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faInstagram, faSquareFacebook, faTwitter } from "@fortawesome/free-brands-svg-icons";
 
 function NameCard() {
   return (
-    <Card sx={{ maxWidth: 345, maxHeight:500 }}>
+    <Card sx={{ maxWidth: 345, maxHeight: 500 }}>
       <CardHeader
         avatar={<Avatar>W</Avatar>}
-        title="Shrimp and Chorizo Paella"
-        subheader="September 14, 2016"
+        title="Haoran Wang"
+        subheader="Software Engineer"
       ></CardHeader>
       <CardMedia
         component="img"
         height="194"
-        image="https://source.unsplash.com/random?wallpapers"
-        alt="Paella dish"
+        image="https://i.imgur.com/JeflHLr.jpg"
+        alt="pic"
       />
       <CardContent>
         <Typography variant="body2">
-          This impressive paella is a perfect party dish and a fun meal to cook
-          together with your guests. Add 1 cup of frozen peas along with the
-          mussels, if you like.
+          Assassin's Creed fan, museum lover. 🍉 is my ultimate favorite fruit.
         </Typography>
       </CardContent>
       <CardActions>
-      <IconButton >
-          <FavoriteIcon />
+        <IconButton>
+          <FontAwesomeIcon icon={faTwitter} style={{ color: "#1da1f2" }} />
         </IconButton>
         <IconButton>
-            <ShareIcon />
+          <FontAwesomeIcon icon={faInstagram} style={{ color: "#c13584" }} />
+        </IconButton>
+        <IconButton>
+        <FontAwesomeIcon icon={faSquareFacebook} style={{color: "#0165e1",}} />
         </IconButton>
       </CardActions>
     </Card>
