@@ -10,12 +10,12 @@ import remarkGfm from "remark-gfm";
 function PostMarkdown({ content }) {
 
   const renderers = {
-    h1: ({ children }) => <Typography variant="h3" fontSize={70} >{children}</Typography>,
-    h2: ({ children }) => <Typography variant="h3" fontSize={60}>{children}</Typography>,
-    h3: ({ children }) => <Typography variant="h3" fontSize={55}>{children}</Typography>,
-    h4: ({ children }) => <Typography variant="h3" fontSize={50}>{children}</Typography>,
-    h5: ({ children }) => <Typography variant="h3" fontSize={45}>{children}</Typography>,
-    h6: ({ children }) => <Typography variant="h3" fontSize={40}>{children}</Typography>,
+    h1: ({ children }) => <Typography variant="h3" fontSize={65} fontFamily={'Roboto'}>{children}</Typography>,
+    h2: ({ children }) => <Typography variant="h3" fontSize={50} fontFamily={'Roboto'}>{children}</Typography>,
+    h3: ({ children }) => <Typography variant="h3" fontSize={40} fontFamily={'Roboto'}>{children}</Typography>,
+    h4: ({ children }) => <Typography variant="h3" fontSize={35} fontFamily={'Roboto'}>{children}</Typography>,
+    h5: ({ children }) => <Typography variant="h3" fontSize={30} fontFamily={'Roboto'}>{children}</Typography>,
+    h6: ({ children }) => <Typography variant="h3" fontSize={25} fontFamily={'Roboto'}>{children}</Typography>,
     p: ({ node, children }) => <Typography variant="body" fontSize={28} style={{ wordWrap: 'break-word' }} gutterBottom>{children}</Typography>,
     img: ({ node, src, alt, title, ...props }) => {
       return (
