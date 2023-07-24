@@ -18,6 +18,7 @@ function PostEditor() {
   const { isNew, postId } = location.state;
 
   const [title, setTitle] = useState("");
+  const [coverUrl, setCoverUrl] = useState("");
   const [description, setDescription] = useState("");
   const [content, setContent] = useState("");
   const [categoryId, setCategoryId] = useState("");
@@ -39,6 +40,7 @@ function PostEditor() {
         setDescription(original.description);
         setContent(original.content);
         setCategoryId(original.category.id);
+        setCoverUrl(original.coverUrl);
       });
     }
   }, [isNew, postId]);
@@ -56,6 +58,7 @@ function PostEditor() {
       description: description,
       content: content,
       categoryId: categoryId,
+      coverUrl: coverUrl,
     };
 
     if (isNew) {
@@ -86,6 +89,15 @@ function PostEditor() {
           value={title}
           onChange={(e) => {
             setTitle(e.target.value);
+          }}
+          fullWidth
+          sx={{ marginTop: 5, marginBottom: 5, display: "block" }}
+        />
+        <TextField
+          label="Cover Picture"
+          value={coverUrl}
+          onChange={(e) => {
+            setCoverUrl(e.target.value);
           }}
           fullWidth
           sx={{ marginTop: 5, marginBottom: 5, display: "block" }}

@@ -27,7 +27,7 @@ function PostCover({ post }) {
         backgroundSize: "cover",
         color: "whitesmoke",
         backgroundPosition: "center",
-        backgroundImage: `url('https://source.unsplash.com/random?wallpapers')`,
+        backgroundImage: `url(${post.coverUrl})`,
         width: "100vw", // Set the width to the viewport width
         height: "60vh", // Set the height to the viewport height
       }}
@@ -46,7 +46,7 @@ function PostCover({ post }) {
           alignItems: "center",
         }}
       >
-        <Typography variant="h2">{post.title}</Typography>
+        <Typography variant="h2" style={{ wordWrap: 'break-word' }} maxWidth={'80%'}>{post.title}</Typography>
         <Typography variant="h5">{`${
           createdDate.getMonth() + 1
         }/${createdDate.getDate()}/${createdDate.getFullYear()}`}</Typography>
