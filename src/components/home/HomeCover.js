@@ -10,7 +10,7 @@ function HomeCover() {
         mb: 4,
         backgroundSize: "cover",
         backgroundPosition: "center",
-        backgroundImage: `url('https://source.unsplash.com/random?wallpapers')`,
+        backgroundImage: `url('https://i.imgur.com/FpHwkAJ.gif')`,
         width: "100vw", // Set the width to the viewport width
         height: "80vh", // Set the height to the viewport height
       }}

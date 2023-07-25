@@ -8,6 +8,7 @@ import React from "react";
 import { useState } from "react";
 import CategoryPage from '../category/CategoryPage';
 import EditPost from "./EditPost";
+import EditCategory from "./EditCategory";
 
 function EditorPage() {
   const [section, setSection] = useState("posts");
@@ -39,7 +40,7 @@ function EditorPage() {
           {section === "posts" ? (
             <EditPost />
           ) : section === "categories" ? (
-            <div><CategoryPage/></div>
+            <EditCategory />
           ) : (
             <div>tags</div>
           )}
