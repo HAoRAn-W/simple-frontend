@@ -46,27 +46,40 @@ function PostCover({ post }) {
           alignItems: "center",
         }}
       >
-        <Typography variant="h2" style={{ wordWrap: 'break-word' }} maxWidth={'80%'}>{post.title}</Typography>
+        <Typography
+          variant="h2"
+          style={{ wordWrap: "break-word" }}
+          maxWidth={"80%"}
+        >
+          {post.title}
+        </Typography>
         <Typography variant="h5">{`${
           createdDate.getMonth() + 1
         }/${createdDate.getDate()}/${createdDate.getFullYear()}`}</Typography>
         {user && (
           <Box position={"absolute"} bottom={"20%"}>
             {isFavorite ? (
-              <ButtonBase onClick={() => {
-                UserServcice.removeFavorite(post.id);
-                setIsFavorite(false);
-              }}>
-                <BookmarkAddedIcon fontSize="large" />
+              <ButtonBase
+                onClick={() => {
+                  UserServcice.removeFavorite(post.id);
+                  setIsFavorite(false);
+                }}
+              >
+                <BookmarkAddedIcon
+                  fontSize="large"
+                  sx={{ "&:hover": { color: "grey" }, color: '#f28482'}}
+                />
               </ButtonBase>
             ) : (
-              <ButtonBase>
+              <ButtonBase
+                onClick={() => {
+                  UserServcice.addFavorite(post.id);
+                  setIsFavorite(true);
+                }}
+              >
                 <BookmarkAddIcon
                   fontSize="large"
-                  onClick={() => {
-                    UserServcice.addFavorite(post.id);
-                    setIsFavorite(true);
-                  }}
+                  sx={{ "&:hover": { color: "grey" } }}
                 />
               </ButtonBase>
             )}

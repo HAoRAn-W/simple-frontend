@@ -1,4 +1,4 @@
-import { Container, List, ListItemButton } from "@mui/material";
+import { Container, List, ListItemButton, Typography } from "@mui/material";
 import React from "react";
 import PostInfo from "./PostInfo";
 import { useNavigate } from "react-router-dom";
@@ -13,30 +13,34 @@ function PostList({ fromEditor }) {
       style={{
         display: "flex",
         flexDirection: "column",
-        alignItems: "flex-end",
+        alignItems: 'center'
       }}
     >
-      <List sx={{ width: "90%" }} disablePadding>
-        {posts.map((post) => {
-          return (
-            <ListItemButton
-              style={{ marginTop: "15px" }}
-              onClick={() => {
-                if (fromEditor) {
-                  navigate("/posteditor", {
-                    state: { isNew: false, postId: post.id},
-                  });
-                } else {
-                  navigate(`/${post.id}`);
-                }
-              }}
-              key={post.id}
-            >
-              <PostInfo post={post} />
-            </ListItemButton>
-          );
-        })}
-      </List>
+      {posts.length === 0 ? (
+        <Typography variant="h4">No Posts</Typography>
+      ) : (
+        <List sx={{ width: "90%" }} disablePadding>
+          {posts.map((post) => {
+            return (
+              <ListItemButton
+                style={{ marginTop: "15px" }}
+                onClick={() => {
+                  if (fromEditor) {
+                    navigate("/posteditor", {
+                      state: { isNew: false, postId: post.id },
+                    });
+                  } else {
+                    navigate(`/${post.id}`);
+                  }
+                }}
+                key={post.id}
+              >
+                <PostInfo post={post} />
+              </ListItemButton>
+            );
+          })}
+        </List>
+      )}
     </Container>
   );
 }

@@ -1,5 +1,4 @@
 import {
-  Avatar,
   ButtonBase,
   Grid,
   IconButton,
@@ -15,6 +14,8 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { logout } from "../app/slices/auth";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUser } from "@fortawesome/free-solid-svg-icons";
 
 function NavBar() {
   const [tabValue, setTabValue] = useState(false);
@@ -68,7 +69,7 @@ function NavBar() {
             setTabValue(false);
           }}
         >
-          <Typography variant="h3">whr.one</Typography>
+          <Typography variant="h3" gutterBottom>whr.one</Typography>
         </ButtonBase>
       </div>
 
@@ -126,7 +127,7 @@ function NavBar() {
         ) : (
           <Tooltip title="User menu">
             <IconButton onClick={handleOpenUserMenu}>
-              <Avatar sx={{ bgcolor: "black" }}>W</Avatar>
+              <FontAwesomeIcon icon={faUser} />
             </IconButton>
           </Tooltip>
         )}
