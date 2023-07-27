@@ -6,9 +6,9 @@ import {
 } from "@mui/material";
 import React from "react";
 import { useState } from "react";
-import CategoryPage from '../category/CategoryPage';
 import EditPost from "./EditPost";
 import EditCategory from "./EditCategory";
+import EditTag from "./EditTag";
 
 function EditorPage() {
   const [section, setSection] = useState("posts");
@@ -42,7 +42,7 @@ function EditorPage() {
           ) : section === "categories" ? (
             <EditCategory />
           ) : (
-            <div>tags</div>
+            <EditTag />
           )}
         </div>
       </Container>
