@@ -15,7 +15,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { logout } from "../app/slices/auth";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUser } from "@fortawesome/free-solid-svg-icons";
+import { faCircleUser} from "@fortawesome/free-solid-svg-icons";
 
 function NavBar() {
   const [tabValue, setTabValue] = useState(false);
@@ -82,9 +82,9 @@ function NavBar() {
         }}
       >
         <Tabs value={tabValue} onChange={handleTabChange}>
-          <Tab disableRipple value="category" label="Category" />
-          <Tab disableRipple value="tag" label="Tag" />
-          <Tab disableRipple value="about" label="About" />
+          <Tab disableRipple value="category" label="Category" sx={{fontSize: 23}}/>
+          <Tab disableRipple value="tag" label="Tag" sx={{fontSize: 23}}/>
+          <Tab disableRipple value="about" label="About" sx={{fontSize: 23}}/>
         </Tabs>
       </div>
 
@@ -127,7 +127,7 @@ function NavBar() {
         ) : (
           <Tooltip title="User menu">
             <IconButton onClick={handleOpenUserMenu}>
-              <FontAwesomeIcon icon={faUser} />
+              <FontAwesomeIcon icon={faCircleUser} />
             </IconButton>
           </Tooltip>
         )}
@@ -146,10 +146,7 @@ function NavBar() {
             <Typography textAlign="center">Profile</Typography>
           </MenuItem>
           <MenuItem onClick={() => handleClickUserMenu("favorites")}>
-            <Typography textAlign="center">favorites</Typography>
-          </MenuItem>
-          <MenuItem onClick={handleLogout}>
-            <Typography textAlign="center">log out</Typography>
+            <Typography textAlign="center">Favorites</Typography>
           </MenuItem>
           {user && user.roles.includes("ROLE_ADMIN") && (
             <MenuItem
@@ -161,6 +158,10 @@ function NavBar() {
               <Typography textAlign="center">Editor</Typography>
             </MenuItem>
           )}
+          <MenuItem onClick={handleLogout}>
+            <Typography textAlign="center">Logout</Typography>
+          </MenuItem>
+          
         </Menu>
       </div>
     </Toolbar>
