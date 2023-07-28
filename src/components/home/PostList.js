@@ -1,6 +1,5 @@
 import { List, ListItemButton, Typography } from "@mui/material";
 import React from "react";
-import PostInfo from "./PostInfo";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import PostCard from "./PostCard";
@@ -10,13 +9,7 @@ function PostList({ fromEditor }) {
   const navigate = useNavigate();
 
   return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: 'center',
-      }}
-    >
+    <>
       {posts.length === 0 ? (
         <Typography variant="h4">No Posts</Typography>
       ) : (
@@ -42,7 +35,7 @@ function PostList({ fromEditor }) {
           })}
         </List>
       )}
-    </div>
+      </>
   );
 }
 

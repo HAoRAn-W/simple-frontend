@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import UserServcice from "../../app/services/user.service";
 import { SUCCESSFUL } from "../../app/constants/MessageCode";
 import { ListItemButton } from "@mui/material";
-import PostInfo from "../home/PostInfo";
 import { useNavigate } from "react-router-dom";
+import PostCard from "../home/PostCard";
 
 function FavoritePage() {
   const [favorites, setFavorites] = useState([]);
@@ -16,17 +16,18 @@ function FavoritePage() {
       }
     });
   }, []);
+
   return (
-    <div>
+    <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
       {favorites.map((post) => (
         <ListItemButton
-          style={{ marginTop: "15px" }}
+          style={{ marginTop: "15px", width: '60%' }}
           key={post.id}
           onClick={() => {
             navigate(`/${post.id}`);
           }}
         >
-          <PostInfo post={post} />
+          <PostCard post={post} />
         </ListItemButton>
       ))}
     </div>

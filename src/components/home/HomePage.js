@@ -9,7 +9,7 @@ function HomePage() {
     <>
       <HomeCover />
       <div style={{ display: "flex", flexDirection: 'row' }}>
-        <div style={{ flex: 7}}>
+        <div style={{ flex: 7, display: 'flex', justifyContent: 'flex-end'}}>
           <PostList />
         </div>
         <div style={{ flex: 3 }}>

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import TagService from "../../app/services/tag.service";
 import { SUCCESSFUL } from "../../app/constants/MessageCode";
-import { ButtonBase, Paper, Stack, Typography } from "@mui/material";
+import { ButtonBase, Container, Paper, Stack, Typography } from "@mui/material";
 import styled from "@emotion/styled";
 
 function TagPage() {
@@ -15,7 +15,15 @@ function TagPage() {
     });
   }, []);
   return (
-    <div>
+    <Container style={{justifyContent: 'center'}}>
+      <Typography
+        variant="h4"
+        marginLeft={"40px"}
+        marginBottom={"40px"}
+        marginTop={"40px"}
+      >
+        Tags
+      </Typography>
       <Stack
         spacing={{ xs: 1, sm: 2 }}
         direction="row"
@@ -31,7 +39,7 @@ function TagPage() {
           </ButtonBase>
         ))}
       </Stack>
-    </div>
+    </Container>
   );
 }
 

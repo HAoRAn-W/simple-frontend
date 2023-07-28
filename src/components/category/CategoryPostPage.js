@@ -7,7 +7,7 @@ function CategoryPostPage() {
   const { id } = location.state;
 
   return (
-    <div>
+    <div style={{width: '80%', display: 'flex', flexDirection: 'column',alignItems: 'center', justifyContent: 'center'}}>
       <PostList />
       <PaginationBar pos={1} id={id} />
     </div>

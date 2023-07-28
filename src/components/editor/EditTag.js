@@ -3,6 +3,7 @@ import TagService from "../../app/services/tag.service";
 import { SUCCESSFUL } from "../../app/constants/MessageCode";
 import {
   Alert,
+  Box,
   Button,
   ButtonBase,
   Paper,
@@ -28,18 +29,26 @@ function EditTag() {
     });
   }, []);
   return (
-    <div>
-      <div style={{ display: "inline-block" }}>
-        <TextField
-          label="Name"
-          value={name}
-          onChange={(e) => {
-            setName(e.target.value);
-          }}
-          fullWidth
-          sx={{ marginTop: 5, marginBottom: 5, display: "block" }}
-        />
+    <div
+      style={{
+        width: "90%",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+      }}
+    >
+      <TextField
+        label="Name"
+        value={name}
+        onChange={(e) => {
+          setName(e.target.value);
+        }}
+        fullWidth
+        sx={{ marginTop: 5, marginBottom: 5, display: "block" }}
+      />
+      <Box>
         <Button
+        sx={{ marginX: "10px" }}
           variant="contained"
           onClick={() => {
             const newTag = {
@@ -74,6 +83,7 @@ function EditTag() {
         {isUpdate && (
           <>
             <Button
+            sx={{ marginX: "10px" }}
               variant="contained"
               onClick={() => {
                 setId();
@@ -84,13 +94,14 @@ function EditTag() {
               Cancel
             </Button>
             <Button
+            sx={{ marginX: "10px" }}
               variant="contained"
               onClick={() => {
-                TagService.deleteTag(id).then(data => {
+                TagService.deleteTag(id).then((data) => {
                   if (data.code !== SUCCESSFUL) {
                     setIsError(true);
                   }
-                })
+                });
                 setId();
                 setIsUpdate(false);
                 setName("");
@@ -100,11 +111,18 @@ function EditTag() {
             </Button>
           </>
         )}
-      </div>
+      </Box>
 
-      {isError && <Alert severity="error" onClose={() => {
-        setIsError(false)
-      }}>Failed</Alert>}
+      {isError && (
+        <Alert
+          severity="error"
+          onClose={() => {
+            setIsError(false);
+          }}
+        >
+          Failed
+        </Alert>
+      )}
       <Stack
         spacing={{ xs: 1, sm: 2 }}
         direction="row"
