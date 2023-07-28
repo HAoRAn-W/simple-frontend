@@ -14,6 +14,7 @@ import AboutPage from "./components/about/AboutPage";
 import EditorPage from "./components/editor/EditorPage";
 import PostEditor from "./components/editor/PostEditor";
 import CategoryPostPage from "./components/category/CategoryPostPage";
+import TagPage from "./components/tag/TagPage";
 
 function App() {
   const defaultTheme = createTheme({
@@ -35,7 +36,7 @@ function App() {
 
             <Route path="/category" element={<CategoryPage />} />
             <Route path="/category/:id" element={<CategoryPostPage />} />
-            <Route path="/tag" element={<HomePage />} />
+            <Route path="/tag" element={<TagPage />} />
             <Route path="/about" element={<AboutPage />} />
 
             <Route path="/profile" element={<ProfilePage />} />
