@@ -8,11 +8,11 @@ function HomePage() {
   return (
     <>
       <HomeCover />
-      <div style={{ display: "flex", justifyContent: "center" }}>
-        <div style={{ display: "flex", width: "70%" }}>
+      <div style={{ display: "flex", flexDirection: 'row' }}>
+        <div style={{ flex: 7}}>
           <PostList />
         </div>
-        <div style={{ display: "flex", width: "30%" }}>
+        <div style={{ flex: 3 }}>
           <Sidebar />
         </div>
       </div>

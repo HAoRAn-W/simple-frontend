@@ -1,19 +1,20 @@
-import { Container, List, ListItemButton, Typography } from "@mui/material";
+import { List, ListItemButton, Typography } from "@mui/material";
 import React from "react";
 import PostInfo from "./PostInfo";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import PostCard from "./PostCard";
 
 function PostList({ fromEditor }) {
   const posts = useSelector((state) => state.page.posts);
   const navigate = useNavigate();
 
   return (
-    <Container
+    <div
       style={{
         display: "flex",
         flexDirection: "column",
-        alignItems: 'center'
+        alignItems: 'center',
       }}
     >
       {posts.length === 0 ? (
@@ -35,13 +36,13 @@ function PostList({ fromEditor }) {
                 }}
                 key={post.id}
               >
-                <PostInfo post={post} />
+                <PostCard post={post} />
               </ListItemButton>
             );
           })}
         </List>
       )}
-    </Container>
+    </div>
   );
 }
 
