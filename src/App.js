@@ -19,15 +19,22 @@ import TagPage from "./components/tag/TagPage";
 function App() {
   const defaultTheme = createTheme({
     typography: {
-      fontFamily: 'Noto Serif, serif'
-    }
+      fontFamily: "Noto Serif, serif",
+    },
   });
   return (
     <div className="App">
       <ThemeProvider theme={defaultTheme}>
         <CssBaseline />
         <NavBar />
-        <div style={{ minHeight: "100vh" }}>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: 'column',
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/:id" element={<PostPage />} />
@@ -47,7 +54,6 @@ function App() {
             <Route path="/*" element={<NotFound />} />
           </Routes>
         </div>
-
         <Footer />
       </ThemeProvider>
     </div>
