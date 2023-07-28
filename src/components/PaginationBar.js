@@ -20,6 +20,11 @@ function PaginationBar({ pos = 0, id }) {
     } else if (pos === 1) {
       // from category
       dispatch(loadpagebycategory({ categoryId: id, page: currentPage - 1 }));
+    } else if (pos === 2) {
+      //from tag
+    } else if (pos === 3) {
+      // from favorite
+      
     }
   }, [currentPage, dispatch, pos, id]);
 
