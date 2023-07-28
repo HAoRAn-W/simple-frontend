@@ -76,15 +76,9 @@ const addPost = (newPost) => {
 };
 
 const updatePost = (newPost) => {
-  console.log("updating...");
+  console.log("updating...:", newPost);
   return client
-    .post("update", {
-      id: newPost.id,
-      title: newPost.title,
-      description: newPost.description,
-      content: newPost.content,
-      categoryId: newPost.categoryId,
-    })
+    .post("update", newPost)
     .then((response) => {
       return response.data;
     })
