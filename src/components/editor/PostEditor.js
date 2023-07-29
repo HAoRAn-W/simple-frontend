@@ -1,7 +1,12 @@
 import {
   Button,
+  Checkbox,
   Container,
   FormControl,
+  FormControlLabel,
+  FormGroup,
+  FormLabel,
+  Grid,
   InputLabel,
   MenuItem,
   Select,
@@ -12,22 +17,30 @@ import { useLocation, useNavigate } from "react-router-dom";
 import PostService from "../../app/services/post.service";
 import CategoryService from "../../app/services/category.service";
 import { SUCCESSFUL } from "../../app/constants/MessageCode";
+import TagService from "../../app/services/tag.service";
 
 function PostEditor() {
   const location = useLocation();
   const { isNew, postId } = location.state;
+
+  const navigate = useNavigate();
 
   const [title, setTitle] = useState("");
   const [coverUrl, setCoverUrl] = useState("");
   const [description, setDescription] = useState("");
   const [content, setContent] = useState("");
   const [categoryId, setCategoryId] = useState("");
-
   const [categories, setCategories] = useState([]);
+  const [tags, setTags] = useState([]);
+  const [selectedTags, setSelectedTags] = useState(new Set());
 
   useEffect(() => {
     CategoryService.getCategoryList().then((data) => {
       setCategories(data.categories);
+    });
+    TagService.getTagList().then((data) => {
+      console.log(data.tags);
+      setTags(data.tags);
     });
   }, []);
 
@@ -41,6 +54,12 @@ function PostEditor() {
         setContent(original.content);
         setCategoryId(original.category.id);
         setCoverUrl(original.coverUrl);
+        console.log(original.tags);
+        setSelectedTags((prev) => {
+          const updatedTags = new Set([...original.tags.map((tag) => tag.id)]);
+          console.log("updatedTags", updatedTags);
+          return updatedTags;
+        });
       });
     }
   }, [isNew, postId]);
@@ -49,33 +68,48 @@ function PostEditor() {
     setCategoryId(e.target.value);
   };
 
-  const navigate = useNavigate();
+  const handleChecked = (e) => {
+    // remeber to convert string to number, otherwise, you can only add, cannot remove. becasue set.has() always false
+    const selected = Number(e.target.name);
+    setSelectedTags((prev) => {
+      const updatedTags = new Set(prev);
+      if (e.target.checked) {
+        updatedTags.add(selected);
+      } else {
+        updatedTags.delete(selected);
+      }
+      console.log(updatedTags);
+      return updatedTags;
+    });
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log("tagIds:", selectedTags);
     const newPost = {
       title: title,
       description: description,
       content: content,
       categoryId: categoryId,
       coverUrl: coverUrl,
+      tagIds: [...selectedTags], // set to array
     };
 
     if (isNew) {
-      PostService.addPost(newPost).then(data => {
+      PostService.addPost(newPost).then((data) => {
         if (data.code === SUCCESSFUL) {
           navigate("/editor");
         } else {
-          console.log('error:', data);
+          console.log("error:", data);
         }
       });
     } else {
       newPost.id = postId;
-      PostService.updatePost(newPost).then(data => {
+      PostService.updatePost(newPost).then((data) => {
         if (data.code === SUCCESSFUL) {
           navigate("/editor");
         } else {
-          console.log('error:', data);
+          console.log("error:", data);
         }
       });
     }
@@ -124,7 +158,7 @@ function PostEditor() {
           multiline
           rows={20}
         />
-        <FormControl fullWidth required>
+        <FormControl fullWidth required variant="standard">
           <InputLabel id="category-id">Category</InputLabel>
           <Select
             labelId="category-id"
@@ -142,9 +176,36 @@ function PostEditor() {
             })}
           </Select>
         </FormControl>
+
+        <FormControl fullWidth component="fieldset" variant="standard">
+          <FormLabel>Tags</FormLabel>
+          <FormGroup>
+          <Grid container spacing={2}> {/* Use Grid container */}
+            {tags.map((tag) => (
+              <Grid item xs={12} sm={3} md={2} key={tag.id}>
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    checked={selectedTags.has(tag.id)}
+                    onChange={handleChecked}
+                    name={tag.id}
+                  />
+                }
+                label={tag.name}
+              />
+              </Grid>
+            ))}
+            </Grid>
+          </FormGroup>
+        </FormControl>
       </form>
 
-      <Button variant="contained" type="submit" onClick={handleSubmit}>
+      <Button
+        variant="contained"
+        type="submit"
+        sx={{ marginTop: 6 }}
+        onClick={handleSubmit}
+      >
         {isNew ? "save" : "update"}
       </Button>
     </Container>

@@ -76,7 +76,6 @@ const addPost = (newPost) => {
 };
 
 const updatePost = (newPost) => {
-  console.log("updating...:", newPost);
   return client
     .post("update", newPost)
     .then((response) => {
