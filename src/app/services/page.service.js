@@ -8,7 +8,7 @@ const client = axios.create({
 
 const loadPage = (page) => {
   return client
-    .get('post', {params: {pageNo: page, pageSize:2}})
+    .get('post', {params: {pageNo: page, pageSize:6}})
     .then((response) => {
       return response.data;
     })
@@ -18,8 +18,11 @@ const loadPage = (page) => {
 };
 
 const loadPageByCategory = (categoryId, page) => {
+  console.log('categoryId', categoryId);
+  console.log('page', page);
+
   return client
-    .get('/page/category', {params: {categoryId: categoryId, pageNo: page, pageSize:1}})
+    .get('post/category', {params: {categoryId: categoryId, pageNo: page, pageSize:6}})
     .then((response) => {
       return response.data;
     })

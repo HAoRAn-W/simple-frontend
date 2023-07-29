@@ -1,11 +1,27 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import PostList from "../home/PostList";
 import PaginationBar from "../PaginationBar";
 import { Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import PageService from "../../app/services/page.service";
+import { SUCCESSFUL } from "../../app/constants/MessageCode";
 
 function EditPost() {
   const navigate = useNavigate();
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const [posts, setPosts] = useState([]);
+  const [total, setTotal] = useState(0);
+
+  useEffect(() => {
+    PageService.loadPage(currentPage - 1).then((data) => {
+      console.log('data:', data)  
+      if (data.code === SUCCESSFUL) {
+          setPosts(data.posts);
+          setTotal(data.total);
+        }
+    })
+  }, [currentPage]);
   return (
     <>
       <div
@@ -24,9 +40,9 @@ function EditPost() {
         >
           Add New Post
         </Button>
-        <PostList fromEditor={true} />
+        <PostList  posts={posts} fromEditor={true} />
       </div>
-      <PaginationBar />
+      <PaginationBar currentPage={currentPage} setCurrentPage={setCurrentPage} total={total}/>
     </>
   );
 }

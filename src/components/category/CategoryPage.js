@@ -41,9 +41,7 @@ function CategoryPage({
               <ButtonBase
                 onClick={() => {
                   if (!fromEditor) {
-                    navigate(`/category/${category.id}`, {
-                      state: { id: category.id },
-                    });
+                    navigate(`/category/${category.id}`);
                   } else {
                     setIsUpdate(true);
                     setId(category.id);
