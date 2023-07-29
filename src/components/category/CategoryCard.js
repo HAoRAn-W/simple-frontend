@@ -4,9 +4,9 @@ import React from "react";
 
 function CategoryCard({ category }) {
   return (
-    <Paper style={{ display: "flex", flexDirection: "column", width: 260, height: 260 }}>
-      <div style={{ flex: 8 }}>
-        <Image src={category.coverUrl} style={{maxHeight: '100%'}}/>
+    <Paper style={{ display: "flex", flexDirection: "column", width: 260, height: 260,  }}>
+      <div style={{ flex: 8 , overflow: 'hidden'}}>
+        <Image src={category.coverUrl}/>
       </div>
       <div style={{ flex: 4 }}>
         <Typography variant="h5">{category.name}</Typography>
