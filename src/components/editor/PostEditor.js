@@ -2,6 +2,9 @@ import {
   Button,
   Checkbox,
   Container,
+  Dialog,
+  DialogActions,
+  DialogTitle,
   FormControl,
   FormControlLabel,
   FormGroup,
@@ -33,6 +36,8 @@ function PostEditor() {
   const [categories, setCategories] = useState([]);
   const [tags, setTags] = useState([]);
   const [selectedTags, setSelectedTags] = useState(new Set());
+
+  const [openDialog, setOpenDialog] = useState(false);
 
   useEffect(() => {
     CategoryService.getCategoryList().then((data) => {
@@ -115,6 +120,19 @@ function PostEditor() {
     }
   };
 
+  const handleCancelDialog = () => {
+    setOpenDialog(false);
+  };
+
+  const handleDelete = () => {
+    PostService.deletePost(postId).then((data) => {
+      if (data.code === SUCCESSFUL) {
+        navigate(-1);
+      }
+      setOpenDialog(false);
+    });
+  };
+
   return (
     <Container>
       <form noValidate autoComplete="off">
@@ -180,21 +198,23 @@ function PostEditor() {
         <FormControl fullWidth component="fieldset" variant="standard">
           <FormLabel>Tags</FormLabel>
           <FormGroup>
-          <Grid container spacing={2}> {/* Use Grid container */}
-            {tags.map((tag) => (
-              <Grid item xs={12} sm={3} md={2} key={tag.id}>
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    checked={selectedTags.has(tag.id)}
-                    onChange={handleChecked}
-                    name={tag.id}
+            <Grid container spacing={2}>
+              {" "}
+              {/* Use Grid container */}
+              {tags.map((tag) => (
+                <Grid item xs={12} sm={3} md={2} key={tag.id}>
+                  <FormControlLabel
+                    control={
+                      <Checkbox
+                        checked={selectedTags.has(tag.id)}
+                        onChange={handleChecked}
+                        name={tag.id}
+                      />
+                    }
+                    label={tag.name}
                   />
-                }
-                label={tag.name}
-              />
-              </Grid>
-            ))}
+                </Grid>
+              ))}
             </Grid>
           </FormGroup>
         </FormControl>
@@ -203,11 +223,54 @@ function PostEditor() {
       <Button
         variant="contained"
         type="submit"
-        sx={{ marginTop: 6 }}
+        sx={{ marginTop: 6, marginRight: 2 }}
         onClick={handleSubmit}
       >
         {isNew ? "save" : "update"}
       </Button>
+      <Button
+        variant="contained"
+        sx={{ marginTop: 6, marginRight: 2 }}
+        onClick={() => {
+          navigate(-1);
+        }}
+      >
+        Cancel
+      </Button>
+      {!isNew && (
+        <Button
+          sx={{
+            backgroundColor: "#ef233c",
+            color: "white",
+            marginTop: 6,
+            marginRight: 2,
+          }}
+          variant="contained"
+          onClick={() => {
+            setOpenDialog(true);
+          }}
+        >
+          Delete
+        </Button>
+      )}
+      {/* updating the state within the component's render function or event handlers may cause too many re-renders
+        in this case onClose is the one that triggers infinite loop
+      */}
+      <Dialog open={openDialog} onClose={handleCancelDialog}>
+        <DialogTitle>Confirm delete post</DialogTitle>
+        <DialogActions>
+          <Button onClick={handleCancelDialog}>Cancel</Button>
+          <Button
+            sx={{
+              backgroundColor: "#ef233c",
+              color: "white",
+            }}
+            onClick={handleDelete}
+          >
+            Delete
+          </Button>
+        </DialogActions>
+      </Dialog>
     </Container>
   );
 }

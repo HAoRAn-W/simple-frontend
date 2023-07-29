@@ -86,10 +86,20 @@ const updatePost = (newPost) => {
     });
 };
 
+const deletePost = (postId) => {
+  return client.get(`delete/${postId}`).then((response) => {
+    return response.data;
+  })
+  .catch((error) => {
+    return { code: UNDEFINED_ERROR, message: error.toString() };
+  });
+}
+
 const PostService = {
   getPost,
   addPost,
   updatePost,
+  deletePost,
 };
 
 export default PostService;
