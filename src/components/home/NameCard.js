@@ -10,7 +10,7 @@ import {
 } from "@mui/material";
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faInstagram, faSquareFacebook, faTwitter } from "@fortawesome/free-brands-svg-icons";
+import { faInstagram, faLinkedin, faSquareFacebook, faTwitter } from "@fortawesome/free-brands-svg-icons";
 
 function NameCard() {
   return (
@@ -32,14 +32,14 @@ function NameCard() {
         </Typography>
       </CardContent>
       <CardActions>
-        <IconButton>
+        <IconButton href="https://twitter.com/WHRONE233" target="_blank">
           <FontAwesomeIcon icon={faTwitter} style={{ color: "#1da1f2" }} />
         </IconButton>
-        <IconButton>
+        <IconButton href="https://www.instagram.com/haoran_233x/" target="_blank">
           <FontAwesomeIcon icon={faInstagram} style={{ color: "#c13584" }} />
         </IconButton>
-        <IconButton>
-        <FontAwesomeIcon icon={faSquareFacebook} style={{color: "#0165e1",}} />
+        <IconButton href="https://www.linkedin.com/in/whr/" target="_blank">
+        <FontAwesomeIcon icon={faLinkedin} style={{color: "#0077b5",}} />
         </IconButton>
       </CardActions>
     </Card>

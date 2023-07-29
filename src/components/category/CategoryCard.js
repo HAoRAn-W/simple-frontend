@@ -8,7 +8,7 @@ function CategoryCard({ category }) {
       <div style={{ flex: 8 , overflow: 'hidden'}}>
         <Image src={category.coverUrl}/>
       </div>
-      <div style={{ flex: 4 }}>
+      <div style={{ flex: 4, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
         <Typography variant="h5">{category.name}</Typography>
       </div>
     </Paper>

@@ -69,7 +69,7 @@ function NavBar() {
             setTabValue(false);
           }}
         >
-          <Typography variant="h3" gutterBottom>whr.one</Typography>
+          <Typography variant="h3" fontFamily={'Lato'} gutterBottom>whr.one</Typography>
         </ButtonBase>
       </div>
 
