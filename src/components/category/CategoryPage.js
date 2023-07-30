@@ -24,7 +24,7 @@ function CategoryPage({
   }, []);
 
   return (
-    <Container style={{ alignItems: "center" }}>
+    <Container style={{ display:'flex', flexDirection:'column',alignItems: "center" }}>
       <Typography
         variant="h4"
         marginLeft={"40px"}
@@ -37,7 +37,7 @@ function CategoryPage({
       <Grid container spacing={5}>
         {categories.map((category) => {
           return (
-            <Grid item marginLeft={"40px"} key={category.id}>
+            <Grid item key={category.id} xs={12} sm={6} md={4} lg={3} justifyContent={'center'}>
               <ButtonBase
                 onClick={() => {
                   if (!fromEditor) {
