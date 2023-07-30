@@ -10,7 +10,7 @@ import {
 } from "@mui/material";
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faInstagram, faLinkedin, faSquareFacebook, faTwitter } from "@fortawesome/free-brands-svg-icons";
+import { faInstagram, faLinkedin, faTwitter } from "@fortawesome/free-brands-svg-icons";
 
 function NameCard() {
   return (
