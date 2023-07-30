@@ -24,10 +24,9 @@ function PostCard({ post }) {
           display: "flex",
           flexDirection: "column",
           padding: 20,
-          width: '100%'
         }}
       >
-        <Typography variant="h5" gutterBottom>
+        <Typography variant="h5" gutterBottom  style={{ wordBreak:'break-all', maxWidth: '100%'}}>
           {post.title}
         </Typography>
 
@@ -37,7 +36,7 @@ function PostCard({ post }) {
           fontFamily={"Roboto"}
           sx={{
             overflow: "hidden",
-            textOverflow: "ellipsis"
+            textOverflow: "ellipsis",
           }}
         >
           {post.description}
