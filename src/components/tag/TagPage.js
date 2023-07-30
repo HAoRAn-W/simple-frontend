@@ -3,9 +3,12 @@ import TagService from "../../app/services/tag.service";
 import { SUCCESSFUL } from "../../app/constants/MessageCode";
 import { ButtonBase, Container, Paper, Stack, Typography } from "@mui/material";
 import styled from "@emotion/styled";
+import { useNavigate } from "react-router-dom";
 
 function TagPage() {
   const [tags, setTags] = useState([]);
+  const navigate = useNavigate();
+
   useEffect(() => {
     TagService.getTagList().then((data) => {
       console.log("tag lists data:", data);
@@ -32,7 +35,9 @@ function TagPage() {
         marginTop={2}
       >
         {tags.map((tag) => (
-          <ButtonBase key={tag.id} onClick={() => {}}>
+          <ButtonBase key={tag.id} onClick={() => {
+            navigate(`/tag/${tag.id}`)
+          }}>
             <Item sx={{ backgroundColor: "red" }}>
               <Typography>{tag.name}</Typography>
             </Item>

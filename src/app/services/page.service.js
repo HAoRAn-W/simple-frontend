@@ -18,9 +18,6 @@ const loadPage = (page) => {
 };
 
 const loadPageByCategory = (categoryId, page) => {
-  console.log('categoryId', categoryId);
-  console.log('page', page);
-
   return client
     .get('post/category', {params: {categoryId: categoryId, pageNo: page, pageSize:6}})
     .then((response) => {
@@ -31,9 +28,22 @@ const loadPageByCategory = (categoryId, page) => {
     });
 }
 
+const loadPageByTag = (tagId, page) => {
+  return client
+    .get('post/tag', {params: {tagId: tagId, pageNo: page, pageSize:6}})
+    .then((response) => {
+      return response.data;
+    })
+    .catch((error) => {
+      return { code: UNDEFINED_ERROR, message: error.toString() };
+    });
+}
+
+
 const PageService = {
   loadPage,
   loadPageByCategory,
+  loadPageByTag,
 };
 
 export default PageService;

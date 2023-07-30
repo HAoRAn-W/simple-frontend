@@ -13,7 +13,6 @@ function HomePage() {
 
   useEffect(() => {
     PageService.loadPage(currentPage - 1).then((data) => {
-      console.log('data:', data)  
       if (data.code === SUCCESSFUL) {
           setPosts(data.posts);
           setTotal(data.total);
