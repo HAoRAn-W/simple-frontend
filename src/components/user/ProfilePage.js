@@ -1,12 +1,9 @@
 import { Typography } from "@mui/material";
 import AuthService from "../../app/services/auth.service";
-import UserServcice from "../../app/services/user.service";
-import { useEffect, useState } from "react";
-import { SUCCESSFUL } from "../../app/constants/MessageCode";
+import {  useState } from "react";
 
 function ProfilePage() {
   const user = AuthService.getUser();
-  const [content, setContent] = useState("");
 
   // useEffect(() => {
 
