@@ -95,11 +95,43 @@ const deletePost = (postId) => {
   });
 }
 
+const pinPost = (postId) => {
+  return client.get(`pin/${postId}`).then((response) => {
+    return response.data;
+  })
+  .catch((error) => {
+    return { code: UNDEFINED_ERROR, message: error.toString() };
+  });
+}
+
+const unpinPost = (postId) => {
+  return client.get(`unpin/${postId}`).then((response) => {
+    return response.data;
+  })
+  .catch((error) => {
+    return { code: UNDEFINED_ERROR, message: error.toString() };
+  });
+  
+}
+
+const getPinnedPosts = () => {
+  return client.get(`pin/all`).then((response) => {
+    return response.data;
+  })
+  .catch((error) => {
+    return { code: UNDEFINED_ERROR, message: error.toString() };
+  });
+}
+
+
 const PostService = {
   getPost,
   addPost,
   updatePost,
   deletePost,
+  pinPost,
+  unpinPost,
+  getPinnedPosts,
 };
 
 export default PostService;
