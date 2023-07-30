@@ -1,6 +1,13 @@
 import React, { useState } from "react";
 import CategoryPage from "../category/CategoryPage";
-import { Button, Container, TextField } from "@mui/material";
+import {
+  Button,
+  Container,
+  Dialog,
+  DialogActions,
+  DialogTitle,
+  TextField,
+} from "@mui/material";
 import CategoryService from "../../app/services/category.service";
 
 function EditCategory() {
@@ -8,6 +15,22 @@ function EditCategory() {
   const [coverUrl, setCoverUrl] = useState("");
   const [isUpdate, setIsUpdate] = useState(false);
   const [id, setId] = useState();
+
+  const [openDialog, setOpenDialog] = useState(false);
+
+  const handleCancelDialog = () => {
+    setOpenDialog(false);
+  };
+
+  const handleDelete = () => {
+    CategoryService.deleteCategory(id);
+    setOpenDialog(false);
+    setName("");
+    setCoverUrl("");
+    setIsUpdate(false);
+    setId();
+  };
+
   return (
     <div>
       <Container>
@@ -74,6 +97,21 @@ function EditCategory() {
               Cancel
             </Button>
           )}
+          {isUpdate && (
+            <Button
+              sx={{
+                marginX: "10px",
+                backgroundColor: "#ef233c",
+                color: "white",
+              }}
+              variant="contained"
+              onClick={() => {
+                setOpenDialog(true);
+              }}
+            >
+              Delete
+            </Button>
+          )}
         </div>
       </Container>
       <CategoryPage
@@ -83,6 +121,21 @@ function EditCategory() {
         setIsUpdate={setIsUpdate}
         setId={setId}
       />
+      <Dialog open={openDialog} onClose={handleCancelDialog}>
+        <DialogTitle>Confirm delete category</DialogTitle>
+        <DialogActions>
+          <Button onClick={handleCancelDialog}>Cancel</Button>
+          <Button
+            sx={{
+              backgroundColor: "#ef233c",
+              color: "white",
+            }}
+            onClick={handleDelete}
+          >
+            Delete
+          </Button>
+        </DialogActions>
+      </Dialog>
     </div>
   );
 }

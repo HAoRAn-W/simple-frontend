@@ -55,7 +55,7 @@ const getCategoryList = () => {
 
 const addCategory = (newCategory) => {
   return client
-    .post("/add", newCategory)
+    .post("add", newCategory)
     .then((response) => {
       return response.data;
     })
@@ -66,7 +66,7 @@ const addCategory = (newCategory) => {
 
 const updateCategory = (newCategory) => {
   return client
-    .post("/update", newCategory)
+    .post("update", newCategory)
     .then((response) => {
       return response.data;
     })
@@ -75,10 +75,20 @@ const updateCategory = (newCategory) => {
     });
 };
 
+const deleteCategory = (categoryId) => {
+  return client.get(`delete/${categoryId}`).then((response) => {
+    return response.data;
+  })
+  .catch((error) => {
+    return { code: UNDEFINED_ERROR, message: error.toString() };
+  });
+}
+
 const CategoryService = {
   getCategoryList,
   addCategory,
   updateCategory,
+  deleteCategory
 };
 
 export default CategoryService;
