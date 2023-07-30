@@ -6,6 +6,9 @@ import {
   Box,
   Button,
   ButtonBase,
+  Dialog,
+  DialogActions,
+  DialogTitle,
   Paper,
   Stack,
   TextField,
@@ -20,6 +23,20 @@ function EditTag() {
   const [id, setId] = useState();
   const [isError, setIsError] = useState(false);
 
+  const [openDialog, setOpenDialog] = useState(false);
+
+  const handleCancelDialog = () => {
+    setOpenDialog(false);
+  };
+
+  const handleDelete = () => {
+    TagService.deleteTag(id);
+    setOpenDialog(false);
+    setName("");
+    setIsUpdate(false);
+    setId();
+  };
+
   useEffect(() => {
     TagService.getTagList().then((data) => {
       console.log("tag lists data:", data);
@@ -28,6 +45,7 @@ function EditTag() {
       }
     });
   }, []);
+
   return (
     <div
       style={{
@@ -48,7 +66,7 @@ function EditTag() {
       />
       <Box>
         <Button
-        sx={{ marginX: "10px" }}
+          sx={{ marginX: "10px" }}
           variant="contained"
           onClick={() => {
             const newTag = {
@@ -83,7 +101,7 @@ function EditTag() {
         {isUpdate && (
           <>
             <Button
-            sx={{ marginX: "10px" }}
+              sx={{ marginX: "10px" }}
               variant="contained"
               onClick={() => {
                 setId();
@@ -94,17 +112,14 @@ function EditTag() {
               Cancel
             </Button>
             <Button
-            sx={{ marginX: "10px" }}
+              sx={{
+                marginX: "10px",
+                backgroundColor: "#ef233c",
+                color: "white",
+              }}
               variant="contained"
               onClick={() => {
-                TagService.deleteTag(id).then((data) => {
-                  if (data.code !== SUCCESSFUL) {
-                    setIsError(true);
-                  }
-                });
-                setId();
-                setIsUpdate(false);
-                setName("");
+                setOpenDialog(true);
               }}
             >
               Delete
@@ -145,6 +160,21 @@ function EditTag() {
           </ButtonBase>
         ))}
       </Stack>
+      <Dialog open={openDialog} onClose={handleCancelDialog}>
+        <DialogTitle>Confirm delete category</DialogTitle>
+        <DialogActions>
+          <Button onClick={handleCancelDialog}>Cancel</Button>
+          <Button
+            sx={{
+              backgroundColor: "#ef233c",
+              color: "white",
+            }}
+            onClick={handleDelete}
+          >
+            Delete
+          </Button>
+        </DialogActions>
+      </Dialog>
     </div>
   );
 }
