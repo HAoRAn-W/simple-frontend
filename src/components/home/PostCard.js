@@ -1,6 +1,4 @@
-import { faBoxArchive, faCalendar } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Box, Divider, Paper, Typography } from "@mui/material";
+import { Divider, Paper, Typography } from "@mui/material";
 import Image from "mui-image";
 import React from "react";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
