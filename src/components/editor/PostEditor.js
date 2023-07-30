@@ -36,6 +36,7 @@ function PostEditor() {
   const [categories, setCategories] = useState([]);
   const [tags, setTags] = useState([]);
   const [selectedTags, setSelectedTags] = useState(new Set());
+  const [pinned, setPinned] = useState(false);
 
   const [openDialog, setOpenDialog] = useState(false);
 
@@ -44,7 +45,6 @@ function PostEditor() {
       setCategories(data.categories);
     });
     TagService.getTagList().then((data) => {
-      console.log(data.tags);
       setTags(data.tags);
     });
   }, []);
@@ -59,12 +59,12 @@ function PostEditor() {
         setContent(original.content);
         setCategoryId(original.category.id);
         setCoverUrl(original.coverUrl);
-        console.log(original.tags);
         setSelectedTags((prev) => {
           const updatedTags = new Set([...original.tags.map((tag) => tag.id)]);
           console.log("updatedTags", updatedTags);
           return updatedTags;
         });
+        setPinned(original.pinned);
       });
     }
   }, [isNew, postId]);
@@ -88,6 +88,12 @@ function PostEditor() {
     });
   };
 
+  const handlePin = () => {
+    setPinned((prev) => {
+      return !prev;
+    });
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("tagIds:", selectedTags);
@@ -98,6 +104,7 @@ function PostEditor() {
       categoryId: categoryId,
       coverUrl: coverUrl,
       tagIds: [...selectedTags], // set to array
+      pinned: pinned,
     };
 
     if (isNew) {
@@ -199,7 +206,6 @@ function PostEditor() {
           <FormLabel>Tags</FormLabel>
           <FormGroup>
             <Grid container spacing={2}>
-              {" "}
               {/* Use Grid container */}
               {tags.map((tag) => (
                 <Grid item xs={12} sm={3} md={2} key={tag.id}>
@@ -217,6 +223,13 @@ function PostEditor() {
               ))}
             </Grid>
           </FormGroup>
+        </FormControl>
+        <FormControl fullWidth component="fieldset" variant="standard">
+          <FormLabel>Pin this post</FormLabel>
+          <FormControlLabel
+            control={<Checkbox checked={pinned} onChange={handlePin} />}
+            label="Pin"
+          />
         </FormControl>
       </form>
 
