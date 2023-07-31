@@ -3,7 +3,6 @@ import React from "react";
 
 function AboutPage() {
   return (
-    <>
       <Grid container minHeight={'100vh'}>
         <Grid
           item
@@ -34,7 +33,6 @@ function AboutPage() {
           </Container>
         </Grid>
       </Grid>
-    </>
   );
 }
 

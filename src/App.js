@@ -19,9 +19,9 @@ import TagPostPage from "./components/tag/TagPostPage";
 
 function App() {
   const defaultTheme = createTheme({
-    typography: {
-      fontFamily: "Noto Serif, serif",
-    },
+    // typography: {
+    //   fontFamily: "Noto Serif, serif",
+    // },
   });
   return (
     <div className="App">
@@ -30,10 +30,7 @@ function App() {
         <NavBar />
         <div
           style={{
-            display: "flex",
-            flexDirection: 'column',
-            alignItems: "center",
-            justifyContent: "center",
+            minHeight: '100vh'
           }}
         >
           <Routes>

@@ -33,7 +33,6 @@ function PostCard({ post }) {
         <Divider />
         <Typography
           variant="subtitle1"
-          fontFamily={"Roboto"}
           sx={{
             overflow: "hidden",
             textOverflow: "ellipsis",

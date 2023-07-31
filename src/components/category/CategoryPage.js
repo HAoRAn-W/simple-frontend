@@ -24,7 +24,7 @@ function CategoryPage({
   }, []);
 
   return (
-    <Container style={{ display:'flex', flexDirection:'column',alignItems: "center" }}>
+    <Container style={{ display:'flex', flexDirection:'column' }}>
       <Typography
         variant="h4"
         marginLeft={"40px"}
