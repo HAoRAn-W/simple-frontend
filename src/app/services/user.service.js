@@ -45,9 +45,9 @@ userClient.interceptors.response.use(
   }
 );
 
-const getFavoriteList = () => {
+const getFavoriteList = (pageNo) => {
   return userClient
-    .get("favorite/all")
+    .get("favorite", {params: {pageNo: pageNo, pageSize:6}})
     .then((response) => {
       return response.data;
     })
