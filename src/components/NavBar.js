@@ -4,8 +4,6 @@ import {
   IconButton,
   Menu,
   MenuItem,
-  Tab,
-  Tabs,
   Toolbar,
   Tooltip,
   Typography,
@@ -15,20 +13,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { logout } from "../app/slices/auth";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCircleUser} from "@fortawesome/free-solid-svg-icons";
+import { faCircleUser } from "@fortawesome/free-solid-svg-icons";
 
 function NavBar() {
-  const [tabValue, setTabValue] = useState(false);
-
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
   const user = useSelector((state) => state.auth.user);
-
-  const handleTabChange = (event, newValue) => {
-    setTabValue(newValue);
-    navigate(`/${newValue}`);
-  };
 
   const [anchorElUser, setAnchorElUser] = useState(null);
   const handleOpenUserMenu = (event) => {
@@ -66,27 +57,57 @@ function NavBar() {
           disableRipple
           onClick={() => {
             navigate(`/`);
-            setTabValue(false);
           }}
         >
-          <Typography variant="h3" fontFamily={'Lato'} gutterBottom>whr.one</Typography>
+          <Typography variant="h3" fontFamily={"Lato"} gutterBottom>
+            whr.one
+          </Typography>
         </ButtonBase>
       </div>
 
-      <div
-        style={{
-          display: "flex",
-          flex: 8,
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        <Tabs value={tabValue} onChange={handleTabChange}>
-          <Tab disableRipple value="category" label="Category" sx={{fontSize: 23}}/>
-          <Tab disableRipple value="tag" label="Tag" sx={{fontSize: 23}}/>
-          <Tab disableRipple value="about" label="About" sx={{fontSize: 23}}/>
-        </Tabs>
-      </div>
+        <Grid
+          flex={8}
+          container
+          sx={{
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "center",
+          }}
+          spacing={4}
+        >
+          <Grid item>
+            <ButtonBase disableRipple>
+              <Typography
+                variant="h5"
+                onClick={() => {
+                  navigate(`/category`);
+                }}
+              >
+                CATEGORY
+              </Typography>
+            </ButtonBase>
+          </Grid>
+          <Grid item>
+            <ButtonBase
+              disableRipple
+              onClick={() => {
+                navigate(`/tag`);
+              }}
+            >
+              <Typography variant="h5">TAG</Typography>
+            </ButtonBase>
+          </Grid>
+          <Grid item>
+            <ButtonBase
+              disableRipple
+              onClick={() => {
+                navigate(`/about`);
+              }}
+            >
+              <Typography variant="h5">ABOUT</Typography>
+            </ButtonBase>
+          </Grid>
+        </Grid>
 
       <div
         style={{
@@ -106,7 +127,6 @@ function NavBar() {
             <Grid item>
               <ButtonBase
                 onClick={() => {
-                  setTabValue(false);
                   navigate("/login");
                 }}
               >
@@ -116,7 +136,6 @@ function NavBar() {
             <Grid item>
               <ButtonBase
                 onClick={() => {
-                  setTabValue(false);
                   navigate("/signup");
                 }}
               >
@@ -161,7 +180,6 @@ function NavBar() {
           <MenuItem onClick={handleLogout}>
             <Typography textAlign="center">Logout</Typography>
           </MenuItem>
-          
         </Menu>
       </div>
     </Toolbar>
