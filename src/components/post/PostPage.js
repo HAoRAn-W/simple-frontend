@@ -1,24 +1,34 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import PostMarkdown from "./PostMarkdown";
 import PostCover from "./PostCover";
 import { Paper } from "@mui/material";
 import { useParams } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { getpost } from "../../app/slices/post";
+import PostService from "../../app/services/post.service";
+import { SUCCESSFUL } from "../../app/constants/MessageCode";
 
 function PostPage() {
   const { id } = useParams();
-  const dispatch = useDispatch();
-  const post = useSelector((state) => state.post.post);
+  const [post, setPost] = useState({});
 
   useEffect(() => {
-    dispatch(getpost({ postId: id }));
-  }, [id, dispatch]);
+    PostService.getPost(id).then((data) => {
+      if (data.code === SUCCESSFUL) {
+        setPost(data.post);
+      }
+    });
+  }, [id]);
 
   return (
     <div>
-      <PostCover post={post}/>
-      <Paper elevation={0} sx={{display: 'flex', flexDirection:'column', marginX: '10%', paddingX: '20px'}} >
+      <PostCover post={post} />
+      <Paper
+        elevation={0}
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          marginX: "18%",
+        }}
+      >
         <PostMarkdown content={post.content} />
       </Paper>
     </div>
