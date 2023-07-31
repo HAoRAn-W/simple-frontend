@@ -2,11 +2,17 @@ import { Box, Container, Link, Typography } from '@mui/material';
 import React from 'react'
 
 function Footer() {
-    // const { description, title } = props;
     return (
-        <Box component="footer" sx={{ bgcolor: 'background.paper', py:4, bottom: 0}}>
+        <Box component="footer" sx={{ bgcolor: 'background.paper', py:4, bottom: 0, position: "relative",
+        mt: 5,
+        backgroundSize: "cover",
+        color: "whitesmoke",
+        backgroundPosition: "center",
+        backgroundImage: `url(https://i.imgur.com/0zz9tkX.jpg)`,
+    }}
+       >
           <Container maxWidth="lg">
-            <Typography variant="h6" align="center" gutterBottom>
+            <Typography variant="h5" align="center" gutterBottom>
               whr.one
             </Typography>
             <Typography
