@@ -7,6 +7,7 @@ import BookmarkAddedIcon from "@mui/icons-material/BookmarkAdded";
 
 function ActionBar({ postId }) {
   const [isFavorite, setIsFavorite] = useState(false);
+  const user = localStorage.getItem("user");
 
   useEffect(() => {
     UserServcice.queryFavorite(postId).then((data) => {
@@ -28,7 +29,8 @@ function ActionBar({ postId }) {
 
 
   return (
-    <Fab
+    <>
+    {user && <Fab
       sx={{
         position: "fixed",
         bottom: "300px",
@@ -39,7 +41,9 @@ function ActionBar({ postId }) {
       onClick={handleClick}
     >
         {isFavorite ? (<BookmarkAddedIcon />) : (<BookmarkAddIcon />)}
-    </Fab>
+    </Fab>}
+    </>
+    
   );
 }
 
