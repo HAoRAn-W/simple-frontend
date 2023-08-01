@@ -82,7 +82,6 @@ const queryFavorite = (postId) => {
   return userClient
     .get(`favorite/${postId}`)
     .then((response) => {
-      console.log("query:", response.data);
       return response.data;
     })
     .catch((error) => {

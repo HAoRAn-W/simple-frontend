@@ -87,7 +87,6 @@ const getTagList = () => {
     .get("all")
     .then((response) => {
       if (response.data.code === SUCCESSFUL) {
-        console.log("resp:", response.data);
         return response.data;
       } else {
         return { code: response.data.code, message: response.data.message };

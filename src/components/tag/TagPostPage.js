@@ -14,7 +14,6 @@ function TagPostPage() {
   
     useEffect(() => {
       PageService.loadPageByTag(id, currentPage - 1).then((data) => {
-        console.log('data:', data)  
         if (data.code === SUCCESSFUL) {
             setPosts(data.posts);
             setTotal(data.total);

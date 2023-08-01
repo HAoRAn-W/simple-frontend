@@ -12,7 +12,6 @@ function PinBoard() {
   useEffect(() => {
     PostService.getPinnedPosts().then((data) => {
       if (data.code === SUCCESSFUL) {
-        console.log("data", data);
         setPinnedPosts(data.posts);
       }
     });

@@ -66,7 +66,6 @@ function EditCategory() {
             type="submit"
             sx={{ marginX: "10px" }}
             onClick={() => {
-              console.log("submit");
               if (isUpdate) {
                 CategoryService.updateCategory({
                   id: id,

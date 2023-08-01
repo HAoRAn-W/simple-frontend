@@ -17,8 +17,6 @@ export const getpost = createAsyncThunk(
     try {
       const data = await PostService.getPost(postId);
       if (data.code === SUCCESSFUL) {
-        console.log("slice data:")
-        console.log(data);
         return data;
       } else {
         return thunkAPI.rejectWithValue(data);

@@ -39,7 +39,6 @@ function EditTag() {
 
   useEffect(() => {
     TagService.getTagList().then((data) => {
-      console.log("tag lists data:", data);
       if (data.code === SUCCESSFUL) {
         setTags(data.tags);
       }

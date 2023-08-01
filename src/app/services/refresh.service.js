@@ -12,8 +12,6 @@ const refreshToken = () => {
   return refreshClient
     .post()
     .then((response) => {
-      console.log("refreshToken() response data:");
-      console.log(response.data);
       return response.data;
     })
     .catch((error) => {

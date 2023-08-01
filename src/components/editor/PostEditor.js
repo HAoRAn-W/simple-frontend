@@ -53,7 +53,6 @@ function PostEditor() {
     if (!isNew) {
       PostService.getPost(postId).then((data) => {
         const original = data.post;
-        console.log("original:", original);
         setTitle(original.title);
         setDescription(original.description);
         setContent(original.content);
@@ -61,7 +60,6 @@ function PostEditor() {
         setCoverUrl(original.coverUrl);
         setSelectedTags((prev) => {
           const updatedTags = new Set([...original.tags.map((tag) => tag.id)]);
-          console.log("updatedTags", updatedTags);
           return updatedTags;
         });
         setPinned(original.pinned);
@@ -96,7 +94,6 @@ function PostEditor() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("tagIds:", selectedTags);
     const newPost = {
       title: title,
       description: description,
