@@ -1,6 +1,5 @@
 import { Typography } from "@mui/material";
 import AuthService from "../../app/services/auth.service";
-import {  useState } from "react";
 
 function ProfilePage() {
   const user = AuthService.getUser();

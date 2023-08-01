@@ -1,4 +1,3 @@
-import { CheckBox } from "@mui/icons-material";
 import { Typography } from "@mui/material";
 import Image from "mui-image";
 import ReactMarkdown from "react-markdown";
