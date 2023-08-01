@@ -49,6 +49,7 @@ function EditTag() {
     <div
       style={{
         width: "90%",
+        height: "100vh",
         display: "flex",
         flexDirection: "column",
         alignItems: "center",

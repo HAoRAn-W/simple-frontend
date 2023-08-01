@@ -23,10 +23,9 @@ function CategoryPostPage() {
   }, [currentPage, id]);
 
   return (
-    <div style={{width: '80%', display: 'flex', flexDirection: 'column',alignItems: 'center', justifyContent: 'center'}}>
+    <div style={{ display: 'flex', flexDirection: 'column',alignItems: 'center', justifyContent: 'center', marginLeft: 260, marginRight: 260}}>
       <PostList posts={posts} />
       <PaginationBar currentPage={currentPage} setCurrentPage={setCurrentPage} total={total}/>
-
     </div>
   );
 }

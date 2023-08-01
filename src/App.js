@@ -28,11 +28,6 @@ function App() {
       <ThemeProvider theme={defaultTheme}>
         <CssBaseline />
         <NavBar />
-        <div
-          style={{
-            minHeight: '100vh'
-          }}
-        >
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/:id" element={<PostPage />} />
@@ -54,7 +49,6 @@ function App() {
 
             <Route path="/*" element={<NotFound />} />
           </Routes>
-        </div>
         <Footer />
       </ThemeProvider>
     </div>

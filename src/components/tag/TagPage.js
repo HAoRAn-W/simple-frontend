@@ -18,7 +18,7 @@ function TagPage() {
     });
   }, []);
   return (
-    <Container style={{ display:'flex', flexDirection:'column' }}>
+    <Container style={{ display:'flex', flexDirection:'column' , height: '100vh'}}>
       <Typography
         variant="h4"
         marginLeft={"40px"}
