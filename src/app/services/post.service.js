@@ -21,7 +21,7 @@ client.interceptors.response.use(
   // access token expired OR requesting unauthorized resources
   (error) => {
     const request = error.config; // get request
-    if (request.url === "add" || request.url === "update") {
+    if (request.url === "add" || request.url === "update" || request.url === "delete") {
       console.log("running interceptor");
       if (error.response.status && error.response.status === 401) {
         if (!request._retry) {
@@ -87,7 +87,7 @@ const updatePost = (newPost) => {
 };
 
 const deletePost = (postId) => {
-  return client.get(`delete/${postId}`).then((response) => {
+  return client.get(`delete`, {params: {postId: postId}}).then((response) => {
     return response.data;
   })
   .catch((error) => {

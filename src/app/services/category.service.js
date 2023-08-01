@@ -14,8 +14,7 @@ client.interceptors.response.use(
   // access token expired OR requesting unauthorized resources
   (error) => {
     const request = error.config; // get request
-    if (request.url === "add" || request.url === "update") {
-      console.log("running interceptor");
+    if (request.url === "add" || request.url === "update" || request.url === "delete") {
       if (error.response.status && error.response.status === 401) {
         if (!request._retry) {
           // set _retry flag to prevent multiple retries
@@ -76,7 +75,7 @@ const updateCategory = (newCategory) => {
 };
 
 const deleteCategory = (categoryId) => {
-  return client.get(`delete/${categoryId}`).then((response) => {
+  return client.get(`delete`, {params: {categoryId: categoryId}}).then((response) => {
     return response.data;
   })
   .catch((error) => {
