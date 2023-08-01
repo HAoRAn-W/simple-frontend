@@ -1,22 +1,7 @@
-import { Box, ButtonBase, Paper, Typography } from "@mui/material";
-import React, { useEffect, useState } from "react";
-import BookmarkAddIcon from "@mui/icons-material/BookmarkAdd";
-import BookmarkAddedIcon from "@mui/icons-material/BookmarkAdded";
-import UserServcice from "../../app/services/user.service";
-import { IS_IN_FAVORITE } from "../../app/constants/MessageCode";
+import { Box, Paper, Typography } from "@mui/material";
 
 function PostCover({ post }) {
   const createdDate = new Date(post.createdTime);
-  const user = localStorage.getItem("user");
-  const [isFavorite, setIsFavorite] = useState(false);
-
-  useEffect(() => {
-    UserServcice.queryFavorite(post.id).then((data) => {
-      if (data.code === IS_IN_FAVORITE) {
-        setIsFavorite(true);
-      }
-    });
-  }, [post.id]);
 
   return (
     <Paper
@@ -47,44 +32,17 @@ function PostCover({ post }) {
         }}
       >
         <Typography
+        align="center"
           variant="h2"
           style={{ wordWrap: "break-word" }}
-          maxWidth={"80%"}
+          maxWidth={"70%"}
         >
           {post.title}
         </Typography>
-        <Typography variant="h5">{`${
+        <Typography variant="h4" marginTop={10}>{`${
           createdDate.getMonth() + 1
         }/${createdDate.getDate()}/${createdDate.getFullYear()}`}</Typography>
-        {user && (
-          <Box position={"absolute"} bottom={"20%"}>
-            {isFavorite ? (
-              <ButtonBase
-                onClick={() => {
-                  UserServcice.removeFavorite(post.id);
-                  setIsFavorite(false);
-                }}
-              >
-                <BookmarkAddedIcon
-                  fontSize="large"
-                  sx={{ "&:hover": { color: "grey" }, color: '#f28482'}}
-                />
-              </ButtonBase>
-            ) : (
-              <ButtonBase
-                onClick={() => {
-                  UserServcice.addFavorite(post.id);
-                  setIsFavorite(true);
-                }}
-              >
-                <BookmarkAddIcon
-                  fontSize="large"
-                  sx={{ "&:hover": { color: "grey" } }}
-                />
-              </ButtonBase>
-            )}
-          </Box>
-        )}
+
       </Box>
     </Paper>
   );

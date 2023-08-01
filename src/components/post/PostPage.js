@@ -5,6 +5,7 @@ import { Paper } from "@mui/material";
 import { useParams } from "react-router-dom";
 import PostService from "../../app/services/post.service";
 import { SUCCESSFUL } from "../../app/constants/MessageCode";
+import ActionBar from "./ActionBar";
 
 function PostPage() {
   const { id } = useParams();
@@ -22,15 +23,17 @@ function PostPage() {
     <div>
       <PostCover post={post} />
       <Paper
-        elevation={0}
+        elevation={5}
         sx={{
           display: "flex",
           flexDirection: "column",
-          marginX: "18%",
+          marginX: "10%",
+          padding: 5
         }}
       >
         <PostMarkdown content={post.content} />
       </Paper>
+      <ActionBar postId={post.id}/>
     </div>
   );
 }
