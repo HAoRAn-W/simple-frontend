@@ -18,7 +18,7 @@ function PostList({ posts, fromEditor = false }) {
           {posts.map((post) => {
             return (
               <ListItemButton
-                style={{ marginTop: "15px" }}
+                style={{ marginTop: "15px" , backgroundColor: 'transparent'}}
                 onClick={() => {
                   if (fromEditor) {
                     navigate("/posteditor", {
