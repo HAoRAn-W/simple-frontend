@@ -1,4 +1,5 @@
 import axios from "axios";
+import { SUCCESSFUL, UNDEFINED_ERROR } from "../constants/MessageCode";
 
 const authClient = axios.create({
   baseURL: "http://localhost:8080/api/auth/",
@@ -24,11 +25,13 @@ const login = (username, password) => {
       password,
     })
     .then((response) => {
-      if (response.data.username) {
+      if (response.data.code === SUCCESSFUL) {
         localStorage.setItem("user", JSON.stringify(response.data));
       }
       return response.data;
-    });
+    }).catch((error) => {
+      return {code: UNDEFINED_ERROR, message: error.toString()};
+    })
 };
 
 const logout = () => {
