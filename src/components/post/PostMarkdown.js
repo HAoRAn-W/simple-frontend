@@ -7,22 +7,22 @@ import remarkGfm from "remark-gfm";
 function PostMarkdown({ content }) {
   const renderers = {
     h1: ({ children }) => (
-      <Typography variant="h3" fontSize={65}>
-        {children}
-      </Typography>
-    ),
-    h2: ({ children }) => (
       <Typography variant="h3" fontSize={50}>
         {children}
       </Typography>
     ),
-    h3: ({ children }) => (
+    h2: ({ children }) => (
       <Typography variant="h3" fontSize={40}>
         {children}
       </Typography>
     ),
+    h3: ({ children }) => (
+      <Typography variant="h3" fontSize={30}>
+       <b>{children}</b> 
+      </Typography>
+    ),
     h4: ({ children }) => (
-      <Typography variant="h3" fontSize={35}>
+      <Typography variant="h3" fontSize={30}>
         {children}
       </Typography>
     ),
@@ -39,7 +39,7 @@ function PostMarkdown({ content }) {
     p: ({ children }) => (
       <Typography
         variant="body"
-        fontSize={28}
+        fontSize={25}
         style={{ wordWrap: "break-word" }}
         gutterBottom
       >
@@ -52,7 +52,7 @@ function PostMarkdown({ content }) {
       <Typography
         component="li"
         variant="body"
-        fontSize={28}
+        fontSize={25}
         style={{ wordWrap: "break-word" }}
         gutterBottom
       >
