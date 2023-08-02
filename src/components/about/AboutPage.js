@@ -1,4 +1,4 @@
-import { Container, Grid, Paper, Typography } from "@mui/material";
+import { Container, Grid, Typography } from "@mui/material";
 import Image from "mui-image";
 import React from "react";
 
