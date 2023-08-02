@@ -14,6 +14,13 @@ import { useNavigate } from "react-router-dom";
 import { logout } from "../app/slices/auth";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleUser } from "@fortawesome/free-solid-svg-icons";
+import {
+  HeaderBar,
+  LogoDiv,
+  LogoTypography,
+  SectionGrid,
+  SectionTypography,
+} from "./styles/style";
 
 function NavBar() {
   const navigate = useNavigate();
@@ -37,77 +44,53 @@ function NavBar() {
   };
 
   return (
-    <Toolbar
-      style={{ backgroundColor: "transparent" }}
-      sx={{
-        borderBottom: 1,
-        borderColor: "divider",
-        display: "flex",
-      }}
-    >
-      <div
-        style={{
-          display: "flex",
-          flex: 2,
-          justifyContent: "flex-start",
-          alignItems: "center",
-        }}
-      >
+    <HeaderBar>
+      <LogoDiv>
         <ButtonBase
           disableRipple
           onClick={() => {
             navigate(`/`);
           }}
         >
-          <Typography variant="h3" fontFamily={"Lato"} gutterBottom>
+          <LogoTypography variant="h3" gutterBottom>
             whr.one
-          </Typography>
+          </LogoTypography>
         </ButtonBase>
-      </div>
+      </LogoDiv>
 
-        <Grid
-          flex={8}
-          container
-          sx={{
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "center",
-          }}
-          spacing={4}
-        >
-          <Grid item>
-            <ButtonBase disableRipple>
-              <Typography
-                variant="h5"
-                onClick={() => {
-                  navigate(`/category`);
-                }}
-              >
-                CATEGORY
-              </Typography>
-            </ButtonBase>
-          </Grid>
-          <Grid item>
-            <ButtonBase
-              disableRipple
+      <SectionGrid container spacing={4}>
+        <Grid item>
+          <ButtonBase disableRipple>
+            <SectionTypography
               onClick={() => {
-                navigate(`/tag`);
+                navigate(`/category`);
               }}
             >
-              <Typography variant="h5">TAG</Typography>
-            </ButtonBase>
-          </Grid>
-          <Grid item>
-            <ButtonBase
-              disableRipple
-              onClick={() => {
-                navigate(`/about`);
-              }}
-            >
-              <Typography variant="h5">ABOUT</Typography>
-            </ButtonBase>
-          </Grid>
+              CATEGORY
+            </SectionTypography>
+          </ButtonBase>
         </Grid>
+        <Grid item>
+          <ButtonBase
+            disableRipple
+            onClick={() => {
+              navigate(`/tag`);
+            }}
+          >
+            <SectionTypography>TAG</SectionTypography>
+          </ButtonBase>
+        </Grid>
+        <Grid item>
+          <ButtonBase
+            disableRipple
+            onClick={() => {
+              navigate(`/about`);
+            }}
+          >
+            <SectionTypography >ABOUT</SectionTypography>
+          </ButtonBase>
+        </Grid>
+      </SectionGrid>
 
       <div
         style={{
@@ -182,7 +165,7 @@ function NavBar() {
           </MenuItem>
         </Menu>
       </div>
-    </Toolbar>
+    </HeaderBar>
   );
 }
 

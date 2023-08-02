@@ -16,16 +16,13 @@ import PostEditor from "./components/editor/PostEditor";
 import CategoryPostPage from "./components/category/CategoryPostPage";
 import TagPage from "./components/tag/TagPage";
 import TagPostPage from "./components/tag/TagPostPage";
+import theme from "./components/styles/style";
 
 function App() {
-  const defaultTheme = createTheme({
-    // typography: {
-    //   fontFamily: "Noto Serif, serif",
-    // },
-  });
+
   return (
     <div className="App">
-      <ThemeProvider theme={defaultTheme}>
+      <ThemeProvider theme={theme}>
         <CssBaseline />
         <NavBar />
           <Routes>
