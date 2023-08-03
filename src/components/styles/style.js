@@ -10,7 +10,7 @@ const theme = createTheme({
 
 export const HeaderBar = styled(Toolbar)`
   background-color: transparent;
-  border-bottom: 1;
+  border-bottom: 2px solid whitesmoke;
   display: flex;
 `;
 
