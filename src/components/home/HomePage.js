@@ -22,7 +22,7 @@ function HomePage() {
 
   return (
     <>
-      <HomeCover />
+      {currentPage === 1 && <HomeCover />}
       <div style={{ display: "flex", flexDirection: 'row' }}>
         <div style={{ flex: 7, display: 'flex', justifyContent: 'flex-end'}}>
           <PostList posts={posts}/>
