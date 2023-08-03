@@ -42,7 +42,7 @@ function NameCard() {
           <FontAwesomeIcon icon={faTwitter} style={{ color: "#1da1f2" }} />
         </IconButton>
         <IconButton
-          href="https://www.instagram.com/haoran_233x/"
+          href="https://www.instagram.com/whr.233/"
           target="_blank"
         >
           <FontAwesomeIcon icon={faInstagram} style={{ color: "#c13584" }} />
