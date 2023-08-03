@@ -23,7 +23,6 @@ function PostPage() {
     <div>
       <PostCover post={post} />
       <Paper
-        elevation={5}
         sx={{
           display: "flex",
           flexDirection: "column",
