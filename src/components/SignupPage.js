@@ -61,6 +61,7 @@ function SignupPage() {
     <Container component={"main"} maxWidth="xs">
       <Box
         sx={{
+          height: '100vh',
           marginTop: 8,
           display: "flex",
           flexDirection: "column",
