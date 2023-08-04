@@ -18,7 +18,19 @@ function TagPage() {
     });
   }, []);
   return (
-    <Container style={{ display:'flex', flexDirection:'column' , height: '100vh'}}>
+    <Container
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: 'center',
+        height: "100vh",
+        minWidth: '100%',
+        backgroundImage: `url(https://i.imgur.com/O1qowWB.jpg)`,
+        backgroundSize: "cover",
+        backgroundRepeat: "no-repeat",
+        backgroundPosition: "center",
+      }}
+    >
       <Typography
         variant="h4"
         marginLeft={"40px"}
@@ -35,9 +47,12 @@ function TagPage() {
         marginTop={2}
       >
         {tags.map((tag) => (
-          <ButtonBase key={tag.id} onClick={() => {
-            navigate(`/tag/${tag.id}`)
-          }}>
+          <ButtonBase
+            key={tag.id}
+            onClick={() => {
+              navigate(`/tag/${tag.id}`);
+            }}
+          >
             <Item sx={{ backgroundColor: "red" }}>
               <Typography>{tag.name}</Typography>
             </Item>

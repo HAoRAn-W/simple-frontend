@@ -15,12 +15,12 @@ function PostCard({ post }) {
         width: "100%",
       }}
     >
-      <div style={{ flex: 5 }}>
+      <div style={{ flex: 4 }}>
         <Image src={post.coverUrl} />
       </div>
       <div
         style={{
-          flex: 7,
+          flex: 8,
           display: "flex",
           flexDirection: "column",
           padding: 20,
@@ -47,7 +47,6 @@ function PostCard({ post }) {
           <Typography
             variant="subtitle1"
             gutterBottom
-            fontFamily={"Roboto"}
             marginLeft={1}
             marginRight={2}
           >{`${
@@ -57,7 +56,6 @@ function PostCard({ post }) {
           <InboxOutlinedIcon />
           <Typography
             variant="subtitle1"
-            fontFamily={"Roboto"}
             gutterBottom
             marginLeft={1}
           >

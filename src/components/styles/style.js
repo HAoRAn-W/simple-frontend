@@ -16,6 +16,7 @@ export const HeaderBar = styled(Toolbar)`
 
 export const LogoTypography = styled(Typography)`
   font-weight: bold;
+  font-style: italic;
 `;
 
 export const LogoDiv = styled.div`
