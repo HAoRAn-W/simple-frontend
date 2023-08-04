@@ -4,16 +4,13 @@ import {
   IconButton,
   Menu,
   MenuItem,
-  Toolbar,
   Tooltip,
   Typography,
 } from "@mui/material";
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { logout } from "../app/slices/auth";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCircleUser } from "@fortawesome/free-solid-svg-icons";
 import {
   HeaderBar,
   LogoDiv,
@@ -21,12 +18,15 @@ import {
   SectionGrid,
   SectionTypography,
 } from "./styles/style";
+import Image from "mui-image";
+import avatars from "./avatar/avatars";
+import AuthService from "../app/services/auth.service";
 
 function NavBar() {
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.auth.user);
+  const user = AuthService.getUser();
 
   const [anchorElUser, setAnchorElUser] = useState(null);
   const handleOpenUserMenu = (event) => {
@@ -129,7 +129,11 @@ function NavBar() {
         ) : (
           <Tooltip title="User menu">
             <IconButton onClick={handleOpenUserMenu}>
-              <FontAwesomeIcon icon={faCircleUser} />
+              <Image
+              src={user.avatarId ? (avatars.filter(avatar => avatar.id === user.avatarId)[0].img) : (avatars[0].img)}
+              style={{ width: "50px", height: "50px", borderRadius: "50%" }}
+              alt="avatar"
+            />
             </IconButton>
           </Tooltip>
         )}
