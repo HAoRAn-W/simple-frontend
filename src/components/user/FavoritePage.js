@@ -28,7 +28,7 @@ function FavoritePage() {
           style={{ marginTop: "15px", width: '60%' }}
           key={post.id}
           onClick={() => {
-            navigate(`/${post.id}`);
+            navigate(`/post/${post.id}`);
           }}
         >
           <PostCard post={post} />

@@ -35,7 +35,7 @@ function PinBoard() {
               sx={{ paddingLeft: 0 }}
               key={post.id}
               onClick={() => {
-                navigate(`/${post.id}`);
+                navigate(`/post/${post.id}`);
               }}
             >
               <Typography style={{ wordBreak: "break-all" }}>

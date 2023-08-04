@@ -17,35 +17,42 @@ import CategoryPostPage from "./components/category/CategoryPostPage";
 import TagPage from "./components/tag/TagPage";
 import TagPostPage from "./components/tag/TagPostPage";
 import theme from "./components/styles/style";
+import AuthService from "./app/services/auth.service";
 
 function App() {
+  const user = AuthService.getUser();
 
   return (
     <div className="App">
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <NavBar />
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/:id" element={<PostPage />} />
-            <Route path="/login" element={<LoginPage />} />
-            <Route path="/signup" element={<SignupPage />} />
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/post/:id" element={<PostPage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/signup" element={<SignupPage />} />
 
-            <Route path="/category" element={<CategoryPage />} />
-            <Route path="/category/:id" element={<CategoryPostPage />} />
+          <Route path="/category" element={<CategoryPage />} />
+          <Route path="/category/:id" element={<CategoryPostPage />} />
 
-            <Route path="/tag" element={<TagPage />} />
-            <Route path="/tag/:id" element={<TagPostPage />} />
+          <Route path="/tag" element={<TagPage />} />
+          <Route path="/tag/:id" element={<TagPostPage />} />
 
-            <Route path="/about" element={<AboutPage />} />
+          <Route path="/about" element={<AboutPage />} />
 
-            <Route path="/profile" element={<ProfilePage />} />
-            <Route path="/favorites" element={<FavoritePage />} />
-            <Route path="/editor" element={<EditorPage />} />
-            <Route path="/posteditor" element={<PostEditor />} />
+          <Route path="/profile" element={<ProfilePage />} />
+          <Route path="/favorites" element={<FavoritePage />} />
 
-            <Route path="/*" element={<NotFound />} />
-          </Routes>
+          {user && user.roles.includes("ROLE_ADMIN") && (
+            <>
+              <Route path="/editor" element={<EditorPage />} />
+              <Route path="/posteditor" element={<PostEditor />} />
+            </>
+          )}
+
+          <Route path="/*" element={<NotFound />} />
+        </Routes>
         <Footer />
       </ThemeProvider>
     </div>

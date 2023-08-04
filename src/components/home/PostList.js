@@ -25,7 +25,7 @@ function PostList({ posts, fromEditor = false }) {
                       state: { isNew: false, postId: post.id },
                     });
                   } else {
-                    navigate(`/${post.id}`);
+                    navigate(`/post/${post.id}`);
                   }
                 }}
                 key={post.id}
