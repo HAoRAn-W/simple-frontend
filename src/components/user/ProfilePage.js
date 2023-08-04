@@ -1,34 +1,37 @@
-import { ButtonBase, Paper, Stack, Typography } from "@mui/material";
+import {
+  ToggleButton,
+  ToggleButtonGroup,
+  Typography,
+} from "@mui/material";
 import AuthService from "../../app/services/auth.service";
-import avatars from "../avatar/avatar";
-import Image from "mui-image";
+import { useState } from "react";
+import AvatarSelectionPage from "./AvatarSelectionPage";
+import UserInfoPage from "./UserInfoPage";
 
 function ProfilePage() {
   const user = AuthService.getUser();
 
-  // useEffect(() => {
-
-  // }, []);
+  const [section, setSection] = useState("info");
+  const handleChange = (event, newSection) => {
+    setSection(newSection);
+  };
+  const control = {
+    value: section,
+    onChange: handleChange,
+    exclusive: true,
+  };
 
   return (
-    <div style={{ height: "100vh" }}>
-      <Typography variant="h5">Welcome, {user.username}!</Typography>
-      <Stack
-        spacing={{ xs: 1, sm: 3 }}
-        direction="row"
-        useFlexGap
-        flexWrap="wrap"
-      >
-        {avatars.map((ava) => (
-          <ButtonBase sx={{borderRadius: '50%'}}>
-            <Image
-              src={ava.img}
-              style={{ width: "150px", height: "150px", borderRadius: "50%" }}
-              alt="avatar"
-            />
-          </ButtonBase>
-        ))}
-      </Stack>
+    <div style={{ height: "100vh", display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
+      <ToggleButtonGroup {...control} sx={{ marginTop: 6 }}>
+        <ToggleButton value={"info"} key="info">
+          <Typography>Info</Typography>
+        </ToggleButton>
+        <ToggleButton value={"avatar"} key="avatar">
+          <Typography>Avatar</Typography>
+        </ToggleButton>
+      </ToggleButtonGroup>
+      {section === 'info' ? (<UserInfoPage user={user}/>) : (<AvatarSelectionPage user={user}/>)}
     </div>
   );
 }

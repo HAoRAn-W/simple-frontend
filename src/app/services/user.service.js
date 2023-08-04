@@ -4,6 +4,7 @@ import {
   ACCESS_TOKEN_RENEWED,
   NEED_RELOGIN,
   REFRESH_TOKEN_EXPIRED,
+  SUCCESSFUL,
   UNDEFINED_ERROR,
 } from "../constants/MessageCode";
 
@@ -47,7 +48,7 @@ userClient.interceptors.response.use(
 
 const getFavoriteList = (pageNo) => {
   return userClient
-    .get("favorite", {params: {pageNo: pageNo, pageSize:6}})
+    .get("favorite", { params: { pageNo: pageNo, pageSize: 6 } })
     .then((response) => {
       return response.data;
     })
@@ -89,11 +90,41 @@ const queryFavorite = (postId) => {
     });
 };
 
+const updateInfo = (userinfo) => {
+  return userClient
+    .post("updateinfo", {
+      username: userinfo.username,
+      email: userinfo.email,
+      avatarId: userinfo.avatarId,
+    })
+    .then((response) => {
+      return response.data;
+    })
+    .catch((error) => {
+      return { code: UNDEFINED_ERROR, message: error.toString() };
+    });
+};
+
+const refresh = () => {
+  return userClient
+    .get("getinfo")
+    .then((response) => {
+      if (response.data.code === SUCCESSFUL) {
+        localStorage.setItem("user", JSON.stringify(response.data));
+      }
+      return response.data;
+    }).catch((error) => {
+      return {code: UNDEFINED_ERROR, message: error.toString()};
+    })
+};
+
 const UserServcice = {
   getFavoriteList,
   addFavorite,
   removeFavorite,
   queryFavorite,
+  updateInfo,
+  refresh,
 };
 
 export default UserServcice;
