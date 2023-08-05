@@ -5,10 +5,6 @@ function Footer() {
     return (
         <Box component="footer" sx={{ bgcolor: 'background.paper', py:4, bottom: 0, position: "relative",
         mt: 5,
-        backgroundSize: "cover",
-        color: "whitesmoke",
-        backgroundPosition: "center",
-        backgroundImage: `url(https://i.imgur.com/0zz9tkX.jpg)`,
     }}
        >
           <Container maxWidth="lg">

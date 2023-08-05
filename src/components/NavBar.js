@@ -95,7 +95,7 @@ function NavBar() {
       <div
         style={{
           display: "flex",
-          flex: 2,
+          flex: 3,
           justifyContent: "flex-end",
           alignItems: "center",
         }}

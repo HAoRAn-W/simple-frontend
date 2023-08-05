@@ -21,13 +21,13 @@ export const LogoTypography = styled(Typography)`
 
 export const LogoDiv = styled.div`
   display: flex;
-  flex: 2;
+  flex: 3;
   justify-content: flex-start;
   align-items: center;
 `;
 
 export const SectionGrid = styled(Grid)`
-  flex: 8;
+  flex: 6;
   display: flex;
   flex-direction: row;
   justify-content: center;

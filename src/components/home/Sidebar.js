@@ -2,6 +2,7 @@ import { Grid } from "@mui/material";
 import React from "react";
 import NameCard from "./NameCard";
 import PinBoard from "./PinBoard";
+import MuseumShuffle from "./MuseumShuffle";
 
 function Sidebar() {
   return (
@@ -18,6 +19,9 @@ function Sidebar() {
 
       <Grid item>
         <PinBoard />
+      </Grid>
+      <Grid item>
+        <MuseumShuffle />
       </Grid>
     </Grid>
   );

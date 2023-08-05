@@ -1,4 +1,4 @@
-import { CssBaseline, ThemeProvider, createTheme } from "@mui/material";
+import { CssBaseline, ThemeProvider } from "@mui/material";
 import HomePage from "./components/home/HomePage";
 import { Route, Routes } from "react-router-dom";
 import CategoryPage from "./components/category/CategoryPage";
@@ -18,6 +18,7 @@ import TagPage from "./components/tag/TagPage";
 import TagPostPage from "./components/tag/TagPostPage";
 import theme from "./components/styles/style";
 import AuthService from "./app/services/auth.service";
+import MusePage from "./components/muse/MusePage";
 
 function App() {
   const user = AuthService.getUser();
@@ -43,6 +44,8 @@ function App() {
 
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/favorites" element={<FavoritePage />} />
+
+          <Route path="/muse" element={<MusePage />} />
 
           {user && user.roles.includes("ROLE_ADMIN") && (
             <>
