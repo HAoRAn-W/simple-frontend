@@ -2,8 +2,6 @@ import { CssBaseline, ThemeProvider } from "@mui/material";
 import HomePage from "./components/home/HomePage";
 import { Route, Routes } from "react-router-dom";
 import CategoryPage from "./components/category/CategoryPage";
-import NavBar from "./components/NavBar";
-import Footer from "./components/Footer";
 import NotFound from "./components/NotFound";
 import PostPage from "./components/post/PostPage";
 import LoginPage from "./components/LoginPage";
@@ -19,6 +17,7 @@ import TagPostPage from "./components/tag/TagPostPage";
 import theme from "./components/styles/style";
 import AuthService from "./app/services/auth.service";
 import MusePage from "./components/muse/MusePage";
+import Template from "./components/Template";
 
 function App() {
   const user = AuthService.getUser();
@@ -27,36 +26,39 @@ function App() {
     <div className="App">
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <NavBar />
         <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/post/:id" element={<PostPage />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/signup" element={<SignupPage />} />
+          <Route path="/" element={<Template />}>
+            <Route index element={<HomePage />} />
 
-          <Route path="/category" element={<CategoryPage />} />
-          <Route path="/category/:id" element={<CategoryPostPage />} />
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/signup" element={<SignupPage />} />
 
-          <Route path="/tag" element={<TagPage />} />
-          <Route path="/tag/:id" element={<TagPostPage />} />
+            <Route path="/post/:id" element={<PostPage />} />
+            
 
-          <Route path="/about" element={<AboutPage />} />
+            <Route path="/category" element={<CategoryPage />} />
+            <Route path="/category/:id" element={<CategoryPostPage />} />
 
-          <Route path="/profile" element={<ProfilePage />} />
-          <Route path="/favorites" element={<FavoritePage />} />
+            <Route path="/tag" element={<TagPage />} />
+            <Route path="/tag/:id" element={<TagPostPage />} />
 
-          <Route path="/muse" element={<MusePage />} />
+            <Route path="/about" element={<AboutPage />} />
 
-          {user && user.roles.includes("ROLE_ADMIN") && (
-            <>
-              <Route path="/editor" element={<EditorPage />} />
-              <Route path="/posteditor" element={<PostEditor />} />
-            </>
-          )}
+            <Route path="/profile" element={<ProfilePage />} />
+            <Route path="/favorites" element={<FavoritePage />} />
 
-          <Route path="/*" element={<NotFound />} />
+            <Route path="/muse" element={<MusePage />} />
+
+            {user && user.roles.includes("ROLE_ADMIN") && (
+              <>
+                <Route path="/editor" element={<EditorPage />} />
+                <Route path="/posteditor" element={<PostEditor />} />
+              </>
+            )}
+
+            <Route path="/*" element={<NotFound />} />
+          </Route>
         </Routes>
-        <Footer />
       </ThemeProvider>
     </div>
   );
