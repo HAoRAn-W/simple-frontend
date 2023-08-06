@@ -59,6 +59,26 @@
     img: "./avatars/Xian.jpg",
     name: "Xi'an"
   },
+  {
+    id: 12,
+    img: "./avatars/Chongqing.jpg",
+    name: "Chongqing"
+  },
+  {
+    id: 13,
+    img: "./avatars/Hangzhou.jpg",
+    name: "Hangzhou"
+  },
+  {
+    id: 14,
+    img: "./avatars/XilingXueshan.jpg",
+    name: "Xiling"
+  },
+  {
+    id: 15,
+    img: "./avatars/Chengdu2.jpg",
+    name: "Chengdu"
+  },
 ];
 
 export default avatars;
