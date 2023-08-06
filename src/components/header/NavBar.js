@@ -1,37 +1,57 @@
 import {
   ButtonBase,
+  Drawer,
   Grid,
   IconButton,
   Menu,
   MenuItem,
   Tooltip,
   Typography,
+  useMediaQuery,
 } from "@mui/material";
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { logout } from "../app/slices/auth";
+import { logout } from "../../app/slices/auth";
 import {
   HeaderBar,
   LogoDiv,
   LogoTypography,
   SectionGrid,
   SectionTypography,
-} from "./styles/style";
+} from "../../styles/style";
 import Image from "mui-image";
-import avatars from "./avatar/avatars";
-import AuthService from "../app/services/auth.service";
+import avatars from "../avatar/avatars";
+import AuthService from "../../app/services/auth.service";
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// import {
+//   faEllipsisVertical,
+// } from "@fortawesome/free-solid-svg-icons";
 
 function NavBar() {
   const navigate = useNavigate();
+
+  const isMediumUpScreen = useMediaQuery((theme) => theme.breakpoints.up("md"));
+
+  const isMediumDownScreen = useMediaQuery((theme) =>
+    theme.breakpoints.down("md")
+  );
 
   const dispatch = useDispatch();
   const user = AuthService.getUser();
 
   const [anchorElUser, setAnchorElUser] = useState(null);
+
+  // const [drawerOpen, setDrawerOpen] = useState(false);
+
+  // const toggleDrawer = (isOpen) => {
+  //   setDrawerOpen(isOpen);
+  // };
+
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
   };
+
   const handleClickUserMenu = (path) => {
     setAnchorElUser(null);
     navigate(`/${path}`);
@@ -52,45 +72,44 @@ function NavBar() {
             navigate(`/`);
           }}
         >
-          <LogoTypography variant="h3" gutterBottom>
-            whr.one
-          </LogoTypography>
+          <LogoTypography variant="h3">whr.one</LogoTypography>
         </ButtonBase>
       </LogoDiv>
-
-      <SectionGrid container spacing={4}>
-        <Grid item>
-          <ButtonBase disableRipple>
-            <SectionTypography
+      {isMediumUpScreen && (
+        <SectionGrid container spacing={4}>
+          <Grid item>
+            <ButtonBase disableRipple>
+              <SectionTypography
+                onClick={() => {
+                  navigate(`/category`);
+                }}
+              >
+                CATEGORY
+              </SectionTypography>
+            </ButtonBase>
+          </Grid>
+          <Grid item>
+            <ButtonBase
+              disableRipple
               onClick={() => {
-                navigate(`/category`);
+                navigate(`/tag`);
               }}
             >
-              CATEGORY
-            </SectionTypography>
-          </ButtonBase>
-        </Grid>
-        <Grid item>
-          <ButtonBase
-            disableRipple
-            onClick={() => {
-              navigate(`/tag`);
-            }}
-          >
-            <SectionTypography>TAG</SectionTypography>
-          </ButtonBase>
-        </Grid>
-        <Grid item>
-          <ButtonBase
-            disableRipple
-            onClick={() => {
-              navigate(`/about`);
-            }}
-          >
-            <SectionTypography >ABOUT</SectionTypography>
-          </ButtonBase>
-        </Grid>
-      </SectionGrid>
+              <SectionTypography>TAG</SectionTypography>
+            </ButtonBase>
+          </Grid>
+          <Grid item>
+            <ButtonBase
+              disableRipple
+              onClick={() => {
+                navigate(`/about`);
+              }}
+            >
+              <SectionTypography>ABOUT</SectionTypography>
+            </ButtonBase>
+          </Grid>
+        </SectionGrid>
+      )}
 
       <div
         style={{
@@ -130,13 +149,26 @@ function NavBar() {
           <Tooltip title="User menu">
             <IconButton onClick={handleOpenUserMenu}>
               <Image
-              src={user.avatarId ? (avatars.filter(avatar => avatar.id === user.avatarId)[0].img) : (avatars[0].img)}
-              style={{ width: "50px", height: "50px", borderRadius: "50%" }}
-              alt="avatar"
-            />
+                src={
+                  user.avatarId
+                    ? avatars.filter((avatar) => avatar.id === user.avatarId)[0]
+                        .img
+                    : avatars[0].img
+                }
+                style={{ width: "50px", height: "50px", borderRadius: "50%" , marginRight: 10}}
+                alt="avatar"
+              />
             </IconButton>
           </Tooltip>
         )}
+        {/* {isMediumDownScreen && (
+          <ButtonBase onClick={() => {toggleDrawer(true)}}>
+            <FontAwesomeIcon
+              icon={faEllipsisVertical}
+              style={{ color: "#000000", height: "25px" }}
+            />
+          </ButtonBase>
+        )} */}
         <Menu
           sx={{ mt: "45px" }}
           anchorEl={anchorElUser}
@@ -168,6 +200,21 @@ function NavBar() {
             <Typography textAlign="center">Logout</Typography>
           </MenuItem>
         </Menu>
+
+        {/* <Drawer
+            anchor='top '
+            open={drawerOpen}
+            onClose={() => {toggleDrawer(false)}}
+          >
+             <ButtonBase
+              disableRipple
+              onClick={() => {
+                navigate(`/tag`);
+              }}
+            >
+              <SectionTypography>Category</SectionTypography>
+            </ButtonBase>
+          </Drawer> */}
       </div>
     </HeaderBar>
   );

@@ -14,7 +14,7 @@ import PostEditor from "./components/editor/PostEditor";
 import CategoryPostPage from "./components/category/CategoryPostPage";
 import TagPage from "./components/tag/TagPage";
 import TagPostPage from "./components/tag/TagPostPage";
-import theme from "./components/styles/style";
+import theme from "./styles/style";
 import AuthService from "./app/services/auth.service";
 import MusePage from "./components/muse/MusePage";
 import Template from "./components/Template";

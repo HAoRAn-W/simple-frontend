@@ -12,7 +12,11 @@ function HomeCover() {
         backgroundPosition: "center",
         backgroundImage: `url('https://i.imgur.com/FpHwkAJ.gif')`,
         width: "100vw", // Set the width to the viewport width
-        height: "60vh", // Set the height to the viewport height
+        height: {
+          xs: '100vh',
+          md: '40vh',
+          lg: '50vh'
+        }
       }}
     ></Paper>
   );
