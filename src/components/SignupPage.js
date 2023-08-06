@@ -1,6 +1,5 @@
 import {
   Alert,
-  Avatar,
   Box,
   Button,
   Container,
@@ -8,7 +7,6 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { signup } from "../app/slices/auth";
@@ -58,19 +56,19 @@ function SignupPage() {
   };
 
   return (
-    <Container component={"main"} maxWidth="xs">
+    <Container maxWidth="xs">
       <Box
         sx={{
-          height: '100vh',
+          height: "100vh",
           marginTop: 8,
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
         }}
       >
-        <Avatar>
-          <LockOutlinedIcon />
-        </Avatar>
+        <Typography variant="h3">
+          🐣
+        </Typography>
         <Typography component="h1" variant="h5">
           Create a new account
         </Typography>
@@ -157,8 +155,8 @@ function SignupPage() {
           </Grid>
           <Grid container justifyContent="flex-end" sx={{ mt: 3 }}>
             <Grid item>
-              <Typography component={Link} to={"/login"}>
-                Already have an account? Sign in
+              <Typography component={Link} to={"/login"} color={'grey'}>
+                Already have an account? Login
               </Typography>
             </Grid>
           </Grid>
