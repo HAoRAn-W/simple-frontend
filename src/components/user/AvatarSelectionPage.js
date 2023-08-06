@@ -1,7 +1,13 @@
 import React, { useState } from "react";
 import avatars from "../avatar/avatars";
 import Image from "mui-image";
-import { Button, ButtonBase, Container, Stack, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  ButtonBase,
+  Grid,
+  Typography,
+} from "@mui/material";
 import UserServcice from "../../app/services/user.service";
 import { SUCCESSFUL } from "../../app/constants/MessageCode";
 function AvatarSelectionPage({ user }) {
@@ -26,8 +32,22 @@ function AvatarSelectionPage({ user }) {
   };
 
   return (
-    <Container sx={{ marginTop: 6, display: "flex", flexDirection: "row" }}>
-      <div style={{ flex: 5, display: "flex", justifyContent: "flex-start", flexDirection: 'column', alignItems: 'center'}}>
+    <Box
+      sx={{
+        display: "flex",
+        flexDirection: "row",
+      }}
+    >
+      <Box
+        style={{
+          flex: 5,
+          display: "flex",
+          justifyContent: "flex-start",
+          flexDirection: "column",
+          alignItems: "flex-end",
+        }}
+        paddingRight={6}
+      >
         <img
           src={
             avatarId
@@ -43,28 +63,28 @@ function AvatarSelectionPage({ user }) {
           }}
           alt="avatar"
         />
-         {originalAvatarId !== avatarId && (
+        {originalAvatarId !== avatarId && (
           <Button
             variant="contained"
             type="submit"
             sx={{ marginTop: 6, marginRight: 2 }}
-           onClick={handleSubmit}
+            onClick={handleSubmit}
           >
             save
           </Button>
         )}
-      </div>
-
-      <Stack
+      </Box>
+      <Grid
+        container
         flex={7}
-        spacing={{ xs: 1, sm: 3 }}
-        direction="row"
-        useFlexGap
-        flexWrap="wrap"
-        justifyContent={"center"}
+        spacing={6}
+        sx={{ maxHeight: "80vh", overflowY: "scroll" }}
+        marginTop={0}
+        paddingBottom={2}
       >
         {avatars.map((ava) => (
-          <div
+          <Grid
+            item
             style={{
               display: "flex",
               flexDirection: "column",
@@ -77,15 +97,19 @@ function AvatarSelectionPage({ user }) {
             >
               <Image
                 src={ava.img}
-                style={{ width: "150px", height: "150px", borderRadius: "50%" }}
+                style={{
+                  width: "150px",
+                  height: "150px",
+                  borderRadius: "50%",
+                }}
                 alt="avatar"
               />
             </ButtonBase>
             <Typography fontSize={"1.5rem"}>{ava.name}</Typography>
-          </div>
+          </Grid>
         ))}
-      </Stack>
-    </Container>
+      </Grid>
+    </Box>
   );
 }
 
