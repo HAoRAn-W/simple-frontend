@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import PostList from "../home/PostList";
-import PaginationBar from "../PaginationBar";
+import PaginationBar from "../template/PaginationBar";
 import { Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import PageService from "../../app/services/page.service";

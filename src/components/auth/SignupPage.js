@@ -9,13 +9,13 @@ import {
 } from "@mui/material";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { signup } from "../app/slices/auth";
+import { signup } from "../../app/slices/auth";
 import {
   EMAIL_EXIST,
   SIGNUP_SUCCESSFUL,
   UNDEFINED_ERROR,
   USER_EXIST,
-} from "../app/constants/MessageCode";
+} from "../../app/constants/MessageCode";
 import { object, string } from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";

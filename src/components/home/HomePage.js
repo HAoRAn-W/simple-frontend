@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import PostList from "./PostList";
-import PaginationBar from "../PaginationBar";
+import PaginationBar from "../template/PaginationBar";
 import HomeCover from "./HomeCover";
 import Sidebar from "./Sidebar";
 import PageService from "../../app/services/page.service";

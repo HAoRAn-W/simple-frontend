@@ -9,7 +9,7 @@ import {
 } from "@mui/material";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { login } from "../app/slices/auth";
+import { login } from "../../app/slices/auth";
 import { useNavigate } from "react-router-dom";
 
 export default function LoginPage() {

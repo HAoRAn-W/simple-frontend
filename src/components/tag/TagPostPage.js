@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import PageService from '../../app/services/page.service';
 import { SUCCESSFUL } from '../../app/constants/MessageCode';
 import PostList from '../home/PostList';
-import PaginationBar from '../PaginationBar';
+import PaginationBar from '../template/PaginationBar';
 
 function TagPostPage() {
     const [currentPage, setCurrentPage] = useState(1);

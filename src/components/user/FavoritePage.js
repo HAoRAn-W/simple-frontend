@@ -4,7 +4,7 @@ import { SUCCESSFUL } from "../../app/constants/MessageCode";
 import { ListItemButton } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import PostCard from "../home/PostCard";
-import PaginationBar from "../PaginationBar";
+import PaginationBar from "../template/PaginationBar";
 
 function FavoritePage() {
   const [currentPage, setCurrentPage] = useState(1);

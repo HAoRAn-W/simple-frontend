@@ -1,4 +1,4 @@
-import PaginationBar from "../PaginationBar";
+import PaginationBar from "../template/PaginationBar";
 import { useParams } from "react-router-dom";
 import PostList from "../home/PostList";
 import { useEffect, useState } from "react";

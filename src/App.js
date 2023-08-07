@@ -2,10 +2,10 @@ import { CssBaseline, ThemeProvider } from "@mui/material";
 import HomePage from "./components/home/HomePage";
 import { Route, Routes } from "react-router-dom";
 import CategoryPage from "./components/category/CategoryPage";
-import NotFound from "./components/NotFound";
+import NotFound from "./components/template/NotFound";
 import PostPage from "./components/post/PostPage";
-import LoginPage from "./components/LoginPage";
-import SignupPage from "./components/SignupPage";
+import LoginPage from "./components/auth/LoginPage";
+import SignupPage from "./components/auth/SignupPage";
 import ProfilePage from "./components/user/ProfilePage";
 import FavoritePage from "./components/user/FavoritePage";
 import AboutPage from "./components/about/AboutPage";
@@ -17,7 +17,7 @@ import TagPostPage from "./components/tag/TagPostPage";
 import theme from "./styles/style";
 import AuthService from "./app/services/auth.service";
 import MusePage from "./components/muse/MusePage";
-import Template from "./components/Template";
+import Template from "./components/template/Template";
 
 function App() {
   const user = AuthService.getUser();
