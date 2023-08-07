@@ -10,9 +10,7 @@ import {
   useMediaQuery,
 } from "@mui/material";
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { logout } from "../../app/slices/auth";
 import {
   HeaderBar,
   LogoDiv,
@@ -37,7 +35,6 @@ function NavBar() {
     theme.breakpoints.down("md")
   );
 
-  const dispatch = useDispatch();
   const user = AuthService.getUser();
 
   const [anchorElUser, setAnchorElUser] = useState(null);
@@ -59,7 +56,7 @@ function NavBar() {
 
   const handleLogout = () => {
     setAnchorElUser(null);
-    dispatch(logout());
+    AuthService.logout();
     navigate("/");
   };
 

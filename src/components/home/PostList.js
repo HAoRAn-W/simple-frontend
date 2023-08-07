@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 import PostCard from "./PostCard";
 
 function PostList({ posts, fromEditor = false }) {
-  // const posts = useSelector((state) => state.page.posts);
   const navigate = useNavigate();
 
   return (

@@ -8,8 +8,6 @@ import {
   Typography,
 } from "@mui/material";
 import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { signup } from "../../app/slices/auth";
 import {
   EMAIL_EXIST,
   SIGNUP_SUCCESSFUL,
@@ -19,6 +17,8 @@ import {
 import { object, string } from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
+import AuthService from "../../app/services/auth.service";
+import { useState } from "react";
 
 function SignupPage() {
   const signupSchema = object({
@@ -40,19 +40,13 @@ function SignupPage() {
     formState: { errors },
   } = useForm({ resolver: yupResolver(signupSchema) });
 
-  const code = useSelector((state) => state.auth.code);
-
-  const dispatch = useDispatch();
+  const [respCode, setRespCode] = useState();
 
   const onSubmit = (data) => {
     const { username, email, password } = data;
-    dispatch(signup({ username, email, password }))
-      .unwrap()
-      .then(() => {
-        if (code === SIGNUP_SUCCESSFUL) {
-        }
-      })
-      .catch(() => {});
+    AuthService.signup(username, email, password).then((data) => {
+      setRespCode(data.code);
+    });
   };
 
   return (
@@ -66,22 +60,20 @@ function SignupPage() {
           alignItems: "center",
         }}
       >
-        <Typography variant="h3">
-          🐣
-        </Typography>
+        <Typography variant="h3">🐣</Typography>
         <Typography component="h1" variant="h5">
           Create a new account
         </Typography>
-        {code === USER_EXIST && (
+        {respCode === USER_EXIST && (
           <Alert severity="error">Username already exists</Alert>
         )}
-        {code === EMAIL_EXIST && (
+        {respCode === EMAIL_EXIST && (
           <Alert severity="error">Email already exists</Alert>
         )}
-        {code === UNDEFINED_ERROR && (
+        {respCode === UNDEFINED_ERROR && (
           <Alert severity="error">Please try again</Alert>
         )}
-        {code === SIGNUP_SUCCESSFUL && (
+        {respCode === SIGNUP_SUCCESSFUL && (
           <Alert severity="success" sx={{ marginTop: "3px" }}>
             Sign up success!
           </Alert>
@@ -155,7 +147,7 @@ function SignupPage() {
           </Grid>
           <Grid container justifyContent="flex-end" sx={{ mt: 3 }}>
             <Grid item>
-              <Typography component={Link} to={"/login"} color={'grey'}>
+              <Typography component={Link} to={"/login"} color={"grey"}>
                 Already have an account? Login
               </Typography>
             </Grid>
