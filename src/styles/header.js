@@ -1,42 +1,34 @@
 import styled from "@emotion/styled";
-import { Grid, Toolbar, Typography, createTheme } from "@mui/material";
-
-const theme = createTheme({
-  typography: {
-    fontSize: 14,
-    fontFamily: "Lato",
-  },
-});
+import { Grid, Toolbar, Typography } from "@mui/material";
 
 export const HeaderBar = styled(Toolbar)`
   background-color: transparent;
   border-bottom: 2px solid whitesmoke;
   display: flex;
-  width: 100%;
 `;
 
 export const LogoTypography = styled(Typography)(({ theme }) => ({
   fontWeight: 'bold',
   fontStyle: 'italic',
   [theme.breakpoints.up('xs')]: {
-    fontSize: '25px', // Font size for screens 'sm' and above
+    fontSize: '25px',
   },
   [theme.breakpoints.up('sm')]: {
-    fontSize: '28px', // Font size for screens 'sm' and above
+    fontSize: '28px',
   },
   [theme.breakpoints.up('md')]: {
-    fontSize: '30px', // Font size for screens 'md' and above
+    fontSize: '30px',
   },
   [theme.breakpoints.up('lg')]: {
-    fontSize: '40px', // Font size for screens 'lg' and above
+    fontSize: '40px',
   },
 }));
 
 export const LogoDiv = styled.div`
   display: flex;
-  flex: 3;
   justify-content: flex-start;
   align-items: center;
+  flex: ${(props) => props.flex || "auto"};
 `;
 
 export const SectionGrid = styled(Grid)`
@@ -49,5 +41,3 @@ export const SectionGrid = styled(Grid)`
 export const SectionTypography = styled(Typography)`
   font-size: 1.5rem
 `;
-
-export default theme;
