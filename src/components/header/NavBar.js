@@ -5,9 +5,7 @@ import NavBarDesktop from "./NavBarDesktop";
 
 function NavBar() {
   const isMediumUpScreen = useMediaQuery((theme) => theme.breakpoints.up("md"));
-  return (
-    isMediumUpScreen ? <NavBarDesktop /> : <NavBarMobile />
-  );
+  return isMediumUpScreen ? <NavBarDesktop /> : <NavBarMobile />;
 }
 
 export default NavBar;

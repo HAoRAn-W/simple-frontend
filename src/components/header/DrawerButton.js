@@ -12,6 +12,11 @@ function DrawerButton() {
     setOpen(isOpen);
   };
 
+  const handleClick = (dest) => {
+    navigate(`/${dest}`);
+    setOpen(false);
+  };
+
   return (
     <>
       <ButtonBase
@@ -24,12 +29,21 @@ function DrawerButton() {
       </ButtonBase>
 
       <Drawer anchor="left" open={open} onClose={() => toggleDrawer(false)}>
-        <Grid container sx={{ marginX: 3, display: 'flex', flexDirection: 'column', marginTop: 3 }} spacing={1}>
+        <Grid
+          container
+          sx={{
+            marginX: 3,
+            display: "flex",
+            flexDirection: "column",
+            marginTop: 3,
+          }}
+          spacing={1}
+        >
           <Grid item>
             <ButtonBase disableRipple>
               <Typography
                 onClick={() => {
-                  navigate(`/category`);
+                  handleClick("category");
                 }}
               >
                 CATEGORY
@@ -41,7 +55,7 @@ function DrawerButton() {
             <ButtonBase disableRipple>
               <Typography
                 onClick={() => {
-                  navigate(`/tag`);
+                  handleClick("tag");
                 }}
               >
                 TAG
@@ -53,7 +67,7 @@ function DrawerButton() {
             <ButtonBase disableRipple>
               <Typography
                 onClick={() => {
-                  navigate(`/about`);
+                  handleClick("about");
                 }}
               >
                 ABOUT
