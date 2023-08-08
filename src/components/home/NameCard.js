@@ -17,7 +17,7 @@ import {
 
 function NameCard() {
   return (
-    <Card sx={{ maxWidth: 345, maxHeight: 500 }}>
+    <Card sx={{maxWidth: '80%'}}>
       <CardHeader
         title="Haoran Wang"
         subheader="Software Engineer"
