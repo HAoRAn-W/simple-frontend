@@ -24,20 +24,25 @@ function CategoryPage({
   }, []);
 
   return (
-    <Container style={{ display:'flex', flexDirection:'column' }}>
-      <Typography
-        variant="h4"
-        marginLeft={"40px"}
-        marginBottom={"40px"}
-        marginTop={"40px"}
-      >
+    <Container
+      style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
+    >
+      <Typography variant="h4" marginTop={"40px"} marginBottom={"30px"}>
         Categories
       </Typography>
 
-      <Grid container spacing={5}>
+      <Grid container rowSpacing={4}>
         {categories.map((category) => {
           return (
-            <Grid item key={category.id} xs={12} sm={6} md={4} lg={3} justifyContent={'center'}>
+            <Grid
+              item
+              key={category.id}
+              xs={12}
+              sm={6}
+              md={4}
+              lg={3}
+              sx={{ display: "flex", justifyContent: "center" }}
+            >
               <ButtonBase
                 onClick={() => {
                   if (!fromEditor) {
