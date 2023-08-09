@@ -5,11 +5,11 @@ import { Outlet } from "react-router-dom";
 
 function Template() {
   return (
-    <div>
+    <>
       <NavBar />
       <Outlet />
       <Footer />
-    </div>
+    </>
   );
 }
 

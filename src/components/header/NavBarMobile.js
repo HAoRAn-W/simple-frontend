@@ -1,6 +1,6 @@
 import React from "react";
 import { HeaderBar, LogoDiv, LogoTypography } from "../../styles/header";
-import { ButtonBase, Typography } from "@mui/material";
+import { ButtonBase } from "@mui/material";
 import UserAvatar from "./UserAvatar";
 import AuthService from "../../app/services/auth.service";
 import { useNavigate } from "react-router-dom";
