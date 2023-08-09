@@ -4,17 +4,10 @@ import React from "react";
 
 function AboutPage() {
   return (
-    <Container
-      style={{
-        minWidth:'100%',
-        display: "flex",
-        alignItems: "center",
-        flexDirection: "column",
-      }}
-    >
+    <Container>
       <Grid
         container
-        sx={{ display: "flex", flexDirection: "column", paddingX: 20 }}
+        sx={{ display: "flex", flexDirection: "column", paddingX: 5 }}
       >
         <Grid item display="flex" justifyContent={"center"}>
           <Typography variant="h2" gutterBottom>
@@ -24,19 +17,24 @@ function AboutPage() {
         <Grid item>
           <Grid
             container
-            sx={{ display: "flex", flexDirection: "row" }}
-            spacing={10}
+            sx={{ display: "flex", flexDirection: { xs: "column", lg: "row" } }}
+            spacing={4}
           >
             <Grid
               item
               flex={5}
+              sx={{ display: "flex", justifyContent: "center" }}
             >
-              <Image
-                src="https://i.imgur.com/wMO9AqS.jpg"
-              />
+              <Image src="https://i.imgur.com/wMO9AqS.jpg" />
             </Grid>
-            <Grid item flex={7} display="flex" alignItems={"center"} justifyContent={'center'}>
-              <Typography variant="body1" sx={{ wordBreak: "break-word" }}>
+            <Grid
+              item
+              flex={8}
+              display="flex"
+              alignItems={"center"}
+              justifyContent={"center"}
+            >
+              <Typography>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
                 eiusmod tempor incididunt ut labore et dolore magna aliqua. Diam
                 in arcu cursus euismod quis viverra nibh cras. Elementum
@@ -69,7 +67,7 @@ function AboutPage() {
             What I'm doing
           </Typography>
         </Grid>
-        <Grid item paddingX={10}>
+        <Grid item>
           <Typography variant="body1" sx={{ wordBreak: "break-word" }}>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua. Diam in
