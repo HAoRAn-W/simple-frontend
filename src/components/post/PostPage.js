@@ -29,10 +29,11 @@ function PostPage() {
           marginX: "10%",
           padding: 5
         }}
+        elevation={0}
       >
         <PostMarkdown content={post.content} />
       </Paper>
-      <ActionBar postId={post.id}/>
+      <ActionBar postId={id}/>
     </div>
   );
 }
