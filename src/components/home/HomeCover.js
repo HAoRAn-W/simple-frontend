@@ -13,7 +13,7 @@ function HomeCover() {
         backgroundImage: `url('https://i.imgur.com/FpHwkAJ.gif')`,
         width: "100vw", // Set the width to the viewport width
         height: {
-          xs: "100vh",
+          xs: "80vh",
           md: "50vh",
         },
       }}

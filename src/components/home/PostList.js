@@ -9,7 +9,7 @@ function PostList({ posts, fromEditor = false }) {
   return (
     <>
       {posts.length === 0 ? (
-        <div style={{ width: "90%" }}>
+        <div >
           <Typography variant="h4">No Posts</Typography>
         </div>
       ) : (

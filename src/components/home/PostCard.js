@@ -3,6 +3,7 @@ import Image from "mui-image";
 import React from "react";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import InboxOutlinedIcon from "@mui/icons-material/InboxOutlined";
+import { PostCardImageDiv, PostCardTextDiv } from "../../styles/home";
 
 function PostCard({ post }) {
   const date = new Date(post.createdTime);
@@ -15,18 +16,16 @@ function PostCard({ post }) {
         width: "100%",
       }}
     >
-      <div style={{ flex: 4 }}>
+      <PostCardImageDiv>
         <Image src={post.coverUrl} />
-      </div>
-      <div
-        style={{
-          flex: 8,
-          display: "flex",
-          flexDirection: "column",
-          padding: 20,
-        }}
-      >
-        <Typography variant="h5" gutterBottom  style={{ wordBreak:'break-all', maxWidth: '100%'}}>
+      </PostCardImageDiv>
+
+      <PostCardTextDiv>
+        <Typography
+          variant="h5"
+          gutterBottom
+          style={{ wordBreak: "break-all", maxWidth: "100%" }}
+        >
           {post.title}
         </Typography>
 
@@ -54,15 +53,11 @@ function PostCard({ post }) {
           }/${date.getDate()}/${date.getFullYear()}`}</Typography>
 
           <InboxOutlinedIcon />
-          <Typography
-            variant="subtitle1"
-            gutterBottom
-            marginLeft={1}
-          >
+          <Typography variant="subtitle1" gutterBottom marginLeft={1}>
             {post.category.name}
           </Typography>
         </div>
-      </div>
+      </PostCardTextDiv>
     </Paper>
   );
 }
