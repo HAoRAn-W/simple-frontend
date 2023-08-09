@@ -1,6 +1,14 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBars } from "@fortawesome/free-solid-svg-icons";
-import { ButtonBase, Drawer, Grid, Typography } from "@mui/material";
+import { faBars, faClose } from "@fortawesome/free-solid-svg-icons";
+import {
+  Box,
+  ButtonBase,
+  Drawer,
+  Grid,
+  List,
+  ListItem,
+  Typography,
+} from "@mui/material";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -28,53 +36,51 @@ function DrawerButton() {
         <FontAwesomeIcon icon={faBars} style={{ height: 25 }} />
       </ButtonBase>
 
-      <Drawer anchor="left" open={open} onClose={() => toggleDrawer(false)}>
-        <Grid
-          container
-          sx={{
-            marginX: 3,
-            display: "flex",
-            flexDirection: "column",
-            marginTop: 3,
-          }}
-          spacing={1}
+      <Drawer
+        anchor="left"
+        open={open}
+        onClose={() => toggleDrawer(false)}
+      >
+        <Box
+          sx={{ width: '25vw', paddingTop: '2rem'}}
+          onClick={() => toggleDrawer(false)}
         >
-          <Grid item>
-            <ButtonBase disableRipple>
-              <Typography
-                onClick={() => {
-                  handleClick("category");
-                }}
-              >
-                CATEGORY
-              </Typography>
-            </ButtonBase>
-          </Grid>
-
-          <Grid item>
-            <ButtonBase disableRipple>
-              <Typography
-                onClick={() => {
-                  handleClick("tag");
-                }}
-              >
-                TAG
-              </Typography>
-            </ButtonBase>
-          </Grid>
-
-          <Grid item>
-            <ButtonBase disableRipple>
-              <Typography
-                onClick={() => {
-                  handleClick("about");
-                }}
-              >
-                ABOUT
-              </Typography>
-            </ButtonBase>
-          </Grid>
-        </Grid>
+          <List sx={{display: 'flex', flexDirection: 'column', gap: 2}}>
+            <ListItem disablePadding sx={{justifyContent: 'center'}}>
+              <ButtonBase disableRipple>
+                <Typography fontWeight={'bold'} fontSize={'1.5rem'}
+                  onClick={() => {
+                    handleClick("category");
+                  }}
+                >
+                  CATEGORY
+                </Typography>
+              </ButtonBase>
+            </ListItem >
+            <ListItem disablePadding sx={{justifyContent: 'center'}}>
+              <ButtonBase disableRipple>
+                <Typography fontWeight={'bold'} fontSize={'1.5rem'}
+                  onClick={() => {
+                    handleClick("tag");
+                  }}
+                >
+                  TAG
+                </Typography>
+              </ButtonBase>
+            </ListItem>
+            <ListItem disablePadding sx={{justifyContent: 'center'}}>
+              <ButtonBase disableRipple>
+                <Typography fontWeight={'bold'} fontSize={'1.5rem'}
+                  onClick={() => {
+                    handleClick("about");
+                  }}
+                >
+                  ABOUT
+                </Typography>
+              </ButtonBase>
+            </ListItem>
+          </List>
+        </Box>
       </Drawer>
     </>
   );

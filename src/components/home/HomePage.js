@@ -7,6 +7,9 @@ import { SUCCESSFUL } from "../../app/constants/MessageCode";
 import { MainDiv, PostListDiv, SidebarDiv } from "../../styles/home";
 import Sidebar from "./Sidebar";
 import { useMediaQuery } from "@mui/material";
+import NameCard from "./NameCard";
+import PinBoard from "./PinBoard";
+import MuseumShuffle from "./MuseumShuffle";
 
 function HomePage() {
   const [currentPage, setCurrentPage] = useState(1);
@@ -34,7 +37,9 @@ function HomePage() {
         {isLargeDown &&  <PaginationBar currentPage={currentPage} setCurrentPage={setCurrentPage} total={total}/>}
        
         <SidebarDiv>
-          <Sidebar />
+          <NameCard />
+          <PinBoard />
+          <MuseumShuffle />
         </SidebarDiv>
       </MainDiv>
       {!isLargeDown && <PaginationBar

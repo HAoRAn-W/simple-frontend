@@ -6,7 +6,7 @@ import MuseumShuffle from "./MuseumShuffle";
 
 function Sidebar() {
   return (
-    <Grid container spacing={2} sx={{display: 'flex', flexDirection: 'column'}}>
+    <Grid container spacing={2} sx={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
       <Grid item >
         <NameCard />
       </Grid>

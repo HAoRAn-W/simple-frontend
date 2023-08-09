@@ -28,8 +28,10 @@ export const SidebarDiv = styled.div(
     display: flex;
     flex-direction: column;
     align-items: center;
+    gap: 1.5rem;
+    padding-top: 1rem;
     ${props.theme.breakpoints.up("lg")} {
-      justify-content: flex-start;
+      align-items: flex-start;
       flex: 3;
     }
   `
