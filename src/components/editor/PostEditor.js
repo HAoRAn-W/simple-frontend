@@ -10,12 +10,12 @@ import {
   FormGroup,
   FormLabel,
   Grid,
+  Input,
   InputLabel,
   MenuItem,
   Select,
-  TextField,
 } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import PostService from "../../app/services/post.service";
 import CategoryService from "../../app/services/category.service";
@@ -28,11 +28,12 @@ function PostEditor() {
 
   const navigate = useNavigate();
 
-  const [title, setTitle] = useState("");
-  const [coverUrl, setCoverUrl] = useState("");
-  const [description, setDescription] = useState("");
-  const [content, setContent] = useState("");
-  const [categoryId, setCategoryId] = useState("");
+  const titleRef = useRef("");
+  const coverUrlRef = useRef("");
+  const descriptionRef = useRef("");
+  const contentRef = useRef("");
+  const [categoryId, setCategoryId]= useState(1);
+
   const [categories, setCategories] = useState([]);
   const [tags, setTags] = useState([]);
   const [selectedTags, setSelectedTags] = useState(new Set());
@@ -53,11 +54,12 @@ function PostEditor() {
     if (!isNew) {
       PostService.getPost(postId).then((data) => {
         const original = data.post;
-        setTitle(original.title);
-        setDescription(original.description);
-        setContent(original.content);
+        titleRef.current.value = original.title;
+        descriptionRef.current.value = original.description;
+        contentRef.current.value = original.content;
         setCategoryId(original.category.id);
-        setCoverUrl(original.coverUrl);
+        coverUrlRef.current.value = original.coverUrl;
+
         setSelectedTags((prev) => {
           const updatedTags = new Set([...original.tags.map((tag) => tag.id)]);
           return updatedTags;
@@ -66,10 +68,6 @@ function PostEditor() {
       });
     }
   }, [isNew, postId]);
-
-  const handleChange = (e) => {
-    setCategoryId(e.target.value);
-  };
 
   const handleChecked = (e) => {
     // remeber to convert string to number, otherwise, you can only add, cannot remove. becasue set.has() always false
@@ -95,11 +93,11 @@ function PostEditor() {
   const handleSubmit = (e) => {
     e.preventDefault();
     const newPost = {
-      title: title,
-      description: description,
-      content: content,
+      title: titleRef.current.value,
+      description: descriptionRef.current.value,
+      content: contentRef.current.value,
       categoryId: categoryId,
-      coverUrl: coverUrl,
+      coverUrl: coverUrlRef.current.value,
       tagIds: [...selectedTags], // set to array
       pinned: pinned,
     };
@@ -138,56 +136,50 @@ function PostEditor() {
   };
 
   return (
-    <Container>
+    <Container sx={{ paddingTop: 5 }}>
       <form noValidate autoComplete="off">
-        <TextField
-          label="Title"
-          value={title}
-          onChange={(e) => {
-            setTitle(e.target.value);
-          }}
+        <InputLabel htmlFor="title">Title</InputLabel>
+        <Input
+          id="title"
+          inputRef={titleRef}
           fullWidth
-          sx={{ marginTop: 5, marginBottom: 5, display: "block" }}
+          sx={{ marginBottom: 5 }}
         />
-        <TextField
-          label="Cover Picture"
-          value={coverUrl}
-          onChange={(e) => {
-            setCoverUrl(e.target.value);
-          }}
+
+        <InputLabel htmlFor="coverurl">Cover Picture</InputLabel>
+        <Input
+          id="coverurl"
+          inputRef={coverUrlRef}
           fullWidth
-          sx={{ marginTop: 5, marginBottom: 5, display: "block" }}
+          sx={{ marginBottom: 5 }}
         />
-        <TextField
-          label="Description"
-          value={description}
-          onChange={(e) => {
-            setDescription(e.target.value);
-          }}
+
+        <InputLabel htmlFor="Description">Description</InputLabel>
+        <Input
+          id="Description"
+          inputRef={descriptionRef}
           fullWidth
-          sx={{ marginTop: 5, marginBottom: 5, display: "block" }}
-          multiline
-          rows={4}
+          sx={{ marginBottom: 5 }}
         />
-        <TextField
-          label="Content"
-          value={content}
-          onChange={(e) => {
-            setContent(e.target.value);
-          }}
+
+        <InputLabel htmlFor="Content">Content</InputLabel>
+        <Input
+          id="Content"
+          inputRef={contentRef}
           fullWidth
-          sx={{ marginTop: 5, marginBottom: 5, display: "block" }}
+          sx={{ marginBottom: 5}}
           multiline
           rows={20}
         />
+
         <FormControl fullWidth required variant="standard">
           <InputLabel id="category-id">Category</InputLabel>
           <Select
             labelId="category-id"
             id="category-selector"
             value={categoryId}
+            onChange={e => setCategoryId(e.target.value)}
             lable="Category"
-            onChange={handleChange}
           >
             {categories.map((cate) => {
               return (
@@ -199,7 +191,7 @@ function PostEditor() {
           </Select>
         </FormControl>
 
-        <FormControl fullWidth component="fieldset" variant="standard">
+        <FormControl fullWidth component="fieldset" variant="standard" sx={{marginTop: 4}}>
           <FormLabel>Tags</FormLabel>
           <FormGroup>
             <Grid container spacing={2}>
@@ -221,7 +213,7 @@ function PostEditor() {
             </Grid>
           </FormGroup>
         </FormControl>
-        <FormControl fullWidth component="fieldset" variant="standard">
+        <FormControl fullWidth component="fieldset" variant="standard" sx={{marginTop: 4}}>
           <FormLabel>Pin this post</FormLabel>
           <FormControlLabel
             control={<Checkbox checked={pinned} onChange={handlePin} />}

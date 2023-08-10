@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import CategoryPage from "../category/CategoryPage";
 import {
   Button,
@@ -6,13 +6,15 @@ import {
   Dialog,
   DialogActions,
   DialogTitle,
-  TextField,
+  Input,
+  InputLabel,
 } from "@mui/material";
 import CategoryService from "../../app/services/category.service";
 
 function EditCategory() {
-  const [name, setName] = useState("");
-  const [coverUrl, setCoverUrl] = useState("");
+  const name = useRef(null);
+  const coverUrl = useRef(null);
+
   const [isUpdate, setIsUpdate] = useState(false);
   const [id, setId] = useState();
 
@@ -25,8 +27,8 @@ function EditCategory() {
   const handleDelete = () => {
     CategoryService.deleteCategory(id);
     setOpenDialog(false);
-    setName("");
-    setCoverUrl("");
+    name.current.value = "";
+    coverUrl.current.value = "";
     setIsUpdate(false);
     setId();
   };
@@ -35,24 +37,10 @@ function EditCategory() {
     <div>
       <Container>
         <form>
-          <TextField
-            label="Name"
-            value={name}
-            onChange={(e) => {
-              setName(e.target.value);
-            }}
-            fullWidth
-            sx={{ marginTop: 5, marginBottom: 5, display: "block" }}
-          />
-          <TextField
-            label="Cover Picture"
-            value={coverUrl}
-            onChange={(e) => {
-              setCoverUrl(e.target.value);
-            }}
-            fullWidth
-            sx={{ marginTop: 5, marginBottom: 5, display: "block" }}
-          />
+          <InputLabel htmlFor="name">Name</InputLabel>
+          <Input id="name" inputRef={name} fullWidth sx={{marginBottom: 4}}/>
+          <InputLabel htmlFor="coverurl">Cover Picture</InputLabel>
+          <Input id="coverurl" inputRef={coverUrl} fullWidth sx={{marginBottom: 4}}/>
         </form>
         <div
           style={{
@@ -69,14 +57,17 @@ function EditCategory() {
               if (isUpdate) {
                 CategoryService.updateCategory({
                   id: id,
-                  name: name,
-                  coverUrl: coverUrl,
+                  name: name.current.value,
+                  coverUrl: coverUrl.current.value,
                 });
               } else {
-                CategoryService.addCategory({ name: name, coverUrl: coverUrl });
+                CategoryService.addCategory({
+                  name: name.current.value,
+                  coverUrl: coverUrl.current.value,
+                });
               }
-              setName("");
-              setCoverUrl("");
+              name.current.value = "";
+              coverUrl.current.value = "";
               setId();
             }}
           >
@@ -88,8 +79,8 @@ function EditCategory() {
               variant="contained"
               onClick={() => {
                 setIsUpdate(false);
-                setName("");
-                setCoverUrl("");
+                name.current.value = "";
+                coverUrl.current.value = "";
                 setId();
               }}
             >
@@ -115,8 +106,8 @@ function EditCategory() {
       </Container>
       <CategoryPage
         fromEditor={true}
-        setName={setName}
-        setCoverUrl={setCoverUrl}
+        name={name}
+        coverUrl={coverUrl}
         setIsUpdate={setIsUpdate}
         setId={setId}
       />

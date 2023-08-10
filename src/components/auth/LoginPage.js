@@ -7,21 +7,22 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import AuthService from "../../app/services/auth.service";
 import { SUCCESSFUL } from "../../app/constants/MessageCode";
 
 export default function LoginPage() {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const username = useRef(null);
+  const password = useRef(null);
   const [loginError, setLoginError] = useState();
 
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    AuthService.login(username, password).then(data => {
+    console.log(username.current.value)
+    AuthService.login(username.current.value, password.current.value).then(data => {
       if (data.code === SUCCESSFUL) {
         navigate("/");
       } else {
@@ -81,10 +82,7 @@ export default function LoginPage() {
               name="username"
               autoFocus
               autoComplete="username"
-              value={username}
-              onChange={(e) => {
-                setUsername(e.target.value);
-              }}
+              inputRef={username}
             />
             <TextField
               margin="normal"
@@ -95,10 +93,7 @@ export default function LoginPage() {
               type="password"
               id="password"
               autoComplete="current-password"
-              value={password}
-              onChange={(e) => {
-                setPassword(e.target.value);
-              }}
+              inputRef={password}
             />
             <Button
               type="submit"

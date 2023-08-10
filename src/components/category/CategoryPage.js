@@ -7,8 +7,8 @@ import { useNavigate } from "react-router-dom";
 
 function CategoryPage({
   fromEditor,
-  setName,
-  setCoverUrl,
+  name,
+  coverUrl,
   setIsUpdate,
   setId,
 }) {
@@ -50,8 +50,8 @@ function CategoryPage({
                   } else {
                     setIsUpdate(true);
                     setId(category.id);
-                    setName(category.name);
-                    setCoverUrl(category.coverUrl);
+                    name.current.value = category.name;
+                    coverUrl.current.value = category.coverUrl;
                   }
                 }}
               >

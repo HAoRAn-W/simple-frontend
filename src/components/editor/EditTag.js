@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import TagService from "../../app/services/tag.service";
 import { SUCCESSFUL } from "../../app/constants/MessageCode";
 import {
@@ -6,19 +6,21 @@ import {
   Box,
   Button,
   ButtonBase,
+  Container,
   Dialog,
   DialogActions,
   DialogTitle,
+  Input,
+  InputLabel,
   Paper,
   Stack,
-  TextField,
   Typography,
 } from "@mui/material";
 import styled from "@emotion/styled";
 
 function EditTag() {
   const [tags, setTags] = useState([]);
-  const [name, setName] = useState("");
+  const name = useRef(null);
   const [isUpdate, setIsUpdate] = useState(false);
   const [id, setId] = useState();
   const [isError, setIsError] = useState(false);
@@ -32,7 +34,7 @@ function EditTag() {
   const handleDelete = () => {
     TagService.deleteTag(id);
     setOpenDialog(false);
-    setName("");
+    name.current.value = "";
     setIsUpdate(false);
     setId();
   };
@@ -46,87 +48,76 @@ function EditTag() {
   }, []);
 
   return (
-    <div
-      style={{
-        width: "90%",
-        height: "100vh",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-      }}
-    >
-      <TextField
-        label="Name"
-        value={name}
-        onChange={(e) => {
-          setName(e.target.value);
-        }}
-        fullWidth
-        sx={{ marginTop: 5, marginBottom: 5, display: "block" }}
-      />
-      <Box>
-        <Button
-          sx={{ marginX: "10px" }}
-          variant="contained"
-          onClick={() => {
-            const newTag = {
-              name: name,
-            };
-            if (isUpdate) {
-              newTag.id = id;
-              TagService.updateTag(newTag).then((data) => {
-                if (data.code === SUCCESSFUL) {
+    <div style={{ height: "100vh" }}>
+      <Container>
+        <form>
+          <InputLabel htmlFor="name">Name</InputLabel>
+          <Input id="name" inputRef={name} fullWidth sx={{ marginBottom: 4 }} />
+        </form>
+        <Box sx={{ display: "flex", justifyContent: "center" }}>
+          <Button
+            sx={{ marginX: "10px" }}
+            variant="contained"
+            onClick={() => {
+              const newTag = {
+                name: name.current.value,
+              };
+              if (isUpdate) {
+                newTag.id = id;
+                TagService.updateTag(newTag).then((data) => {
+                  if (data.code === SUCCESSFUL) {
+                    setId();
+                    setIsUpdate(false);
+                    name.current.value = "";
+                  } else {
+                    setIsError(true);
+                  }
+                });
+              } else {
+                TagService.addTag(newTag).then((data) => {
+                  if (data.code === SUCCESSFUL) {
+                    setId();
+                    setIsUpdate(false);
+                    name.current.value = "";
+                  } else {
+                    setIsError(true);
+                  }
+                });
+              }
+            }}
+          >
+            {isUpdate ? "Update" : "Add"}
+          </Button>
+          {isUpdate && (
+            <>
+              <Button
+                sx={{ marginX: "10px" }}
+                variant="contained"
+                onClick={() => {
                   setId();
                   setIsUpdate(false);
-                  setName("");
-                } else {
-                  setIsError(true);
-                }
-              });
-            } else {
-              TagService.addTag(newTag).then((data) => {
-                if (data.code === SUCCESSFUL) {
-                  setId();
-                  setIsUpdate(false);
-                  setName("");
-                } else {
-                  setIsError(true);
-                }
-              });
-            }
-          }}
-        >
-          {isUpdate ? "Update" : "Add"}
-        </Button>
-        {isUpdate && (
-          <>
-            <Button
-              sx={{ marginX: "10px" }}
-              variant="contained"
-              onClick={() => {
-                setId();
-                setIsUpdate(false);
-                setName("");
-              }}
-            >
-              Cancel
-            </Button>
-            <Button
-              sx={{
-                marginX: "10px",
-                backgroundColor: "#ef233c",
-                color: "white",
-              }}
-              variant="contained"
-              onClick={() => {
-                setOpenDialog(true);
-              }}
-            >
-              Delete
-            </Button>
-          </>
-        )}
-      </Box>
+                  name.current.value = "";
+                }}
+              >
+                Cancel
+              </Button>
+              <Button
+                sx={{
+                  marginX: "10px",
+                  backgroundColor: "#ef233c",
+                  color: "white",
+                }}
+                variant="contained"
+                onClick={() => {
+                  setOpenDialog(true);
+                }}
+              >
+                Delete
+              </Button>
+            </>
+          )}
+        </Box>
+      </Container>
 
       {isError && (
         <Alert
@@ -139,17 +130,19 @@ function EditTag() {
         </Alert>
       )}
       <Stack
+        display={"flex"}
+        justifyContent={"center"}
         spacing={{ xs: 1, sm: 2 }}
         direction="row"
         useFlexGap
         flexWrap="wrap"
-        marginTop={2}
+        marginTop={6}
       >
         {tags.map((tag) => (
           <ButtonBase
             key={tag.id}
             onClick={() => {
-              setName(tag.name);
+              name.current.value = tag.name;
               setIsUpdate(true);
               setId(tag.id);
             }}
