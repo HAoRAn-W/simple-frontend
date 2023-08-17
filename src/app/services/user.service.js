@@ -92,11 +92,7 @@ const queryFavorite = (postId) => {
 
 const updateInfo = (userinfo) => {
   return userClient
-    .post("updateinfo", {
-      username: userinfo.username,
-      email: userinfo.email,
-      avatarId: userinfo.avatarId,
-    })
+    .post("updateinfo", userinfo)
     .then((response) => {
       return response.data;
     })

@@ -1,39 +1,48 @@
-import React, { useState } from "react";
-import avatars from "../avatar/avatars";
+import React, { useEffect, useState } from "react";
 import Image from "mui-image";
-import {
-  Box,
-  Button,
-  ButtonBase,
-  Grid,
-  Typography,
-} from "@mui/material";
+import { Box, Button, ButtonBase, Container, Grid, Typography } from "@mui/material";
 import UserServcice from "../../app/services/user.service";
 import { SUCCESSFUL } from "../../app/constants/MessageCode";
+import AvatarService from "../../app/services/avatar.service";
 function AvatarSelectionPage({ user }) {
-  const [avatarId, setAvatarId] = useState(user.avatarId);
-  const [originalAvatarId, setOriginalAvatarId] = useState(user.avatarId);
+  const defaultAvatar = { id: 0, name: "default", url: "./avatars/cloud.jpg" };
 
-  const handleClick = (id) => {
-    setAvatarId(id);
+  const [avatar, setAvatar] = useState(defaultAvatar);
+  const [oldAvatar, setOldAvatar] = useState(defaultAvatar);
+
+  const [avatarList, setAvatarList] = useState([]);
+
+  useEffect(() => {
+    AvatarService.getAvatarList().then((data) => {
+      setAvatarList(data.avatars);
+    });
+    if (user.avatar) {
+      setAvatar(user.avatar);
+      setOldAvatar(user.avatar);
+    }
+  }, [user]);
+
+  const handleClick = (avatar) => {
+    setAvatar(avatar);
   };
 
   const handleSubmit = () => {
     UserServcice.updateInfo({
       username: user.username,
       email: user.email,
-      avatarId: avatarId,
+      avatarId: avatar.id,
     }).then((data) => {
       if (data.code === SUCCESSFUL) {
         UserServcice.refresh();
-        setOriginalAvatarId(avatarId);
+        setOldAvatar(avatar);
       }
     });
   };
 
   return (
-    <Box
+    <Container
       sx={{
+        paddingTop: 4,
         display: "flex",
         flexDirection: "row",
       }}
@@ -42,18 +51,13 @@ function AvatarSelectionPage({ user }) {
         style={{
           flex: 5,
           display: "flex",
-          justifyContent: "flex-start",
           flexDirection: "column",
-          alignItems: "flex-end",
+          alignItems: "center",
         }}
         paddingRight={6}
       >
         <img
-          src={
-            avatarId
-              ? avatars.filter((avatar) => avatar.id === avatarId)[0].img
-              : avatars[0].img
-          }
+          src={avatar.url}
           style={{
             width: "280px",
             height: "280px",
@@ -63,11 +67,11 @@ function AvatarSelectionPage({ user }) {
           }}
           alt="avatar"
         />
-        {originalAvatarId !== avatarId && (
+        {oldAvatar !== avatar && (
           <Button
             variant="contained"
             type="submit"
-            sx={{ marginTop: 6, marginRight: 2 }}
+            sx={{ marginTop: 6}}
             onClick={handleSubmit}
           >
             save
@@ -82,8 +86,9 @@ function AvatarSelectionPage({ user }) {
         marginTop={0}
         paddingBottom={2}
       >
-        {avatars.map((ava) => (
+        {avatarList.map((ava) => (
           <Grid
+            key={ava.id}
             item
             style={{
               display: "flex",
@@ -93,10 +98,10 @@ function AvatarSelectionPage({ user }) {
           >
             <ButtonBase
               sx={{ borderRadius: "50%" }}
-              onClick={() => handleClick(ava.id)}
+              onClick={() => handleClick(ava)}
             >
               <Image
-                src={ava.img}
+                src={ava.url}
                 style={{
                   width: "150px",
                   height: "150px",
@@ -109,7 +114,7 @@ function AvatarSelectionPage({ user }) {
           </Grid>
         ))}
       </Grid>
-    </Box>
+    </Container>
   );
 }
 

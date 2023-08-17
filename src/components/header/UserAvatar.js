@@ -1,11 +1,17 @@
 import React, { useState } from "react";
-import { ButtonBase, MenuItem, Popover, Tooltip, Typography } from "@mui/material";
+import {
+  ButtonBase,
+  MenuItem,
+  Popover,
+  Tooltip,
+  Typography,
+} from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import avatars from "../avatar/avatars";
 import Image from "mui-image";
 import AuthService from "../../app/services/auth.service";
 
 function UserAvatar({ user }) {
+  console.log('user', user)
   const navigate = useNavigate();
   const [anchorElUser, setAnchorElUser] = useState(null);
 
@@ -26,16 +32,12 @@ function UserAvatar({ user }) {
   return (
     <>
       <Tooltip title="User menu">
-        <ButtonBase onClick={handleOpenUserMenu} sx={{borderRadius: "50%"}}>
+        <ButtonBase onClick={handleOpenUserMenu} sx={{ borderRadius: "50%" }}>
           <Image
-            src={
-              user.avatarId
-                ? avatars.filter((avatar) => avatar.id === user.avatarId)[0].img
-                : avatars[0].img
-            }
+            src={user.avatar ? user.avatar.url : "./avatars/cloud.jpg"}
             style={{
-              width: '50px',
-              height: '50px',
+              width: "50px",
+              height: "50px",
               borderRadius: "50%",
             }}
             alt="avatar"

@@ -2,19 +2,18 @@ import { Button, Grid, TextField } from "@mui/material";
 import React, { useState } from "react";
 import UserServcice from "../../app/services/user.service";
 import { SUCCESSFUL } from "../../app/constants/MessageCode";
-import avatars from "../avatar/avatars";
 
 function UserInfoPage({ user }) {
   const [username, setUsername] = useState(user.username);
   const [email, setEmail] = useState(user.email);
-  const [originalUsername, setOriginalUsername] =  useState(user.username);
-  const [originalEmail, setOriginalEmail] =  useState(user.email);
+  const [originalUsername, setOriginalUsername] = useState(user.username);
+  const [originalEmail, setOriginalEmail] = useState(user.email);
 
   const handleSubmit = () => {
     UserServcice.updateInfo({
       username: username,
       email: email,
-      avatarId: user.avatarId,
+      avatarId: user.avatar ? user.avatar.id : 0,
     }).then((data) => {
       if (data.code === SUCCESSFUL) {
         UserServcice.refresh();
@@ -36,7 +35,7 @@ function UserInfoPage({ user }) {
     >
       <Grid item style={{ flex: 5, display: "flex", justifyContent: "center" }}>
         <img
-          src={user.avatarId ? (avatars.filter(avatar => avatar.id === user.avatarId)[0].img) : (avatars[0].img)}
+          src={user.avatar ? user.avatar.url : "./avatars/cloud.jpg"}
           style={{
             width: "280px",
             height: "280px",
