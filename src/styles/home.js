@@ -4,6 +4,7 @@ import styled from "@emotion/styled";
 export const MainDiv = styled.div((props) => ({
   display: "flex",
   flexDirection: "column",
+  alignItems: "flex-start",
   [props.theme.breakpoints.up("lg")]: {
     flexDirection: "row",
   },
