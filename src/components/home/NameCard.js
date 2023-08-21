@@ -25,7 +25,7 @@ function NameCard() {
       <CardMedia
         component="img"
         height="194"
-        image="https://i.imgur.com/JeflHLr.jpg"
+        image="https://i.imgur.com/4KfvBFd.jpg"
         alt="pic"
       />
       <CardContent>
