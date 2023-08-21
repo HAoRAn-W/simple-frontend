@@ -6,6 +6,7 @@ import { useParams } from "react-router-dom";
 import PostService from "../../app/services/post.service";
 import { SUCCESSFUL } from "../../app/constants/MessageCode";
 import ActionBar from "./ActionBar";
+import PostHeader from "./PostHeader";
 
 function PostPage() {
   const { id } = useParams();
@@ -21,7 +22,7 @@ function PostPage() {
 
   return (
     <div>
-      <PostCover post={post} />
+      
       <Paper
         sx={{
           display: "flex",
@@ -31,9 +32,10 @@ function PostPage() {
         }}
         elevation={0}
       >
+        <PostHeader post={post} />
         <PostMarkdown content={post.content} />
       </Paper>
-      <ActionBar postId={id}/>
+      <ActionBar post={post}/>
     </div>
   );
 }

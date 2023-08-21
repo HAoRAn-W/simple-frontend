@@ -4,8 +4,12 @@ import BookmarkAddIcon from "@mui/icons-material/BookmarkAdd";
 import UserServcice from "../../app/services/user.service";
 import { IS_IN_FAVORITE } from "../../app/constants/MessageCode";
 import BookmarkAddedIcon from "@mui/icons-material/BookmarkAdded";
+import Toc from "react-toc";
 
-function ActionBar({ postId }) {
+function ActionBar({ post }) {
+  const postId = post.id
+
+
   const [isFavorite, setIsFavorite] = useState(false);
   const user = localStorage.getItem("user");
 
@@ -30,6 +34,7 @@ function ActionBar({ postId }) {
 
   return (
     <>
+    {/* <Toc markdownText={post.content}></Toc> */}
     {user && <Fab
       sx={{
         position: "fixed",
