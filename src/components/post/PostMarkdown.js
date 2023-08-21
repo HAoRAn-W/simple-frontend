@@ -1,4 +1,13 @@
-import { Typography } from "@mui/material";
+import {
+  Box,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Typography,
+} from "@mui/material";
 import Image from "mui-image";
 import ReactMarkdown from "react-markdown";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
@@ -7,27 +16,29 @@ import remarkGfm from "remark-gfm";
 function PostMarkdown({ content }) {
   const renderers = {
     h1: ({ children }) => (
-      <Typography variant="h3" fontSize={50}>
+      <Typography variant="h3" fontSize={45} >
         {children}
       </Typography>
     ),
     h2: ({ children }) => (
-      <Typography variant="h3" fontSize={40}>
-        {children}
-      </Typography>
+      // <Box id={children}></Box>
+      <Typography variant="h3" fontSize={35} paddingY={'1rem'}>
+      {children}
+    </Typography>
+      
     ),
     h3: ({ children }) => (
-      <Typography variant="h3" fontSize={30}>
-       <b>{children}</b> 
+      <Typography variant="h3" fontSize={25} gutterBottom>
+        <b>{children}</b>
       </Typography>
     ),
     h4: ({ children }) => (
-      <Typography variant="h3" fontSize={30}>
+      <Typography variant="h3" fontSize={25}>
         {children}
       </Typography>
     ),
     h5: ({ children }) => (
-      <Typography variant="h3" fontSize={30}>
+      <Typography variant="h3" fontSize={25}>
         {children}
       </Typography>
     ),
@@ -39,7 +50,7 @@ function PostMarkdown({ content }) {
     p: ({ children }) => (
       <Typography
         variant="body"
-        fontSize={25}
+        fontSize={22}
         style={{ wordWrap: "break-word" }}
         gutterBottom
       >
@@ -96,6 +107,20 @@ function PostMarkdown({ content }) {
         </code>
       );
     },
+    table: ({ children }) => (
+      <TableContainer sx={{marginY: 4, paddingX: 5}}>
+        <Table>{children}</Table>
+      </TableContainer>
+    ),
+    thead: ({ children }) => <TableHead>{children}</TableHead>,
+    tbody: ({ children }) => <TableBody>{children}</TableBody>,
+    tr: ({ children }) => <TableRow>{children}</TableRow>,
+    th: ({ children }) => (
+      <TableCell align="center" style={{fontWeight: 'bold', fontSize: '1.2rem'}}>
+        {children}
+      </TableCell>
+    ),
+    td: ({ children }) => <TableCell align="center">{children}</TableCell>,
   };
   return (
     <>
