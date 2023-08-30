@@ -1,5 +1,11 @@
 import axios from "axios";
-import { ACCESS_TOKEN_RENEWED, NEED_RELOGIN, REFRESH_TOKEN_EXPIRED, SUCCESSFUL, UNDEFINED_ERROR } from "../constants/MessageCode";
+import {
+  ACCESS_TOKEN_RENEWED,
+  NEED_RELOGIN,
+  REFRESH_TOKEN_EXPIRED,
+  SUCCESSFUL,
+  UNDEFINED_ERROR,
+} from "../constants/MessageCode";
 import RefreshService from "./refresh.service";
 
 const client = axios.create({
@@ -14,7 +20,11 @@ client.interceptors.response.use(
   // access token expired OR requesting unauthorized resources
   (error) => {
     const request = error.config; // get request
-    if (request.url === "add" || request.url === "update" || request.url === "delete") {
+    if (
+      request.url === "add" ||
+      request.url === "update" ||
+      request.url === "delete"
+    ) {
       if (error.response.status && error.response.status === 401) {
         if (!request._retry) {
           // set _retry flag to prevent multiple retries
@@ -73,7 +83,7 @@ const updateTag = (newTag) => {
 
 const deleteTag = (id) => {
   return client
-    .get(`delete`, {params: {tagId: id}})
+    .get(`delete`, { params: { tagId: id } })
     .then((response) => {
       return response.data;
     })
