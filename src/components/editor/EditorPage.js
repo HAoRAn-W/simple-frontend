@@ -9,6 +9,7 @@ import { useState } from "react";
 import EditPost from "./EditPost";
 import EditCategory from "./EditCategory";
 import EditTag from "./EditTag";
+import EditAvatar from "./EditAvatar";
 
 function EditorPage() {
   const [section, setSection] = useState("posts");
@@ -34,15 +35,24 @@ function EditorPage() {
         <ToggleButton value={"tags"} key="tags">
           <Typography>tags</Typography>
         </ToggleButton>
+        <ToggleButton value={"avatar"} key="avatar">
+          <Typography>avatar</Typography>
+        </ToggleButton>
       </ToggleButtonGroup>
-      
-        {section === "posts" ? (
-          <EditPost />
-        ) : section === "categories" ? (
-          <EditCategory />
-        ) : (
-          <EditTag />
-        )}
+      {(() => {
+        switch (section) {
+          case "posts":
+            return <EditPost />;
+          case "categories":
+            return <EditCategory />;
+          case "tags":
+            return <EditTag />;
+          case "avatar":
+            return <EditAvatar />;
+          default:
+            return null;
+        }
+      })()}
     </Container>
   );
 }
