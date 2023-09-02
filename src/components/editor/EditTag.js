@@ -32,12 +32,22 @@ function EditTag() {
   };
 
   const handleDelete = () => {
-    TagService.deleteTag(id);
+    TagService.deleteTag(id).then(() => {
+      updateTags()
+    });
     setOpenDialog(false);
     name.current.value = "";
     setIsUpdate(false);
     setId();
   };
+
+  const updateTags = () => {
+    TagService.getTagList().then((data) => {
+      if (data.code === SUCCESSFUL) {
+        setTags(data.tags);
+      }
+    });
+  }
 
   useEffect(() => {
     TagService.getTagList().then((data) => {
@@ -69,6 +79,7 @@ function EditTag() {
                     setId();
                     setIsUpdate(false);
                     name.current.value = "";
+                    updateTags()
                   } else {
                     setIsError(true);
                   }
@@ -79,6 +90,7 @@ function EditTag() {
                     setId();
                     setIsUpdate(false);
                     name.current.value = "";
+                    updateTags()
                   } else {
                     setIsError(true);
                   }

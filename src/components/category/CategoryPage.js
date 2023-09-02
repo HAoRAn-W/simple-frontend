@@ -5,13 +5,7 @@ import CategoryService from "../../app/services/category.service";
 import { SUCCESSFUL } from "../../app/constants/MessageCode";
 import { useNavigate } from "react-router-dom";
 
-function CategoryPage({
-  fromEditor,
-  name,
-  coverUrl,
-  setIsUpdate,
-  setId,
-}) {
+function CategoryPage() {
   const [categories, setCategories] = useState([]);
   const navigate = useNavigate();
 
@@ -45,14 +39,7 @@ function CategoryPage({
             >
               <ButtonBase
                 onClick={() => {
-                  if (!fromEditor) {
-                    navigate(`/category/${category.id}`);
-                  } else {
-                    setIsUpdate(true);
-                    setId(category.id);
-                    name.current.value = category.name;
-                    coverUrl.current.value = category.coverUrl;
-                  }
+                  navigate(`/category/${category.id}`);
                 }}
               >
                 <CategoryCard category={category} />

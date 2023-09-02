@@ -34,6 +34,14 @@ function EditAvatar() {
     });
   }, []);
 
+  const updateAvatarList = () => {
+    AvatarService.getAvatarList().then((data) => {
+      setAvatarList(data.avatars);
+      console.log(avatarList)
+    });
+    
+  };
+
   const handleClick = (avatar) => {
     name.current.value = avatar.name;
     avatarUrl.current.value = avatar.url;
@@ -52,6 +60,7 @@ function EditAvatar() {
         setIsUpdate(false);
         name.current.value = "";
         avatarUrl.current.value = "";
+        updateAvatarList()
       } else {
         setIsError(true);
       }
@@ -61,6 +70,7 @@ function EditAvatar() {
     avatarUrl.current.value = "";
     setIsUpdate(false);
     setId();
+    
   };
 
   return (
@@ -94,6 +104,7 @@ function EditAvatar() {
                     setIsUpdate(false);
                     name.current.value = "";
                     avatarUrl.current.value = "";
+                    updateAvatarList()
                   } else {
                     setIsError(true);
                   }
@@ -105,6 +116,7 @@ function EditAvatar() {
                     setIsUpdate(false);
                     name.current.value = "";
                     avatarUrl.current.value = "";
+                    updateAvatarList()
                   } else {
                     setIsError(true);
                   }
