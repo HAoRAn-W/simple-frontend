@@ -1,6 +1,6 @@
 import React from "react";
 import { HeaderBar, LogoDiv, LogoTypography } from "../../styles/header";
-import { ButtonBase } from "@mui/material";
+import { ButtonBase, Grid, Typography } from "@mui/material";
 import UserAvatar from "./UserAvatar";
 import AuthService from "../../app/services/auth.service";
 import { useNavigate } from "react-router-dom";
@@ -22,7 +22,35 @@ function NavBarMobile() {
           <LogoTypography variant="h3">whr.one</LogoTypography>
         </ButtonBase>
       </LogoDiv>
-      <UserAvatar user={user} />
+      {!user ? (
+        <Grid
+          container
+          display={"flex"}
+          justifyContent={"flex-end"}
+          spacing={3}
+        >
+          <Grid item>
+            <ButtonBase
+              onClick={() => {
+                navigate("/login");
+              }}
+            >
+              <Typography>Login</Typography>
+            </ButtonBase>
+          </Grid>
+          <Grid item>
+            <ButtonBase
+              onClick={() => {
+                navigate("/signup");
+              }}
+            >
+              <Typography>Sign up</Typography>
+            </ButtonBase>
+          </Grid>
+        </Grid>
+      ) : (
+        <UserAvatar user = {user}/>
+      )}
     </HeaderBar>
   );
 }
