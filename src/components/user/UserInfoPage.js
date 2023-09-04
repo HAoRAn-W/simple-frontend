@@ -1,4 +1,4 @@
-import { Button, Grid, TextField } from "@mui/material";
+import { Button, Grid, TextField, Link } from "@mui/material";
 import React, { useState } from "react";
 import UserServcice from "../../app/services/user.service";
 import { SUCCESSFUL } from "../../app/constants/MessageCode";
@@ -46,7 +46,7 @@ function UserInfoPage({ user }) {
           alt="avatar"
         />
       </Grid>
-      <Grid item flex={7}>
+      <Grid item flex={7} flexDirection={"column"}>
         <form noValidate autoComplete="off">
           <TextField
             label="Username"
@@ -72,12 +72,17 @@ function UserInfoPage({ user }) {
           <Button
             variant="contained"
             type="submit"
-            sx={{ marginTop: 6, marginRight: 2 }}
+            // sx={{ marginTop: 6, marginRight: 2 }}
             onClick={handleSubmit}
           >
             save
           </Button>
         )}
+        <Grid item xs mt={3}>
+          <Link href="/resetpassword" variant="body1" underline="none">
+            Reset Password
+          </Link>
+        </Grid>
       </Grid>
     </Grid>
   );
