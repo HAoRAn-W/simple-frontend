@@ -134,11 +134,13 @@ function SignupPage() {
                   {errors.password?.message}
                 </Alert>
               )}
+            </Grid>
+            <Grid item xs={12}>
               <Button
                 type="submit"
                 fullWidth
                 variant="contained"
-                sx={{ mt: 5 }}
+                sx={{ mt: 2 }}
                 onClick={reset}
               >
                 Sign up
