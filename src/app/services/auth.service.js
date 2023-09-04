@@ -34,6 +34,22 @@ const login = (username, password) => {
     })
 };
 
+const resetpassword = (username, email, password, confirmpassword) => {
+  console.log(username, email, password, confirmpassword)
+  return authClient
+    .post("resetpassword", {
+      username,
+      email,
+      password,
+      confirmPassword:confirmpassword
+    })
+    .then((response) => {
+      return response.data
+    }).catch((error) => {
+      return {code: UNDEFINED_ERROR, message: error.toString()};
+    })
+};
+
 const logout = () => {
   localStorage.removeItem("user");
   return authClient.post("logout").then((response) => {
@@ -56,6 +72,7 @@ const AuthService = {
   login,
   logout,
   getUser,
+  resetpassword,
 };
 
 export default AuthService;

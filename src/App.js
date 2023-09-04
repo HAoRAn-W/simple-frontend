@@ -18,6 +18,7 @@ import theme from "./styles/theme";
 import AuthService from "./app/services/auth.service";
 import MusePage from "./components/muse/MusePage";
 import Template from "./components/template/Template";
+import ResetPasswordPage from "./components/auth/ResetPasswordPage";
 
 function App() {
   const user = AuthService.getUser();
@@ -32,6 +33,7 @@ function App() {
 
             <Route path="/login" element={<LoginPage />} />
             <Route path="/signup" element={<SignupPage />} />
+            <Route path="/resetpassword" element={<ResetPasswordPage />} />
 
             <Route path="/post/:id" element={<PostPage />} />
             

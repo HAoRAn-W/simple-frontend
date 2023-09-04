@@ -33,3 +33,5 @@ export const IS_IN_FAVORITE = 400;
 export const NOT_IN_FAVORITE = 401;
 
 export const AVATAR_NOT_FOUND = 500;
+
+export const EMAIL_MISMATCH = 600;
