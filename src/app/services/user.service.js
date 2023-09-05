@@ -7,10 +7,11 @@ import {
   SUCCESSFUL,
   UNDEFINED_ERROR,
 } from "../constants/MessageCode";
+import { backendURL } from "../../config";
 
 // axios instance with baseURL and credential config to send http-only cookies with request
 const userClient = axios.create({
-  baseURL: "http://localhost:8080/api/user/",
+  baseURL: `${backendURL}/api/user/`,
   withCredentials: true,
 });
 
@@ -19,99 +20,89 @@ userClient.interceptors.response.use(
     return response;
   },
   // access token expired OR requesting unauthorized resources
-  (error) => {
+  async (error) => {
     const request = error.config; // get request
     if (error.response.status && error.response.status === 401) {
       if (!request._retry) {
         // set _retry flag to prevent multiple retries
         request._retry = true;
         // try to refresh access token
-        return RefreshService.refreshToken().then((data) => {
-          if (data.code === ACCESS_TOKEN_RENEWED) {
-            console.log("Successfully refresh access token.");
-            return userClient(request); // retry original request
-          } else if (data.code === REFRESH_TOKEN_EXPIRED) {
-            console.log("Refresh token expired, need to login");
-            return {
-              data: {
-                code: NEED_RELOGIN,
-                message: "Refresh token expired, need to login",
-              },
-            };
-          }
-        });
+        const data = await RefreshService.refreshToken();
+        if (data.code === ACCESS_TOKEN_RENEWED) {
+          console.log("Successfully refresh access token.");
+          return userClient(request); // retry original request
+        } else if (data.code === REFRESH_TOKEN_EXPIRED) {
+          console.log("Refresh token expired, need to login");
+          return {
+            data: {
+              code: NEED_RELOGIN,
+              message: "Refresh token expired, need to login",
+            },
+          };
+        }
       }
     }
     return Promise.reject(error);
   }
 );
 
-const getFavoriteList = (pageNo) => {
-  return userClient
-    .get("favorite", { params: { pageNo: pageNo, pageSize: 6 } })
-    .then((response) => {
-      return response.data;
-    })
-    .catch((error) => {
-      return { code: UNDEFINED_ERROR, message: error.toString() };
+const getFavoriteList = async (pageNo) => {
+  try {
+    const response = await userClient.get("favorite", {
+      params: { pageNo: pageNo, pageSize: 6 },
     });
+    return response.data;
+  } catch (error) {
+    return { code: UNDEFINED_ERROR, message: error.toString() };
+  }
 };
 
-const addFavorite = (postId) => {
-  return userClient
-    .get(`favorite/add/${postId}`)
-    .then((response) => {
-      return response.data;
-    })
-    .catch((error) => {
-      return { code: UNDEFINED_ERROR, message: error.toString() };
-    });
+const addFavorite = async (postId) => {
+  try {
+    const response = await userClient.get(`favorite/add/${postId}`);
+    return response.data;
+  } catch (error) {
+    return { code: UNDEFINED_ERROR, message: error.toString() };
+  }
 };
 
-const removeFavorite = (postId) => {
-  return userClient
-    .get(`favorite/remove/${postId}`)
-    .then((response) => {
-      return response.data;
-    })
-    .catch((error) => {
-      return { code: UNDEFINED_ERROR, message: error.toString() };
-    });
+const removeFavorite = async (postId) => {
+  try {
+    const response = await userClient.get(`favorite/remove/${postId}`);
+    return response.data;
+  } catch (error) {
+    return { code: UNDEFINED_ERROR, message: error.toString() };
+  }
 };
 
-const queryFavorite = (postId) => {
-  return userClient
-    .get(`favorite/${postId}`)
-    .then((response) => {
-      return response.data;
-    })
-    .catch((error) => {
-      return { code: UNDEFINED_ERROR, message: error.toString() };
-    });
+const queryFavorite = async (postId) => {
+  try {
+    const response = await userClient.get(`favorite/${postId}`);
+    return response.data;
+  } catch (error) {
+    return { code: UNDEFINED_ERROR, message: error.toString() };
+  }
 };
 
-const updateInfo = (userinfo) => {
-  return userClient
-    .post("updateinfo", userinfo)
-    .then((response) => {
-      return response.data;
-    })
-    .catch((error) => {
-      return { code: UNDEFINED_ERROR, message: error.toString() };
-    });
+const updateInfo = async (userinfo) => {
+  try {
+    const response = await userClient.post("updateinfo", userinfo);
+    return response.data;
+  } catch (error) {
+    return { code: UNDEFINED_ERROR, message: error.toString() };
+  }
 };
 
-const refresh = () => {
-  return userClient
-    .get("getinfo")
-    .then((response) => {
-      if (response.data.code === SUCCESSFUL) {
-        localStorage.setItem("user", JSON.stringify(response.data));
-      }
-      return response.data;
-    }).catch((error) => {
-      return {code: UNDEFINED_ERROR, message: error.toString()};
-    })
+const refresh = async () => {
+  try {
+    const response = await userClient.get("getinfo");
+    if (response.data.code === SUCCESSFUL) {
+      localStorage.setItem("user", JSON.stringify(response.data));
+    }
+    return response.data;
+  } catch (error) {
+    return { code: UNDEFINED_ERROR, message: error.toString() };
+  }
 };
 
 const UserServcice = {

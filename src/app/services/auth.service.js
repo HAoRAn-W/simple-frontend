@@ -1,60 +1,62 @@
 import axios from "axios";
 import { SUCCESSFUL, UNDEFINED_ERROR } from "../constants/MessageCode";
+import { backendURL } from "../../config";
 
-const authClient = axios.create({
-  baseURL: "http://localhost:8080/api/auth/",
+const client = axios.create({
+  baseURL: `${backendURL}/api/auth/`,
   withCredentials: true,
 });
 
-const signup = (username, email, password) => {
-  return authClient
-    .post("signup", {
+const signup = async (username, email, password) => {
+  try {
+    const response = await client.post("signup", {
       username,
       email,
       password,
-    })
-    .then((response) => {
-      return response.data;
     });
+    return response.data;
+  } catch (error) {
+    return { code: UNDEFINED_ERROR, message: error.toString() };
+  }
 };
 
-const login = (username, password) => {
-  return authClient
-    .post("login", {
+const login = async (username, password) => {
+  try {
+    const response = await client.post("login", {
       username,
       password,
-    })
-    .then((response) => {
-      if (response.data.code === SUCCESSFUL) {
-        localStorage.setItem("user", JSON.stringify(response.data));
-      }
-      return response.data;
-    }).catch((error) => {
-      return {code: UNDEFINED_ERROR, message: error.toString()};
-    })
+    });
+    if (response.data.code === SUCCESSFUL) {
+      localStorage.setItem("user", JSON.stringify(response.data));
+    }
+    return response.data;
+  } catch (error) {
+    return { code: UNDEFINED_ERROR, message: error.toString() };
+  }
 };
 
-const resetpassword = (username, email, password, confirmpassword) => {
-  console.log(username, email, password, confirmpassword)
-  return authClient
-    .post("resetpassword", {
+const resetpassword = async (username, email, password, confirmpassword) => {
+  try {
+    const response = await client.post("resetpassword", {
       username,
       email,
       password,
-      confirmPassword:confirmpassword
-    })
-    .then((response) => {
-      return response.data
-    }).catch((error) => {
-      return {code: UNDEFINED_ERROR, message: error.toString()};
-    })
+      confirmPassword: confirmpassword,
+    });
+    return response.data;
+  } catch (error) {
+    return { code: UNDEFINED_ERROR, message: error.toString() };
+  }
 };
 
-const logout = () => {
-  localStorage.removeItem("user");
-  return authClient.post("logout").then((response) => {
+const logout = async () => {
+  try {
+    localStorage.removeItem("user");
+    const response = await client.post("logout");
     return response.data;
-  });
+  } catch (error) {
+    return { code: UNDEFINED_ERROR, message: error.toString() };
+  }
 };
 
 const getUser = () => {
@@ -64,7 +66,6 @@ const getUser = () => {
   }
 
   return null;
-  
 };
 
 const AuthService = {

@@ -6,9 +6,10 @@ import {
   UNDEFINED_ERROR,
 } from "../constants/MessageCode";
 import RefreshService from "./refresh.service";
+import { backendURL } from "../../config";
 
 const client = axios.create({
-  baseURL: "http://localhost:8080/api/avatar/",
+  baseURL: `${backendURL}/api/avatar/`,
   withCredentials: true,
 });
 
@@ -17,7 +18,7 @@ client.interceptors.response.use(
     return response;
   },
   // access token expired OR requesting unauthorized resources
-  (error) => {
+  async (error) => {
     const request = error.config; // get request
     if (
       request.url === "add" ||
@@ -29,20 +30,19 @@ client.interceptors.response.use(
           // set _retry flag to prevent multiple retries
           request._retry = true;
           // try to refresh access token
-          return RefreshService.refreshToken().then((data) => {
-            if (data.code === ACCESS_TOKEN_RENEWED) {
-              console.log("Successfully refresh access token.");
-              return client(request); // retry original request
-            } else if (data.code === REFRESH_TOKEN_EXPIRED) {
-              console.log("Refresh token expired, need to login");
-              return {
-                data: {
-                  code: NEED_RELOGIN,
-                  message: "Refresh token expired, need to login",
-                },
-              };
-            }
-          });
+          const data = await RefreshService.refreshToken();
+          if (data.code === ACCESS_TOKEN_RENEWED) {
+            console.log("Successfully refresh access token.");
+            return client(request); // retry original request
+          } else if (data.code === REFRESH_TOKEN_EXPIRED) {
+            console.log("Refresh token expired, need to login");
+            return {
+              data: {
+                code: NEED_RELOGIN,
+                message: "Refresh token expired, need to login",
+              },
+            };
+          }
         }
       }
     }
@@ -50,48 +50,40 @@ client.interceptors.response.use(
   }
 );
 
-const getAvatarList = () => {
-  return client
-    .get("all")
-    .then((response) => {
-      return response.data;
-    })
-    .catch((error) => {
-      return { code: UNDEFINED_ERROR, message: error.toString() };
-    });
+const getAvatarList = async () => {
+  try {
+    const response = await client.get("all");
+    return response.data;
+  } catch (error) {
+    return { code: UNDEFINED_ERROR, message: error.toString() };
+  }
 };
 
-const updateAvatar = (avatar) => {
-  return client
-    .post("update", avatar)
-    .then((response) => {
-      return response.data;
-    })
-    .catch((error) => {
-      return { code: UNDEFINED_ERROR, message: error.toString() };
-    });
+const updateAvatar = async (avatar) => {
+  try {
+    const response = await client.post("update", avatar);
+    return response.data;
+  } catch (error) {
+    return { code: UNDEFINED_ERROR, message: error.toString() };
+  }
 };
 
-const addAvatar = (avatar) => {
-  return client
-    .post("add", avatar)
-    .then((response) => {
-      return response.data;
-    })
-    .catch((error) => {
-      return { code: UNDEFINED_ERROR, message: error.toString() };
-    });
+const addAvatar = async (avatar) => {
+  try {
+    const response = await client.post("add", avatar);
+    return response.data;
+  } catch (error) {
+    return { code: UNDEFINED_ERROR, message: error.toString() };
+  }
 };
 
-const deleteAvatar = (id) => {
-  return client
-    .get("delete", { params: { avatarId: id } })
-    .then((response) => {
-      return response.data;
-    })
-    .catch((error) => {
-      return { code: UNDEFINED_ERROR, message: error.toString() };
-    });
+const deleteAvatar = async (id) => {
+  try {
+    const response = await client.get("delete", { params: { avatarId: id } });
+    return response.data;
+  } catch (error) {
+    return { code: UNDEFINED_ERROR, message: error.toString() };
+  }
 };
 
 const AvatarService = {

@@ -1,44 +1,44 @@
 import axios from "axios";
 import { UNDEFINED_ERROR } from "../constants/MessageCode";
+import { backendURL } from "../../config";
 
 const client = axios.create({
-  baseURL: "http://localhost:8080/api/page/",
+  baseURL: `${backendURL}/api/page/`,
   withCredentials: true,
 });
 
-const loadPage = (page) => {
-  return client
-    .get('post', {params: {pageNo: page, pageSize:6}})
-    .then((response) => {
-      return response.data;
-    })
-    .catch((error) => {
-      return { code: UNDEFINED_ERROR, message: error.toString() };
+const loadPage = async (page) => {
+  try {
+    const response = await client.get("post", {
+      params: { pageNo: page, pageSize: 6 },
     });
+    return response.data;
+  } catch (error) {
+    return { code: UNDEFINED_ERROR, message: error.toString() };
+  }
 };
 
-const loadPageByCategory = (categoryId, page) => {
-  return client
-    .get('post/category', {params: {categoryId: categoryId, pageNo: page, pageSize:6}})
-    .then((response) => {
-      return response.data;
-    })
-    .catch((error) => {
-      return { code: UNDEFINED_ERROR, message: error.toString() };
+const loadPageByCategory = async (categoryId, page) => {
+  try {
+    const response = await client.get("post/category", {
+      params: { categoryId: categoryId, pageNo: page, pageSize: 6 },
     });
-}
+    return response.data;
+  } catch (error) {
+    return { code: UNDEFINED_ERROR, message: error.toString() };
+  }
+};
 
-const loadPageByTag = (tagId, page) => {
-  return client
-    .get('post/tag', {params: {tagId: tagId, pageNo: page, pageSize:6}})
-    .then((response) => {
-      return response.data;
-    })
-    .catch((error) => {
-      return { code: UNDEFINED_ERROR, message: error.toString() };
+const loadPageByTag = async (tagId, page) => {
+  try {
+    const response = await client.get("post/tag", {
+      params: { tagId: tagId, pageNo: page, pageSize: 6 },
     });
-}
-
+    return response.data;
+  } catch (error) {
+    return { code: UNDEFINED_ERROR, message: error.toString() };
+  }
+};
 
 const PageService = {
   loadPage,
