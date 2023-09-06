@@ -17,6 +17,10 @@ function CategoryPage() {
     });
   }, []);
 
+  const handleClick = (category) => {
+    navigate(`/category/${category.id}`);
+  };
+
   return (
     <Container
       style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
@@ -37,11 +41,7 @@ function CategoryPage() {
               lg={3}
               sx={{ display: "flex", justifyContent: "center" }}
             >
-              <ButtonBase
-                onClick={() => {
-                  navigate(`/category/${category.id}`);
-                }}
-              >
+              <ButtonBase onClick={() => handleClick(category)}>
                 <CategoryCard category={category} />
               </ButtonBase>
             </Grid>

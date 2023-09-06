@@ -21,14 +21,16 @@ export default function LoginPage() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(username.current.value)
-    AuthService.login(username.current.value, password.current.value).then(data => {
-      if (data.code === SUCCESSFUL) {
-        navigate("/");
-      } else {
-        setLoginError(true);
+    console.log(username.current.value);
+    AuthService.login(username.current.value, password.current.value).then(
+      (data) => {
+        if (data.code === SUCCESSFUL) {
+          navigate("/");
+        } else {
+          setLoginError(true);
+        }
       }
-    })
+    );
   };
 
   return (

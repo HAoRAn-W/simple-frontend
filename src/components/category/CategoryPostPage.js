@@ -10,22 +10,34 @@ function CategoryPostPage() {
   const [posts, setPosts] = useState([]);
   const [total, setTotal] = useState(0);
 
-  const {id} = useParams();
+  const { id } = useParams();
 
   useEffect(() => {
     PageService.loadPageByCategory(id, currentPage - 1).then((data) => {
-      console.log('data:', data)  
       if (data.code === SUCCESSFUL) {
-          setPosts(data.posts);
-          setTotal(data.total);
-        }
-    })
+        setPosts(data.posts);
+        setTotal(data.total);
+      }
+    });
   }, [currentPage, id]);
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column',alignItems: 'center', justifyContent: 'center', marginLeft: 260, marginRight: 260}}>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+        marginLeft: 260,
+        marginRight: 260,
+      }}
+    >
       <PostList posts={posts} />
-      <PaginationBar currentPage={currentPage} setCurrentPage={setCurrentPage} total={total}/>
+      <PaginationBar
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
+        total={total}
+      />
     </div>
   );
 }

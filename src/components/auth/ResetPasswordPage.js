@@ -12,7 +12,12 @@ import { object, string, ref } from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import AuthService from "../../app/services/auth.service";
-import { EMAIL_MISMATCH, SUCCESSFUL, UNDEFINED_ERROR, USER_NOTFOUND } from "../../app/constants/MessageCode";
+import {
+  EMAIL_MISMATCH,
+  SUCCESSFUL,
+  UNDEFINED_ERROR,
+  USER_NOTFOUND,
+} from "../../app/constants/MessageCode";
 
 function ResetPasswordPage() {
   const resetSchema = object({
@@ -26,6 +31,7 @@ function ResetPasswordPage() {
       .oneOf([ref("password"), null], "Confirm password must match password")
       .required(),
   });
+  
   const {
     register,
     handleSubmit,
@@ -37,9 +43,11 @@ function ResetPasswordPage() {
 
   const onSubmit = (data) => {
     const { username, email, password, confirmpassword } = data;
-    AuthService.resetpassword(username, email, password, confirmpassword).then((result) => {
-      setRespCode(result.code);
-    });
+    AuthService.resetpassword(username, email, password, confirmpassword).then(
+      (result) => {
+        setRespCode(result.code);
+      }
+    );
   };
 
   return (
