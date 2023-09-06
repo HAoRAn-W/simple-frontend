@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import {
+  Alert,
   Button,
   ButtonBase,
   Container,
@@ -17,6 +18,7 @@ import { SUCCESSFUL } from "../../app/constants/MessageCode";
 
 function EditCategory() {
   const [categories, setCategories] = useState([]);
+
   const name = useRef(null);
   const coverUrl = useRef(null);
 
@@ -24,6 +26,8 @@ function EditCategory() {
   const [id, setId] = useState();
 
   const [openDialog, setOpenDialog] = useState(false);
+
+  const [isError, setIsError] = useState(false);
 
   useEffect(() => {
     CategoryService.getCategoryList().then((data) => {
@@ -39,15 +43,38 @@ function EditCategory() {
         setCategories(data.categories);
       }
     });
-  }
+  };
 
   const handleCancelDialog = () => {
     setOpenDialog(false);
   };
 
+  const handleAddandUpdate = async () => {
+    let data;
+    if (isUpdate) {
+      data = await CategoryService.updateCategory({
+        id: id,
+        name: name.current.value,
+        coverUrl: coverUrl.current.value,
+      });
+    } else {
+      data = await CategoryService.addCategory({
+        name: name.current.value,
+        coverUrl: coverUrl.current.value,
+      });
+    }
+    if (data.code !== SUCCESSFUL) {
+      setIsError(true);
+    }
+    updateCategories();
+    name.current.value = "";
+    coverUrl.current.value = "";
+    setId();
+  };
+
   const handleDelete = () => {
     CategoryService.deleteCategory(id).then(() => {
-      updateCategories()
+      updateCategories();
     });
     setOpenDialog(false);
     name.current.value = "";
@@ -70,6 +97,16 @@ function EditCategory() {
             sx={{ marginBottom: 4 }}
           />
         </form>
+        {isError && (
+          <Alert
+            severity="error"
+            onClose={() => {
+              setIsError(false);
+            }}
+          >
+            Failed
+          </Alert>
+        )}
         <div
           style={{
             display: "flex",
@@ -81,30 +118,11 @@ function EditCategory() {
             variant="contained"
             type="submit"
             sx={{ marginX: "10px" }}
-            onClick={() => {
-              if (isUpdate) {
-                CategoryService.updateCategory({
-                  id: id,
-                  name: name.current.value,
-                  coverUrl: coverUrl.current.value,
-                }).then(() => {
-                  updateCategories()
-                });
-              } else {
-                CategoryService.addCategory({
-                  name: name.current.value,
-                  coverUrl: coverUrl.current.value,
-                }).then(() => {
-                  updateCategories()
-                });
-              }
-              name.current.value = "";
-              coverUrl.current.value = "";
-              setId();
-            }}
+            onClick={handleAddandUpdate}
           >
             {isUpdate ? "Update" : "Add"}
           </Button>
+
           {isUpdate && (
             <Button
               sx={{ marginX: "10px" }}

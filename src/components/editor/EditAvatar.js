@@ -37,9 +37,8 @@ function EditAvatar() {
   const updateAvatarList = () => {
     AvatarService.getAvatarList().then((data) => {
       setAvatarList(data.avatars);
-      console.log(avatarList)
+      console.log(avatarList);
     });
-    
   };
 
   const handleClick = (avatar) => {
@@ -53,24 +52,42 @@ function EditAvatar() {
     setOpenDialog(false);
   };
 
-  const handleDelete = () => {
-    AvatarService.deleteAvatar(id).then((data) => {
-      if (data.code === SUCCESSFUL) {
-        setId();
-        setIsUpdate(false);
-        name.current.value = "";
-        avatarUrl.current.value = "";
-        updateAvatarList()
-      } else {
-        setIsError(true);
-      }
-    });
+  const handleAddandUpdate = async () => {
+    let newAvatar = {
+      name: name.current.value,
+      avatarUrl: avatarUrl.current.value,
+    };
+
+    let data;
+    if (isUpdate) {
+      newAvatar.avatarId = id;
+      data = await AvatarService.updateAvatar(newAvatar);
+    } else {
+      data = await AvatarService.addAvatar(newAvatar);
+    }
+
+    if (data.code === SUCCESSFUL) {
+      setId();
+      setIsUpdate(false);
+      name.current.value = "";
+      avatarUrl.current.value = "";
+      updateAvatarList();
+    } else {
+      setIsError(true);
+    }
+  };
+
+  const handleDelete = async () => {
+    const data = await AvatarService.deleteAvatar(id);
+    if (data.code !== SUCCESSFUL) {
+      setIsError(true);
+    }
     setOpenDialog(false);
     name.current.value = "";
     avatarUrl.current.value = "";
     setIsUpdate(false);
     setId();
-    
+    updateAvatarList();
   };
 
   return (
@@ -91,38 +108,7 @@ function EditAvatar() {
           <Button
             sx={{ marginX: "10px" }}
             variant="contained"
-            onClick={() => {
-              const newAvatar = {
-                name: name.current.value,
-                avatarUrl: avatarUrl.current.value,
-              };
-              if (isUpdate) {
-                newAvatar.avatarId = id;
-                AvatarService.updateAvatar(newAvatar).then((data) => {
-                  if (data.code === SUCCESSFUL) {
-                    setId();
-                    setIsUpdate(false);
-                    name.current.value = "";
-                    avatarUrl.current.value = "";
-                    updateAvatarList()
-                  } else {
-                    setIsError(true);
-                  }
-                });
-              } else {
-                AvatarService.addAvatar(newAvatar).then((data) => {
-                  if (data.code === SUCCESSFUL) {
-                    setId();
-                    setIsUpdate(false);
-                    name.current.value = "";
-                    avatarUrl.current.value = "";
-                    updateAvatarList()
-                  } else {
-                    setIsError(true);
-                  }
-                });
-              }
-            }}
+            onClick={handleAddandUpdate}
           >
             {isUpdate ? "Update" : "Add"}
           </Button>
