@@ -6,8 +6,11 @@ function PostHeader({ post }) {
   const createdDate = new Date(post.createdTime);
 
   return (
-    <div style={{marginBottom: '1rem'}}>
-      <Image src={post.coverUrl} style={{ height: "50vh", borderRadius: 20, marginBottom: '1rem' }} />
+    <div style={{ marginBottom: "1rem" }}>
+      <Image
+        src={post.coverUrl}
+        style={{ height: "50vh", borderRadius: 20, marginBottom: "1rem" }}
+      />
       <Typography
         variant="h2"
         style={{ wordWrap: "break-word", color: "#343a40" }}

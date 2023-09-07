@@ -15,13 +15,14 @@ function EditPost() {
 
   useEffect(() => {
     PageService.loadPage(currentPage - 1).then((data) => {
-      console.log('data:', data)  
+      console.log("data:", data);
       if (data.code === SUCCESSFUL) {
-          setPosts(data.posts);
-          setTotal(data.total);
-        }
-    })
+        setPosts(data.posts);
+        setTotal(data.total);
+      }
+    });
   }, [currentPage]);
+
   return (
     <>
       <div
@@ -35,14 +36,18 @@ function EditPost() {
         <Button
           variant="contained"
           onClick={() => {
-            navigate("/posteditor", { state: { isNew: true} });
+            navigate("/posteditor", { state: { isNew: true } });
           }}
         >
           Add New Post
         </Button>
-        <PostList  posts={posts} fromEditor={true} />
+        <PostList posts={posts} fromEditor={true} />
       </div>
-      <PaginationBar currentPage={currentPage} setCurrentPage={setCurrentPage} total={total}/>
+      <PaginationBar
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
+        total={total}
+      />
     </>
   );
 }

@@ -1,10 +1,9 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBars, faClose } from "@fortawesome/free-solid-svg-icons";
+import { faBars } from "@fortawesome/free-solid-svg-icons";
 import {
   Box,
   ButtonBase,
   Drawer,
-  Grid,
   List,
   ListItem,
   Typography,
@@ -36,19 +35,17 @@ function DrawerButton() {
         <FontAwesomeIcon icon={faBars} style={{ height: 25 }} />
       </ButtonBase>
 
-      <Drawer
-        anchor="left"
-        open={open}
-        onClose={() => toggleDrawer(false)}
-      >
+      <Drawer anchor="left" open={open} onClose={() => toggleDrawer(false)}>
         <Box
-          sx={{ width: '25vw', paddingTop: '2rem'}}
+          sx={{ width: "25vw", paddingTop: "2rem" }}
           onClick={() => toggleDrawer(false)}
         >
-          <List sx={{display: 'flex', flexDirection: 'column', gap: 2}}>
-            <ListItem disablePadding sx={{justifyContent: 'center'}}>
+          <List sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
+            <ListItem disablePadding sx={{ justifyContent: "center" }}>
               <ButtonBase disableRipple>
-                <Typography fontWeight={'bold'} fontSize={'1.5rem'}
+                <Typography
+                  fontWeight={"bold"}
+                  fontSize={"1.5rem"}
                   onClick={() => {
                     handleClick("category");
                   }}
@@ -56,10 +53,12 @@ function DrawerButton() {
                   CATEGORY
                 </Typography>
               </ButtonBase>
-            </ListItem >
-            <ListItem disablePadding sx={{justifyContent: 'center'}}>
+            </ListItem>
+            <ListItem disablePadding sx={{ justifyContent: "center" }}>
               <ButtonBase disableRipple>
-                <Typography fontWeight={'bold'} fontSize={'1.5rem'}
+                <Typography
+                  fontWeight={"bold"}
+                  fontSize={"1.5rem"}
                   onClick={() => {
                     handleClick("tag");
                   }}
@@ -68,9 +67,11 @@ function DrawerButton() {
                 </Typography>
               </ButtonBase>
             </ListItem>
-            <ListItem disablePadding sx={{justifyContent: 'center'}}>
+            <ListItem disablePadding sx={{ justifyContent: "center" }}>
               <ButtonBase disableRipple>
-                <Typography fontWeight={'bold'} fontSize={'1.5rem'}
+                <Typography
+                  fontWeight={"bold"}
+                  fontSize={"1.5rem"}
                   onClick={() => {
                     handleClick("about");
                   }}

@@ -49,7 +49,7 @@ function NavBarMobile() {
           </Grid>
         </Grid>
       ) : (
-        <UserAvatar user = {user}/>
+        <UserAvatar user={user} />
       )}
     </HeaderBar>
   );

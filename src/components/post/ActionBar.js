@@ -4,11 +4,9 @@ import BookmarkAddIcon from "@mui/icons-material/BookmarkAdd";
 import UserServcice from "../../app/services/user.service";
 import { IS_IN_FAVORITE } from "../../app/constants/MessageCode";
 import BookmarkAddedIcon from "@mui/icons-material/BookmarkAdded";
-import Toc from "react-toc";
 
 function ActionBar({ post }) {
-  const postId = post.id
-
+  const postId = post.id;
 
   const [isFavorite, setIsFavorite] = useState(false);
   const user = localStorage.getItem("user");
@@ -23,32 +21,32 @@ function ActionBar({ post }) {
 
   const handleClick = () => {
     if (isFavorite) {
-        UserServcice.removeFavorite(postId);
-        setIsFavorite(false);
+      UserServcice.removeFavorite(postId);
+      setIsFavorite(false);
     } else {
-        UserServcice.addFavorite(postId);
-        setIsFavorite(true);
+      UserServcice.addFavorite(postId);
+      setIsFavorite(true);
     }
-  }
-
+  };
 
   return (
     <>
-    {/* <Toc markdownText={post.content}></Toc> */}
-    {user && <Fab
-      sx={{
-        position: "fixed",
-        bottom: "300px",
-        right: "35px",
-        color: isFavorite ? "#f28482" : "grey",
-        backgroundColor: "white",
-      }}
-      onClick={handleClick}
-    >
-        {isFavorite ? (<BookmarkAddedIcon />) : (<BookmarkAddIcon />)}
-    </Fab>}
+      {/* <Toc markdownText={post.content}></Toc> */}
+      {user && (
+        <Fab
+          sx={{
+            position: "fixed",
+            bottom: "300px",
+            right: "35px",
+            color: isFavorite ? "#f28482" : "grey",
+            backgroundColor: "white",
+          }}
+          onClick={handleClick}
+        >
+          {isFavorite ? <BookmarkAddedIcon /> : <BookmarkAddIcon />}
+        </Fab>
+      )}
     </>
-    
   );
 }
 

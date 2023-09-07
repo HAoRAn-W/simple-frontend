@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import PostMarkdown from "./PostMarkdown";
-import PostCover from "./PostCover";
 import { Paper } from "@mui/material";
 import { useParams } from "react-router-dom";
 import PostService from "../../app/services/post.service";
@@ -22,20 +21,19 @@ function PostPage() {
 
   return (
     <div>
-      
       <Paper
         sx={{
           display: "flex",
           flexDirection: "column",
           marginX: "10%",
-          padding: 5
+          padding: 5,
         }}
         elevation={0}
       >
         <PostHeader post={post} />
         <PostMarkdown content={post.content} />
       </Paper>
-      <ActionBar post={post}/>
+      <ActionBar post={post} />
     </div>
   );
 }

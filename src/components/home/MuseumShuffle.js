@@ -17,8 +17,8 @@ function MuseumShuffle() {
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        width: '80%',
-        height: 100
+        width: "80%",
+        height: 100,
       }}
     >
       <ButtonBase

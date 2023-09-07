@@ -1,5 +1,4 @@
 import {
-  Box,
   Table,
   TableBody,
   TableCell,
@@ -16,16 +15,15 @@ import remarkGfm from "remark-gfm";
 function PostMarkdown({ content }) {
   const renderers = {
     h1: ({ children }) => (
-      <Typography variant="h3" fontSize={45} >
+      <Typography variant="h3" fontSize={45}>
         {children}
       </Typography>
     ),
     h2: ({ children }) => (
       // <Box id={children}></Box>
-      <Typography variant="h3" fontSize={35} paddingY={'1rem'}>
-      {children}
-    </Typography>
-      
+      <Typography variant="h3" fontSize={35} paddingY={"1rem"}>
+        {children}
+      </Typography>
     ),
     h3: ({ children }) => (
       <Typography variant="h3" fontSize={25} gutterBottom>
@@ -108,7 +106,7 @@ function PostMarkdown({ content }) {
       );
     },
     table: ({ children }) => (
-      <TableContainer sx={{marginY: 4, paddingX: 5}}>
+      <TableContainer sx={{ marginY: 4, paddingX: 5 }}>
         <Table>{children}</Table>
       </TableContainer>
     ),
@@ -116,7 +114,10 @@ function PostMarkdown({ content }) {
     tbody: ({ children }) => <TableBody>{children}</TableBody>,
     tr: ({ children }) => <TableRow>{children}</TableRow>,
     th: ({ children }) => (
-      <TableCell align="center" style={{fontWeight: 'bold', fontSize: '1.2rem'}}>
+      <TableCell
+        align="center"
+        style={{ fontWeight: "bold", fontSize: "1.2rem" }}
+      >
         {children}
       </TableCell>
     ),

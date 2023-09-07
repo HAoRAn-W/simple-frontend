@@ -17,7 +17,7 @@ import {
 
 function NameCard() {
   return (
-    <Card sx={{maxWidth: '80%'}}>
+    <Card sx={{ maxWidth: "80%" }}>
       <CardHeader
         title="Haoran Wang"
         subheader="Software Engineer"
@@ -40,10 +40,7 @@ function NameCard() {
         <IconButton href="https://twitter.com/WHRONE233" target="_blank">
           <FontAwesomeIcon icon={faTwitter} style={{ color: "#1da1f2" }} />
         </IconButton>
-        <IconButton
-          href="https://www.instagram.com/whr.233/"
-          target="_blank"
-        >
+        <IconButton href="https://www.instagram.com/whr.233/" target="_blank">
           <FontAwesomeIcon icon={faInstagram} style={{ color: "#c13584" }} />
         </IconButton>
         <IconButton href="https://www.linkedin.com/in/whr/" target="_blank">

@@ -11,7 +11,6 @@ import Image from "mui-image";
 import AuthService from "../../app/services/auth.service";
 
 function UserAvatar({ user }) {
-  
   const navigate = useNavigate();
   const [anchorElUser, setAnchorElUser] = useState(null);
 

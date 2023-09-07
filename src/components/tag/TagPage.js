@@ -22,9 +22,9 @@ function TagPage() {
       style={{
         display: "flex",
         flexDirection: "column",
-        alignItems: 'center',
+        alignItems: "center",
         height: "100vh",
-        minWidth: '100%',
+        minWidth: "100%",
         backgroundImage: `url(https://i.imgur.com/O1qowWB.jpg)`,
         backgroundSize: "cover",
         backgroundRepeat: "no-repeat",

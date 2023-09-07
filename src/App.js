@@ -36,7 +36,6 @@ function App() {
             <Route path="/resetpassword" element={<ResetPasswordPage />} />
 
             <Route path="/post/:id" element={<PostPage />} />
-            
 
             <Route path="/category" element={<CategoryPage />} />
             <Route path="/category/:id" element={<CategoryPostPage />} />

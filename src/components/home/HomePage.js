@@ -5,7 +5,6 @@ import HomeCover from "./HomeCover";
 import PageService from "../../app/services/page.service";
 import { SUCCESSFUL } from "../../app/constants/MessageCode";
 import { MainDiv, PostListDiv, SidebarDiv } from "../../styles/home";
-import Sidebar from "./Sidebar";
 import { useMediaQuery } from "@mui/material";
 import NameCard from "./NameCard";
 import PinBoard from "./PinBoard";
@@ -16,7 +15,7 @@ function HomePage() {
   const [posts, setPosts] = useState([]);
   const [total, setTotal] = useState(0);
 
-  const isLargeDown = useMediaQuery((theme) => theme.breakpoints.down("lg"))
+  const isLargeDown = useMediaQuery((theme) => theme.breakpoints.down("lg"));
 
   useEffect(() => {
     PageService.loadPage(currentPage - 1).then((data) => {
@@ -34,19 +33,27 @@ function HomePage() {
         <PostListDiv>
           <PostList posts={posts} />
         </PostListDiv>
-        {isLargeDown &&  <PaginationBar currentPage={currentPage} setCurrentPage={setCurrentPage} total={total}/>}
-       
+        {isLargeDown && (
+          <PaginationBar
+            currentPage={currentPage}
+            setCurrentPage={setCurrentPage}
+            total={total}
+          />
+        )}
+
         <SidebarDiv>
           <NameCard />
           <PinBoard />
           <MuseumShuffle />
         </SidebarDiv>
       </MainDiv>
-      {!isLargeDown && <PaginationBar
-        currentPage={currentPage}
-        setCurrentPage={setCurrentPage}
-        total={total}
-      />}
+      {!isLargeDown && (
+        <PaginationBar
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
+          total={total}
+        />
+      )}
     </>
   );
 }

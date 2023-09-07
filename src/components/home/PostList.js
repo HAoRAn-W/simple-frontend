@@ -9,7 +9,7 @@ function PostList({ posts, fromEditor = false }) {
   return (
     <>
       {posts.length === 0 ? (
-        <div >
+        <div>
           <Typography variant="h4">No Posts</Typography>
         </div>
       ) : (
@@ -17,7 +17,7 @@ function PostList({ posts, fromEditor = false }) {
           {posts.map((post) => {
             return (
               <ListItemButton
-                style={{ marginTop: "15px" , backgroundColor: 'transparent'}}
+                style={{ marginTop: "15px", backgroundColor: "transparent" }}
                 onClick={() => {
                   if (fromEditor) {
                     navigate("/posteditor", {

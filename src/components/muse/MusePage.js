@@ -1,10 +1,4 @@
-import {
-  ButtonBase,
-  Divider,
-  Grid,
-  Paper,
-  Typography,
-} from "@mui/material";
+import { ButtonBase, Divider, Grid, Paper, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import MuseService from "../../app/services/muse.service";
 import Image from "mui-image";
@@ -26,7 +20,7 @@ function MusePage() {
     <div style={{ height: "100vh" }}>
       {data && (
         <Grid
-        position= 'relative'
+          position="relative"
           container
           display={"flex"}
           flexDirection={"row"}
@@ -63,7 +57,12 @@ function MusePage() {
                 {data.artistDisplayBio}
               </Typography>
             </Paper>
-            <ButtonBase sx={{ height: "50px", position: 'absolute', bottom: 0 }} disableRipple href={data.objectURL}  target="_blank">
+            <ButtonBase
+              sx={{ height: "50px", position: "absolute", bottom: 0 }}
+              disableRipple
+              href={data.objectURL}
+              target="_blank"
+            >
               <Image src={"./met-logo.jpg"} />
             </ButtonBase>
           </Grid>
