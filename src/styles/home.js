@@ -17,8 +17,6 @@ export const PostListDiv = styled.div(
     justify-content: center;
     align-items: center;
     ${props.theme.breakpoints.up("lg")} {
-      flex-direction: row;
-      justify-content: flex-end;
       flex: 7;
     }
   `
