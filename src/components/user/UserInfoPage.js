@@ -26,14 +26,22 @@ function UserInfoPage({ user }) {
   return (
     <Grid
       container
+      spacing={6}
       sx={{
         display: "flex",
-        flexDirection: "row",
+        flexDirection: { md: "row", xs: "column" },
         marginTop: 6,
         paddingX: "20%",
       }}
     >
-      <Grid item style={{ flex: 5, display: "flex", justifyContent: "center" }}>
+      <Grid
+        item
+        sx={{
+          flex: { md: 5, xs: 12 },
+          display: "flex",
+          justifyContent: "center",
+        }}
+      >
         <img
           src={user.avatar ? user.avatar.url : "./avatars/cloud.jpg"}
           style={{
@@ -46,7 +54,7 @@ function UserInfoPage({ user }) {
           alt="avatar"
         />
       </Grid>
-      <Grid item flex={7} flexDirection={"column"}>
+      <Grid item flexDirection={"column"} sx={{ flex: { md: 5, xs: 12 } }}>
         <form noValidate autoComplete="off">
           <TextField
             label="Username"
