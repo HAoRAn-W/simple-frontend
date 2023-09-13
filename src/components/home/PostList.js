@@ -22,7 +22,7 @@ function PostList({ posts, fromEditor = false }) {
           <Typography variant="h4">No Posts</Typography>
         </div>
       ) : (
-        <List disablePadding>
+        <List disablePadding sx={{ width: { md: "100%", xs: "90%" } }}>
           {posts.map((post) => {
             return (
               <ListItemButton

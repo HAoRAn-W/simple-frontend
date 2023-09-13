@@ -11,8 +11,8 @@ function PostCard({ post }) {
     <Paper
       style={{
         display: "flex",
-        flexDirection: "row",
-        height: 260,
+        flexDirection: { xs: "column", md: "row" },
+        minHeight: 260,
         width: "100%",
       }}
     >
@@ -30,8 +30,10 @@ function PostCard({ post }) {
         </Typography>
 
         <Divider />
+
         <Typography
           variant="subtitle1"
+          color={"grey"}
           sx={{
             overflow: "hidden",
             textOverflow: "ellipsis",
@@ -40,22 +42,29 @@ function PostCard({ post }) {
           {post.description}
         </Typography>
         <div
-          style={{ display: "flex", flexDirection: "row", marginTop: "auto" }}
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            marginTop: "auto",
+          }}
         >
-          <CalendarMonthIcon />
-          <Typography
-            variant="subtitle1"
-            gutterBottom
-            marginLeft={1}
-            marginRight={2}
-          >{`${
-            date.getMonth() + 1
-          }/${date.getDate()}/${date.getFullYear()}`}</Typography>
-
-          <InboxOutlinedIcon />
-          <Typography variant="subtitle1" gutterBottom marginLeft={1}>
-            {post.category.name}
-          </Typography>
+          <div style={{ display: "flex", flexDirection: "row" }}>
+            <CalendarMonthIcon />
+            <Typography
+              variant="body1"
+              gutterBottom
+              marginLeft={1}
+              marginRight={2}
+            >{`${
+              date.getMonth() + 1
+            }/${date.getDate()}/${date.getFullYear()}`}</Typography>
+          </div>
+          <div style={{ display: "flex", flexDirection: "row" }}>
+            <InboxOutlinedIcon />
+            <Typography variant="body1" gutterBottom marginLeft={1}>
+              {post.category.name}
+            </Typography>
+          </div>
         </div>
       </PostCardTextDiv>
     </Paper>
