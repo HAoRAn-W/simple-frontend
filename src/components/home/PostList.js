@@ -5,6 +5,16 @@ import PostCard from "./PostCard";
 function PostList({ posts, fromEditor = false }) {
   const navigate = useNavigate();
 
+  const handleClick = (post) => {
+    if (fromEditor) {
+      navigate("/posteditor", {
+        state: { isNew: false, postId: post.id },
+      });
+    } else {
+      navigate(`/post/${post.id}`);
+    }
+  };
+
   return (
     <>
       {posts.length === 0 ? (
@@ -12,20 +22,12 @@ function PostList({ posts, fromEditor = false }) {
           <Typography variant="h4">No Posts</Typography>
         </div>
       ) : (
-        <List sx={{ width: "90%" }} disablePadding>
+        <List disablePadding>
           {posts.map((post) => {
             return (
               <ListItemButton
-                style={{ marginTop: "15px", backgroundColor: "transparent" }}
-                onClick={() => {
-                  if (fromEditor) {
-                    navigate("/posteditor", {
-                      state: { isNew: false, postId: post.id },
-                    });
-                  } else {
-                    navigate(`/post/${post.id}`);
-                  }
-                }}
+                style={{ backgroundColor: "transparent" }}
+                onClick={() => handleClick(post)}
                 key={post.id}
               >
                 <PostCard post={post} />
