@@ -1,7 +1,6 @@
 import { ToggleButton, ToggleButtonGroup, Typography } from "@mui/material";
 import AuthService from "../../app/services/auth.service";
 import { useState } from "react";
-import AvatarSelectionPage from "./AvatarSelectionPage";
 import UserInfoPage from "./UserInfoPage";
 
 function ProfilePage() {
@@ -26,19 +25,12 @@ function ProfilePage() {
         alignItems: "center",
       }}
     >
-      <ToggleButtonGroup {...control} sx={{ marginTop: 6 }}>
+      <ToggleButtonGroup {...control} sx={{ marginTop: 6 }} disabled>
         <ToggleButton value={"info"} key="info">
           <Typography>Info</Typography>
         </ToggleButton>
-        <ToggleButton value={"avatar"} key="avatar">
-          <Typography>Avatar</Typography>
-        </ToggleButton>
       </ToggleButtonGroup>
-      {section === "info" ? (
-        <UserInfoPage user={user} />
-      ) : (
-        <AvatarSelectionPage user={user} />
-      )}
+      {section === "info" ? <UserInfoPage user={user} /> : <></>}
     </div>
   );
 }

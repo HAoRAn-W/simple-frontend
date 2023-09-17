@@ -3,7 +3,13 @@ import React from "react";
 
 function Footer() {
   return (
-    <Box sx={{ bgcolor: "background.paper", mt: 4, mb: 2 }}>
+    <Box
+      sx={{
+        bgcolor: "background.paper",
+        mt: 4,
+        mb: 2,
+      }}
+    >
       <Typography variant="h5" align="center">
         whr.one
       </Typography>
