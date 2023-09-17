@@ -1,5 +1,6 @@
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
+import { Container } from "@mui/material";
 
 export const MainDiv = styled.div(
   (props) =>
@@ -27,16 +28,14 @@ export const PostListDiv = styled.div(
   `
 );
 
-export const SidebarDiv = styled.div(
+export const SidebarDiv = styled(Container)(
   (props) => css`
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 1.5rem;
-    margin: 0rem 3.5rem;
     ${props.theme.breakpoints.up("md")} {
       flex: 4;
-      margin: 0rem 1.5rem;
     }
   `
 );
