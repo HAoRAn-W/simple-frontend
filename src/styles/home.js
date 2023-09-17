@@ -43,9 +43,6 @@ export const SidebarDiv = styled(Container)(
 export const PostCardImageDiv = styled.div(
   (props) => css`
     width: 40%;
-    ${props.theme.breakpoints.down("md")} {
-      width: 40%;
-    }
     ${props.theme.breakpoints.down("sm")} {
       width: 0;
     }
@@ -56,11 +53,8 @@ export const PostCardTextDiv = styled.div(
   (props) => css`
     display: flex;
     flex-direction: column;
-    padding: 20px 20px 20px 20px;
+    padding: 20px;
     width: 60%;
-    ${props.theme.breakpoints.down("md")} {
-      width: 60%;
-    }
     ${props.theme.breakpoints.down("sm")} {
       width: 100%;
     }
