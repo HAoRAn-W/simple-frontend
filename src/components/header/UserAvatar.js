@@ -35,8 +35,8 @@ function UserAvatar({ user }) {
           <Image
             src={user.avatar ? user.avatar.url : "./avatars/cloud.jpg"}
             style={{
-              width: "50px",
-              height: "50px",
+              width: "2.5rem",
+              height: "2.5rem",
               borderRadius: "50%",
             }}
             alt="avatar"
