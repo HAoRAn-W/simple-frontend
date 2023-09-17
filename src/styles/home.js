@@ -21,11 +21,8 @@ export const PostListDiv = styled.div(
     justify-content: center;
     align-items: center;
     width: 100%;
-    ${props.theme.breakpoints.up("lg")} {
-      flex: 8;
-    }
     ${props.theme.breakpoints.up("md")} {
-      flex: 7;
+      flex: 8;
     }
   `
 );
@@ -36,12 +33,10 @@ export const SidebarDiv = styled.div(
     flex-direction: column;
     align-items: center;
     gap: 1.5rem;
-    padding-top: 1rem;
-    ${props.theme.breakpoints.up("lg")} {
-      flex: 4;
-    }
+    margin: 0rem 3.5rem;
     ${props.theme.breakpoints.up("md")} {
-      flex: 5;
+      flex: 4;
+      margin: 0rem 1.5rem;
     }
   `
 );

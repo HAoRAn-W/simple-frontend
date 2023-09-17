@@ -16,7 +16,7 @@ function PinBoard() {
     });
   }, []);
   return (
-    <Card sx={{ width: "80%" }}>
+    <Card sx={{ width: "100%" }}>
       <CardContent>
         <div
           style={{
