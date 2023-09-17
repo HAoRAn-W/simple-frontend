@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import UserServcice from "../../app/services/user.service";
 import { SUCCESSFUL } from "../../app/constants/MessageCode";
-import { ListItemButton } from "@mui/material";
+import { List, ListItemButton, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import PostCard from "../home/PostCard";
 import PaginationBar from "../pagination/PaginationBar";
@@ -22,20 +22,36 @@ function FavoritePage() {
   }, [currentPage]);
 
   return (
-    <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
-      {favorites.map((post) => (
-        <ListItemButton
-          style={{ marginTop: "15px", width: '60%' }}
-          key={post.id}
-          onClick={() => {
-            navigate(`/post/${post.id}`);
-          }}
-        >
-          <PostCard post={post} />
-        </ListItemButton>
-      ))}
-      <PaginationBar currentPage={currentPage} setCurrentPage={setCurrentPage} total={total}/>
-
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+      }}
+    >
+      <Typography variant="h4" marginY={"2rem"}>
+        Categories
+      </Typography>
+      <List
+        disablePadding
+        sx={{ width: "100%", paddingX: { md: "15rem", xs: "1rem" } }}
+      >
+        {favorites.map((post) => (
+          <ListItemButton
+            key={post.id}
+            onClick={() => {
+              navigate(`/post/${post.id}`);
+            }}
+          >
+            <PostCard post={post} />
+          </ListItemButton>
+        ))}
+      </List>
+      <PaginationBar
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
+        total={total}
+      />
     </div>
   );
 }
