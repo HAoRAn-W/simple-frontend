@@ -24,19 +24,9 @@ function TagPage() {
         flexDirection: "column",
         alignItems: "center",
         height: "100vh",
-        minWidth: "100%",
-        backgroundImage: `url(https://i.imgur.com/O1qowWB.jpg)`,
-        backgroundSize: "cover",
-        backgroundRepeat: "no-repeat",
-        backgroundPosition: "center",
       }}
     >
-      <Typography
-        variant="h4"
-        marginLeft={"40px"}
-        marginBottom={"40px"}
-        marginTop={"40px"}
-      >
+      <Typography variant="h4" marginY={"2rem"}>
         Tags
       </Typography>
       <Stack

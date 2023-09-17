@@ -25,7 +25,7 @@ function CategoryPage() {
     <Container
       style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
     >
-      <Typography variant="h4" marginTop={"40px"} marginBottom={"30px"}>
+      <Typography variant="h4" marginY={"2rem"}>
         Categories
       </Typography>
 
