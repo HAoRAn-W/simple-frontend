@@ -12,7 +12,7 @@ function PostCard({ post }) {
       style={{
         display: "flex",
         flexDirection: { xs: "column", md: "row" },
-        minHeight: 260,
+        maxHeight: 260,
         width: "100%",
       }}
     >
