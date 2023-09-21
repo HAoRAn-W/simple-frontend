@@ -85,7 +85,7 @@ function UserInfoPage({ user }) {
     <>
       <Grid
         container
-        spacing={6}
+        spacing={2}
         sx={{
           display: "flex",
           flexDirection: { md: "row", xs: "column" },
@@ -96,7 +96,7 @@ function UserInfoPage({ user }) {
         <Grid
           item
           sx={{
-            flex: { md: 5, xs: 12 },
+            flex: { md: 6, xs: 12 },
             display: "flex",
             flexDirection: "column",
             justifyContent: "center",
@@ -114,9 +114,11 @@ function UserInfoPage({ user }) {
             }}
             alt="avatar"
           />
-          <Button onClick={handleOpenDialog}>Edit</Button>
+          <Button onClick={handleOpenDialog} sx={{ fontSize: "1.2rem" }}>
+            Edit
+          </Button>
         </Grid>
-        <Grid item flexDirection={"column"} sx={{ flex: { md: 5, xs: 12 } }}>
+        <Grid item flexDirection={"column"} sx={{ flex: { md: 6, xs: 12 } }}>
           <form noValidate autoComplete="off">
             <TextField
               label="Username"
@@ -148,7 +150,7 @@ function UserInfoPage({ user }) {
               save
             </Button>
           )}
-          <Grid item xs mt={3}>
+          <Grid item xs>
             <Link href="/resetpassword" variant="body1" underline="none">
               Reset Password
             </Link>
@@ -164,7 +166,6 @@ function UserInfoPage({ user }) {
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
-              overflow: "scroll",
             }}
             elevation={0}
           >
@@ -176,7 +177,6 @@ function UserInfoPage({ user }) {
                   display: "flex",
                   justifyContent: "center",
                   alignItems: "center",
-                  overflowY: "scroll",
                 }}
               >
                 {avatarList.map((ava) => (
