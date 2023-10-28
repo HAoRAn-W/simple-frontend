@@ -18,10 +18,7 @@ import {
 function NameCard() {
   return (
     <Card sx={{ maxWidth: "100%" }}>
-      <CardHeader
-        title="Haoran Wang"
-        subheader="Software Engineer"
-      ></CardHeader>
+      <CardHeader title="Haoran Wang" subheader="human"></CardHeader>
       <CardMedia
         component="img"
         height="194"
@@ -30,10 +27,10 @@ function NameCard() {
       />
       <CardContent>
         <Typography variant="body2">
-          Welcome to my website! I'm an Assassin's Creed fan, and a museum
-          lover. 🍉 is my ultimate favorite fruit. And my favorite city is
-          Paris. I'm listening to Post Malone's new Album.🎧 Nice to meet you
-          here!
+          Welcome to whr.one, my personal blog website! I'm currently learning
+          computer programming. I'm an Assassin's Creed fan, and a museum lover.
+          🍉 is my favorite fruit. Favorite city: Paris. I'm listening to 1989
+          taylor's version.🎧 Nice to meet you here!
         </Typography>
       </CardContent>
       <CardActions>
