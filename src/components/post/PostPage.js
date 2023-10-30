@@ -57,7 +57,7 @@ function PostPage() {
           }}
         >
           <Typography
-            variant="h2"
+            sx={{ fontSize: { xs: "2.2rem", md: "2.8rem" } }}
             style={{ wordWrap: "break-word", color: "#343a40" }}
           >
             {post.title}

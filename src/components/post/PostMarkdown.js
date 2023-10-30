@@ -15,40 +15,39 @@ import remarkGfm from "remark-gfm";
 function PostMarkdown({ content }) {
   const renderers = {
     h1: ({ children }) => (
-      <Typography variant="h3" fontSize={45}>
+      <Typography sx={{ fontSize: { xs: "2rem", md: "2.4rem" } }}>
         {children}
       </Typography>
     ),
     h2: ({ children }) => (
-      // <Box id={children}></Box>
-      <Typography variant="h3" fontSize={35} paddingY={"1rem"}>
+      <Typography sx={{ fontSize: { xs: "1.8rem", md: "2rem" } }}>
         {children}
       </Typography>
     ),
     h3: ({ children }) => (
-      <Typography variant="h3" fontSize={25} gutterBottom>
+      <Typography sx={{ fontSize: { xs: "1.6rem", md: "1.8rem" } }}>
         <b>{children}</b>
       </Typography>
     ),
     h4: ({ children }) => (
-      <Typography variant="h3" fontSize={25}>
+      <Typography sx={{ fontSize: { xs: "1.5rem", md: "1.65rem" } }}>
         {children}
       </Typography>
     ),
     h5: ({ children }) => (
-      <Typography variant="h3" fontSize={25}>
+      <Typography sx={{ fontSize: { xs: "1.4rem", md: "1.6rem" } }}>
         {children}
       </Typography>
     ),
     h6: ({ children }) => (
-      <Typography variant="h3" fontSize={25}>
+      <Typography sx={{ fontSize: { xs: "1.3rem", md: "1.5rem" } }}>
         {children}
       </Typography>
     ),
     p: ({ children }) => (
       <Typography
         variant="body"
-        fontSize={22}
+        fontSize={"1.3rem"}
         style={{ wordWrap: "break-word" }}
         gutterBottom
       >
