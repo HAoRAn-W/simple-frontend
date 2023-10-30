@@ -84,7 +84,7 @@ function EditCategory() {
   };
 
   return (
-    <div>
+    <Container>
       <Container>
         <form>
           <InputLabel htmlFor="name">Name</InputLabel>
@@ -165,7 +165,7 @@ function EditCategory() {
           Categories
         </Typography>
 
-        <Grid container rowSpacing={4}>
+        <Grid container rowSpacing={2} spacing={4}>
           {categories.map((category) => {
             return (
               <Grid
@@ -175,7 +175,10 @@ function EditCategory() {
                 sm={6}
                 md={4}
                 lg={3}
-                sx={{ display: "flex", justifyContent: "center" }}
+                sx={{
+                  display: "flex",
+                  justifyContent: "center",
+                }}
               >
                 <ButtonBase
                   onClick={() => {
@@ -207,7 +210,7 @@ function EditCategory() {
           </Button>
         </DialogActions>
       </Dialog>
-    </div>
+    </Container>
   );
 }
 

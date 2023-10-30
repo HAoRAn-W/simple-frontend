@@ -23,7 +23,12 @@ function EditorPage() {
   };
   return (
     <Container
-      sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        width: "100vw",
+      }}
     >
       <ToggleButtonGroup {...control} sx={{ marginTop: 6 }}>
         <ToggleButton value={"posts"} key="posts">
