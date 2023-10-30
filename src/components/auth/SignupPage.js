@@ -10,7 +10,7 @@ import {
 import { Link } from "react-router-dom";
 import {
   EMAIL_EXIST,
-  SIGNUP_SUCCESSFUL,
+  SUCCESSFUL,
   UNDEFINED_ERROR,
   USER_EXIST,
 } from "../../app/constants/MessageCode";
@@ -45,6 +45,7 @@ function SignupPage() {
   const onSubmit = (data) => {
     const { username, email, password } = data;
     AuthService.signup(username, email, password).then((data) => {
+      console.log(data);
       setRespCode(data.code);
     });
   };
@@ -73,7 +74,7 @@ function SignupPage() {
         {respCode === UNDEFINED_ERROR && (
           <Alert severity="error">Please try again</Alert>
         )}
-        {respCode === SIGNUP_SUCCESSFUL && (
+        {respCode === SUCCESSFUL && (
           <Alert severity="success" sx={{ marginTop: "3px" }}>
             Sign up success!
           </Alert>
