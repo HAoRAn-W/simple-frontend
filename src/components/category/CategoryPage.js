@@ -23,7 +23,12 @@ function CategoryPage() {
 
   return (
     <Container
-      style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        height: "100vh",
+      }}
     >
       <Typography variant="h4" marginY={"2rem"}>
         Categories
