@@ -30,7 +30,7 @@ function Copyright() {
   return (
     <Typography variant="body2" color="text.secondary" align="center">
       {"Copyright © "}
-      <Link color="inherit" href="https://mui.com/">
+      <Link color="inherit" href="https://whr.one/">
         whr.one
       </Link>{" "}
       {new Date().getFullYear()}
