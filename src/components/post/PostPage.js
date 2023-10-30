@@ -45,12 +45,11 @@ function PostPage() {
       sx={{
         display: "flex",
         flexDirection: "column",
-        paddingX: { xs: 3, sm: 0 },
       }}
       elevation={0}
     >
       <PostHeader post={post} />
-      <Paper sx={{ paddingX: { sm: 2, md: 10 } }} elevation={0}>
+      <Paper elevation={0} sx={{ paddingX: { xs: 3, md: 10 } }}>
         <div
           style={{
             display: "flex",
@@ -78,6 +77,7 @@ function PostPage() {
             </ButtonBase>
           )}
         </div>
+
         <Typography variant="h5">{`${
           createdDate.getMonth() + 1
         }/${createdDate.getDate()}/${createdDate.getFullYear()}`}</Typography>
