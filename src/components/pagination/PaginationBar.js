@@ -6,7 +6,14 @@ function PaginationBar({ currentPage, setCurrentPage, total }) {
   };
 
   return (
-    <div style={{ display: "flex", justifyContent: "center", marginTop: 30 }}>
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        marginTop: 30,
+        marginBottom: 30,
+      }}
+    >
       <Pagination
         count={total} // Total number of pages
         page={currentPage} // Currently active page
