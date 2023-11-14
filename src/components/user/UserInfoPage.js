@@ -179,42 +179,48 @@ function UserInfoPage({ user }) {
                   alignItems: "center",
                 }}
               >
-                {avatarList.map((ava) => (
-                  <Grid
-                    key={ava.id}
-                    item
-                    sx={{
-                      display: "flex",
-                      flexDirection: "column",
-                      alignItems: "center",
-                      justifyContent: "center",
-                    }}
-                  >
-                    <Box
+                {avatarList.length === 0 && (
+                  <>
+                    <Typography>No Avatar</Typography>
+                  </>
+                )}
+                {avatarList.length !== 0 &&
+                  avatarList.map((ava) => (
+                    <Grid
+                      key={ava.id}
+                      item
                       sx={{
                         display: "flex",
                         flexDirection: "column",
                         alignItems: "center",
+                        justifyContent: "center",
                       }}
                     >
-                      <ButtonBase
-                        onClick={() => handleSelectAvatar(ava)}
-                        sx={{ borderRadius: "50%" }}
+                      <Box
+                        sx={{
+                          display: "flex",
+                          flexDirection: "column",
+                          alignItems: "center",
+                        }}
                       >
-                        <Image
-                          src={ava.url}
-                          style={{
-                            width: "120px",
-                            height: "120px",
-                            borderRadius: "50%",
-                          }}
-                          alt="avatar"
-                        />
-                      </ButtonBase>
-                      <Typography fontSize={"1.5rem"}>{ava.name}</Typography>
-                    </Box>
-                  </Grid>
-                ))}
+                        <ButtonBase
+                          onClick={() => handleSelectAvatar(ava)}
+                          sx={{ borderRadius: "50%" }}
+                        >
+                          <Image
+                            src={ava.url}
+                            style={{
+                              width: "120px",
+                              height: "120px",
+                              borderRadius: "50%",
+                            }}
+                            alt="avatar"
+                          />
+                        </ButtonBase>
+                        <Typography fontSize={"1.5rem"}>{ava.name}</Typography>
+                      </Box>
+                    </Grid>
+                  ))}
               </Grid>
             </Container>
           </Paper>
