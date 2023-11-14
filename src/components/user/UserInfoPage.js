@@ -18,6 +18,7 @@ import UserServcice from "../../app/services/user.service";
 import { SUCCESSFUL } from "../../app/constants/MessageCode";
 import AvatarService from "../../app/services/avatar.service";
 import Image from "mui-image";
+import { AvatarImg } from "../../styles/userinfo";
 
 function UserInfoPage({ user }) {
   const [username, setUsername] = useState(user.username);
@@ -103,17 +104,11 @@ function UserInfoPage({ user }) {
             alignItems: "center",
           }}
         >
-          <img
+          <AvatarImg
             src={user.avatar ? user.avatar.url : "./avatars/cloud.jpg"}
-            style={{
-              width: "280px",
-              height: "280px",
-              borderRadius: "50%",
-              position: "relative",
-              top: 0,
-            }}
             alt="avatar"
           />
+
           <Button onClick={handleOpenDialog} sx={{ fontSize: "1.2rem" }}>
             Edit
           </Button>
